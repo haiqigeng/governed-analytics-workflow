@@ -9,7 +9,8 @@ Use this skill to run analytics work as an interactive, reviewable process. AI a
 
 ## Operating Rules
 
-- Ask only the next necessary question; do not dump the full checklist at once.
+- Show the current step checklist with answered, unknown, assumed, and not-applicable fields.
+- Ask the next necessary question or small group of related questions; do not hide missing fields.
 - Scale rigor to risk: lightweight for low-risk questions, full governance for high-risk decisions.
 - Prefer structured artifacts over prose-only answers.
 - Keep assumptions labeled until reviewed.
@@ -17,6 +18,12 @@ Use this skill to run analytics work as an interactive, reviewable process. AI a
 - Generate a reproducibility packet before human approval.
 - Store durable context only after review.
 - If data access is unavailable, create a readiness assessment and proposed plan instead of fabricating results.
+
+## Core Terms
+
+- Grain: the level one row, metric, or claim describes. Examples: event, session, user, page, form instance, submission, account.
+- Lineage: the trace from a claim back to its source fields, filters, transformations, query/notebook, output table, and caveats.
+- Source mapping: the process of matching desired business metrics to actual tables, events, fields, dimensions, or derived logic in the available data.
 
 ## Agent Compatibility
 
@@ -45,6 +52,16 @@ Missing item blocking the next step:
 Then ask one next question. If the request already includes enough context, continue to the next workflow step instead of asking.
 
 For low-risk descriptive questions, combine steps where sensible, but still preserve source, metric, and caveat information. For medium or high-risk work, keep the plan approval, reproducibility packet, and human review gates.
+
+At every step, use this compact status pattern:
+
+```md
+Known:
+Unknown:
+Assumed:
+Not applicable:
+Next question(s):
+```
 
 ## Interaction Pattern
 
@@ -110,6 +127,8 @@ Expected output:
 Known context:
 ```
 
+Show all fields above to the user. Mark missing fields as `Unknown` instead of silently turning them into one hidden follow-up.
+
 For vague requests, propose a decision frame:
 
 ```text
@@ -147,6 +166,8 @@ Definition of done:
 We can say whether key lower-page content is likely receiving limited exposure and what should be tested next.
 ```
 
+If the user does not know the grain, propose options and explain the consequence. Example: form analysis can be event-level for field interactions, session-level for abandonments, and submission-level for completed contacts.
+
 ## 4. Check Data Readiness
 
 Verify source tables/files, event names, identifiers, page taxonomy, metric definitions, date/timezone logic, freshness, known tracking gaps, and PII/access constraints.
@@ -164,6 +185,18 @@ Missing or weak sources:
 Metric caveats:
 Recommended next step:
 ```
+
+Potential metrics are only hypotheses until mapped to actual source fields or derived logic. Create a metric-source mapping:
+
+```md
+| Logical metric | Source event/field | Direct or derived | Grain | Required filters/logic | Availability | Caveat |
+| --- | --- | --- | --- | --- | --- | --- |
+| form_start_rate | first field_focus after form_view | Derived | session + form | form_start / form_view | Partial | Depends on field tracking |
+| submit_success_rate | form_submit_success | Direct | form submission | successes / form views or starts | Ready | Denominator must be approved |
+| error_rate | form_validation_error | Direct or derived | event/session | errors / starts | Partial | Field-level errors may be missing |
+```
+
+If a dimension or metric does not exist directly, define a derivation recipe and label it `Derived`. If it cannot be derived safely, label it `Unavailable` and recommend tracking changes.
 
 Example:
 
@@ -198,6 +231,7 @@ Approved scope:
 Queries or operations:
 Metrics:
 Segments:
+Metric-source mapping:
 Validation checks:
 Expected artifacts:
 Caveats to preserve:
@@ -252,29 +286,6 @@ Worker outputs must be structured:
 }
 ```
 
-Example:
-
-```json
-{
-  "task": "scroll_depth_by_device",
-  "source_refs": ["analytics.events"],
-  "operations": ["filter programme URLs", "aggregate to session + page", "group by device"],
-  "result_refs": ["analytics_sandbox.programme_scroll_result_2026_06_13"],
-  "key_results": {
-    "mobile_reached_75_pct": 0.26,
-    "desktop_reached_75_pct": 0.43
-  },
-  "row_counts": {
-    "raw_events": 8420110,
-    "programme_events": 612884,
-    "programme_page_sessions": 42800
-  },
-  "assumptions": ["Programme pages match /programmes/*"],
-  "caveats": ["Section visibility is inferred from scroll depth"],
-  "status": "draft"
-}
-```
-
 ## 7. Validate And Quality Review
 
 Check:
@@ -320,6 +331,7 @@ Excluded population:
 Source tables or files:
 Relevant fields:
 Metric definitions:
+Metric-source mapping:
 Queries, notebooks, scripts, or dashboard links:
 Output tables or files:
 Row counts:
