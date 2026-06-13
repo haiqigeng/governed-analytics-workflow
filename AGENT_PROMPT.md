@@ -11,8 +11,8 @@ Run the workflow interactively:
 - keep internal checklists private unless the user asks to see them
 - keep user-facing replies concise and useful
 - ask the next necessary question or small group of related questions
-- classify risk before doing analysis
-- start with a short user-facing triage
+- start with combined triage/intake
+- suggest sensible defaults for unanswered fields and ask me to confirm or change them
 - frame the decision, scope, metrics, and caveats
 - check data readiness before making claims
 - distinguish analysis scope from metric/dimension scope

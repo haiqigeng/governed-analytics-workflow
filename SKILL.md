@@ -1,6 +1,6 @@
 ---
 name: governed-analytics-workflow
-description: Run an interactive, governed analytics workflow for business, product, marketing, web, revenue, or operations analysis. Use when an AI agent needs to turn a question into traceable analytics work with risk triage, framing, data readiness checks, bounded agent tasks, reproducible evidence, human review, stakeholder-ready outputs, and durable context updates. Optimized for Codex, Claude Code, Gemini, and other coding or analysis agents.
+description: Run an interactive, governed analytics workflow for business, product, marketing, web, revenue, or operations analysis. Use when an AI agent needs to turn a question into traceable analytics work with combined triage/intake, framing, data readiness checks, source mapping, internal bounded work modes, reproducible evidence, human review, PowerPoint brief outputs, and durable context updates. Optimized for Codex, Claude Code, Gemini, and other coding or analysis agents.
 ---
 
 # Governed Analytics Workflow
@@ -38,19 +38,24 @@ When a tool is unavailable, keep the artifact format and mark the unavailable it
 
 ## Start Behavior
 
-When invoked, do not immediately produce the full workflow. First, read the user's request and respond with a short user-facing triage:
+When invoked, do not immediately produce the full workflow. First, read the user's request and respond with a short user-facing triage and intake:
 
 ```md
-# Triage
+# Triage And Intake
 
 Business question:
 Decision to support:
 Likely risk:
+Audience:
+Time window:
+Expected output:
 Data/context:
 What I still need:
 ```
 
-Then ask one next question. If the request already includes enough context, continue to the next workflow step instead of asking.
+If important fields are missing, suggest reasonable defaults and ask the user to confirm or change them. Example: "I suggest marketing team as the audience, a PowerPoint brief as the output, and no deadline for this test. Should I use these defaults?"
+
+Then ask one next question or one small group of related questions. If the request already includes enough context, continue to the next workflow step instead of asking.
 
 For low-risk descriptive questions, combine steps where sensible, but still preserve source, metric, and caveat information. For medium or high-risk work, keep the plan approval, reproducibility packet, and human review gates.
 
@@ -60,31 +65,39 @@ Maintain known, unknown, assumed, not-applicable, and next-question fields inter
 
 Proceed in this order:
 
-1. Triage risk and decision.
-2. Create intake.
-3. Frame scope and metrics.
-4. Check data readiness.
-5. Draft analysis plan.
-6. Execute bounded worker tasks.
-7. Validate and quality review.
-8. Generate reproducibility packet.
-9. Ask for human approval.
-10. Produce stakeholder output.
-11. Update durable context.
-12. Define follow-up monitoring or experiment.
+1. Triage and intake.
+2. Frame scope and metrics.
+3. Check data readiness.
+4. Draft analysis plan.
+5. Execute bounded work.
+6. Validate and quality review.
+7. Generate reproducibility packet.
+8. Ask for human approval.
+9. Produce stakeholder output.
+10. Update durable context.
+11. Define follow-up monitoring or experiment.
 
-Ask one concise question at each gate. Example:
+Ask concise grouped questions at each gate. Example:
 
 ```text
 I can proceed, but the data only supports a directional answer because section impressions are missing. Should I continue with caveats or switch to a tracking-readiness recommendation?
 ```
 
-## 1. Triage Risk
+## 1. Triage And Intake
 
-Ask if unclear:
+Create or update the intake internally:
 
-```text
-What decision will this analysis support, and what happens if the answer is wrong?
+```md
+# Analytics Intake
+
+Business question:
+Decision supported:
+Audience:
+Deadline:
+Risk:
+Time window:
+Expected output:
+Known context:
 ```
 
 Classify:
@@ -104,23 +117,7 @@ Reason: May influence web redesign and CTA placement.
 Required rigor: readiness check, plan, reproducibility packet, human review.
 ```
 
-## 2. Intake
-
-Create or update:
-
-```md
-# Analytics Intake
-
-Business question:
-Decision supported:
-Audience:
-Deadline:
-Risk:
-Expected output:
-Known context:
-```
-
-Track all fields above internally. Show missing fields only when they require user input or affect the analysis. Group obvious fields into one concise question.
+Track all fields above internally. Show missing fields only when they require user input or affect the analysis. For low-uncertainty fields, propose defaults and ask the user to confirm or change them.
 
 For vague requests, propose a decision frame:
 
@@ -128,7 +125,7 @@ For vague requests, propose a decision frame:
 When you say "scrolling on programme pages", I can frame that as: "Should key content or CTAs move higher on the page?" Is that the decision you want to support?
 ```
 
-## 3. Frame The Analysis
+## 2. Frame The Analysis
 
 Define analysis scope, time window, inclusion/exclusion rules, metric/dimension scope (grain), metrics, segments, caveats, and definition of done.
 
@@ -161,7 +158,7 @@ We can say whether key lower-page content is likely receiving limited exposure a
 
 If the user does not know the metric/dimension scope, propose options and explain the consequence. Example: form analysis can be event-level for field interactions, session-level for abandonments, and submission-level for completed contacts.
 
-## 4. Check Data Readiness
+## 3. Check Data Readiness
 
 Verify source tables/files, event names, identifiers, page taxonomy, metric definitions, date/timezone logic, freshness, known tracking gaps, and PII/access constraints.
 
@@ -212,7 +209,7 @@ Run directional scroll-depth analysis and recommend section-impression tracking 
 
 If readiness is poor and risk is medium or high, stop and ask whether to improve tracking, narrow the question, or proceed with a caveated directional analysis.
 
-## 5. Draft The Analysis Plan
+## 4. Draft The Analysis Plan
 
 Create a short plan:
 
@@ -250,7 +247,7 @@ For medium/high-risk work, ask:
 Please review this plan before I run or write the analysis. Are the scope, metrics, and caveats correct?
 ```
 
-## 6. Execute With Bounded Workers
+## 5. Execute With Bounded Work
 
 Use these as internal work modes. If using one agent, simulate them sequentially. Do not expose role handoffs to the user unless asked; show clean artifacts, review points, and final outputs instead.
 
@@ -280,7 +277,7 @@ Worker outputs must be structured:
 }
 ```
 
-## 7. Validate And Quality Review
+## 6. Validate And Quality Review
 
 Check:
 
@@ -308,7 +305,7 @@ Use supported language:
 Only 31% of sessions reached the approximate Fees section, suggesting limited measured exposure.
 ```
 
-## 8. Generate The Reproducibility Packet
+## 7. Generate The Reproducibility Packet
 
 Create this before human review:
 
@@ -362,7 +359,7 @@ Raw data guidance:
 - Mask or hash user identifiers unless authorized raw rows are required.
 - Prefer reproducible output tables over personal-data exports.
 
-## 9. Human Review Gate
+## 8. Human Review Gate
 
 Ask for a decision:
 
@@ -382,7 +379,7 @@ Reviewer checks:
 
 Do not mark output as trusted until approved.
 
-## 10. Produce Stakeholder Output
+## 9. Produce Stakeholder Output
 
 Separate facts, interpretation, recommendation, and caveats. When the requested output is a brief, default to an actual PowerPoint deck (`.pptx`) unless the user asks for another format. Use professional slide design, concise text, and visual presentation of the data. If the environment cannot create `.pptx`, state the limitation and provide a slide-by-slide specification as fallback.
 
@@ -399,7 +396,7 @@ Required slides:
 7. Measurement plan and caveats
 ```
 
-## 11. Update Durable Context
+## 10. Update Durable Context
 
 Update durable context only after review.
 
@@ -429,7 +426,7 @@ Status:
 Reviewed
 ```
 
-## 12. Follow Up
+## 11. Follow Up
 
 For recommendations, propose decision owner, next action, success metrics, experiment or monitoring plan, and revisit date.
 

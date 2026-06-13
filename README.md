@@ -2,7 +2,7 @@
 
 An instruction-first AI agent skill for running analytics work as a governed, traceable, human-reviewed process.
 
-The workflow helps an AI agent turn a business question into structured analytics artifacts: risk triage, intake, framing, data readiness, bounded execution, quality review, reproducibility packet, human approval, stakeholder output, and durable context updates.
+The workflow helps an AI agent turn a business question into structured analytics artifacts: combined triage/intake, framing, data readiness, source mapping, bounded internal execution, quality review, reproducibility packet, human approval, PowerPoint brief output, and durable context updates.
 
 ## Why This Exists
 
@@ -55,21 +55,20 @@ Available context:
 GA4/BigQuery events include page_view, scroll events, device category, traffic channel, and CTA clicks.
 ```
 
-The agent should start with a short triage snapshot and ask only the next necessary question.
+The agent should start with a concise triage/intake, suggest sensible defaults for missing fields, and ask only the next useful question or small group of related questions.
 
 ## Workflow Summary
 
 ```text
-Triage risk and decision
--> create intake
+Triage and intake
 -> frame scope and metrics
 -> check data readiness
 -> draft analysis plan
--> execute bounded worker tasks
+-> execute bounded internal work
 -> validate and quality review
 -> generate reproducibility packet
 -> ask for human approval
--> produce stakeholder output
+-> produce stakeholder PowerPoint output
 -> update durable context
 -> define follow-up monitoring or experiment
 ```
@@ -114,7 +113,7 @@ Users do not care about fees.
 
 ## Project Status
 
-Initial private release. The skill is usable as a portable Markdown-based agent workflow and does not require Python, Node.js, or any runtime dependency.
+Private v0.2.0 release. The skill is usable as a portable Markdown-based agent workflow and does not require Python, Node.js, or any runtime dependency.
 
 ## License
 
