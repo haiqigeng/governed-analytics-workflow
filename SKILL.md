@@ -240,7 +240,7 @@ analysis-plan.md
 worker-result-packets.md
 quality-review.md
 reproducibility-packet.md
-stakeholder-brief.md
+stakeholder-brief.pptx
 decision-log-entry.md
 ```
 
@@ -252,7 +252,7 @@ Please review this plan before I run or write the analysis. Are the scope, metri
 
 ## 6. Execute With Bounded Workers
 
-If using one agent, simulate these roles sequentially:
+Use these as internal work modes. If using one agent, simulate them sequentially. Do not expose role handoffs to the user unless asked; show clean artifacts, review points, and final outputs instead.
 
 ```text
 Data profiler: inspect schemas, samples, row counts, freshness, and anomalies.
@@ -260,6 +260,7 @@ Execution worker: write/run queries or transformations; return code, results, ro
 Readiness checker: validate source compatibility, metric definitions, and metric/dimension scope.
 Quality reviewer: check unsupported claims, missing caveats, stale context, wrong filters, and causal overreach.
 Writing worker: draft stakeholder language using only reviewed result packets.
+Presentation worker: turn approved findings into a professional deck with charts, tables, caveats, and concise slide text.
 Orchestrator: maintain context, route tasks, ask humans at gates, assemble artifacts.
 ```
 
@@ -383,32 +384,19 @@ Do not mark output as trusted until approved.
 
 ## 10. Produce Stakeholder Output
 
-Separate facts, interpretation, recommendation, and caveats.
+Separate facts, interpretation, recommendation, and caveats. When the requested output is a brief, default to an actual PowerPoint deck (`.pptx`) unless the user asks for another format. Use professional slide design, concise text, and visual presentation of the data. If the environment cannot create `.pptx`, state the limitation and provide a slide-by-slide specification as fallback.
 
 ```md
-# Stakeholder Brief
+# Stakeholder Brief Deck
 
-Question:
-Short answer:
-Verified findings:
-Directional findings:
-Recommendation:
-Evidence:
-Caveats:
-Next measurement step:
-```
-
-Example:
-
-```md
-Short answer:
-Most programme-page sessions do not reach lower-page content. The median maximum scroll depth was 50%, and 31% of sessions reached 75%.
-
-Recommendation:
-Test moving Fees, Careers, and an Apply/Request Info CTA summary higher on mobile programme pages.
-
-Caveat:
-Scroll depth does not prove reading; section exposure is inferred from page layout.
+Required slides:
+1. Title, question, decision, caveat status
+2. Executive summary
+3. Funnel or core metric visual
+4. Segment breakdown visual
+5. Friction or opportunity analysis
+6. Recommendation
+7. Measurement plan and caveats
 ```
 
 ## 11. Update Durable Context

@@ -8,4 +8,4 @@ Thumbs.db
 *.zip
 *.tmp
 *.log
-
+outputs/

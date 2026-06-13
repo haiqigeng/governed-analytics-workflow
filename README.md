@@ -85,10 +85,12 @@ The workflow can produce artifacts such as:
 - `worker-result-packets.md`
 - `quality-review.md`
 - `reproducibility-packet.md`
-- `stakeholder-brief.md`
+- `stakeholder-brief.pptx`
 - `decision-log-entry.md`
 
 The most important artifact is the reproducibility packet. It should let a human reviewer recreate or challenge the analysis using the source data, filters, queries, row counts, metric definitions, assumptions, and caveats.
+
+When the requested output is a brief, the default final artifact is a PowerPoint deck with concise text and professional data visuals.
 
 ## Example Use Case
 
@@ -117,4 +119,3 @@ Initial private release. The skill is usable as a portable Markdown-based agent 
 ## License
 
 No license has been specified yet. Treat this repository as private/internal unless a license is added.
-
