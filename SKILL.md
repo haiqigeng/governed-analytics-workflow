@@ -387,14 +387,14 @@ Separate facts, interpretation, recommendation, and caveats. When the requested 
 # Stakeholder Brief Deck
 
 Required slides:
-1. Title, question, decision, caveat status
-2. Executive summary
-3. Funnel or core metric visual
-4. Segment breakdown visual
-5. Friction or opportunity analysis
-6. Recommendation
-7. Measurement plan and caveats
+1. Big title slide with analysis name, audience, date, and caveat status
+2. Analytics context: business question, decision, scope, source/readiness, metric definitions
+3. Executive summary: 3-5 key findings and recommendation
+4+. Analysis pages according to results, one message per slide
+Final. Recommendation, measurement plan, caveats, and next step
 ```
+
+Choose visualizations by communication need: funnel/Sankey for process flow or drop-off; bar or dot plot for categorical comparison; line chart for time trend; heatmap for two-dimensional patterns; table only for precise audit detail; KPI cards only for a few headline numbers. Avoid decorative or complex charts when a simpler comparison is clearer. Use a consistent, restrained palette; highlight only the metric or segment that matters; label axes, denominators, sample sizes, and caveats.
 
 ## 10. Update Durable Context
 

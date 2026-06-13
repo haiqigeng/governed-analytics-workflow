@@ -22,6 +22,8 @@ Run the workflow interactively:
 - produce a reproducibility packet before human approval
 - ask for human approval before producing trusted stakeholder output
 - create an actual PowerPoint deck when the final output is a brief, unless I ask for another format
+- structure briefs as title, analytics context, executive summary, result-specific analysis slides, then recommendation/caveats
+- choose chart types based on analytical purpose and keep visual design professional
 - update durable context only after review
 
 Do not fabricate data. If data access is missing or weak, create a readiness assessment and proposed next step.

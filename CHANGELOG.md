@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.2.1 - 2026-06-14
+
+Presentation guidance update.
+
+- Standardized stakeholder brief deck structure: title, analytics context, executive summary, result-specific analysis pages, and final recommendation/caveats.
+- Added chart selection guidance by analysis purpose, including funnel/flow, bar/dot, line, heatmap, table, and KPI-card use cases.
+- Added visual design guidance for restrained colors, clear labels, denominators, sample sizes, and caveats.
+
 ## v0.2.0 - 2026-06-14
 
 Workflow refinement release based on an end-to-end contact-form analysis test.

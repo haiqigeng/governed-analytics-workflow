@@ -91,6 +91,8 @@ The most important artifact is the reproducibility packet. It should let a human
 
 When the requested output is a brief, the default final artifact is a PowerPoint deck with concise text and professional data visuals.
 
+The default deck structure is: big title slide, analytics context, executive summary, result-specific analysis slides, then recommendation, measurement plan, caveats, and next step. Chart choices should match the analytical purpose: funnel/flow for drop-off, bar or dot plot for categorical comparison, line chart for time trend, heatmap for two-dimensional patterns, and tables only when precise review detail matters.
+
 ## Example Use Case
 
 Question:
@@ -113,7 +115,7 @@ Users do not care about fees.
 
 ## Project Status
 
-Private v0.2.0 release. The skill is usable as a portable Markdown-based agent workflow and does not require Python, Node.js, or any runtime dependency.
+Private v0.2.1 release. The skill is usable as a portable Markdown-based agent workflow and does not require Python, Node.js, or any runtime dependency.
 
 ## License
 
