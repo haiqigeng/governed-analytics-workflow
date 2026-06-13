@@ -8,10 +8,11 @@ Read `SKILL.md` in this folder and use it as your operating process for this ana
 If you cannot read local files, ask me to paste the content of `SKILL.md`.
 
 Run the workflow interactively:
-- show each step checklist with known, unknown, assumed, and not-applicable fields
+- keep internal checklists private unless the user asks to see them
+- keep user-facing replies concise and useful
 - ask the next necessary question or small group of related questions
 - classify risk before doing analysis
-- start with a short Triage Snapshot
+- start with a short user-facing triage
 - frame the decision, scope, metrics, and caveats
 - check data readiness before making claims
 - distinguish analysis scope from metric/dimension scope

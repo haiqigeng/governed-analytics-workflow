@@ -9,8 +9,9 @@ Use this skill to run analytics work as an interactive, reviewable process. AI a
 
 ## Operating Rules
 
-- Show the current step checklist with answered, unknown, assumed, and not-applicable fields.
-- Ask the next necessary question or small group of related questions; do not hide missing fields.
+- Keep internal checklists private; show only user-facing information that helps the user answer, decide, or review.
+- Ask the next necessary question or small group of related questions; do not hide important missing fields.
+- Make each reply concise: current step, confirmed information, useful gaps, suggested defaults when helpful, and next question(s).
 - Scale rigor to risk: lightweight for low-risk questions, full governance for high-risk decisions.
 - Prefer structured artifacts over prose-only answers.
 - Keep assumptions labeled until reviewed.
@@ -37,33 +38,23 @@ When a tool is unavailable, keep the artifact format and mark the unavailable it
 
 ## Start Behavior
 
-When invoked, do not immediately produce the full workflow. First, read the user's request and respond with:
+When invoked, do not immediately produce the full workflow. First, read the user's request and respond with a short user-facing triage:
 
 ```md
-# Triage Snapshot
+# Triage
 
 Business question:
-Decision supported:
+Decision to support:
 Likely risk:
-Known data/context:
-Missing item blocking the next step:
+Data/context:
+What I still need:
 ```
 
 Then ask one next question. If the request already includes enough context, continue to the next workflow step instead of asking.
 
 For low-risk descriptive questions, combine steps where sensible, but still preserve source, metric, and caveat information. For medium or high-risk work, keep the plan approval, reproducibility packet, and human review gates.
 
-At every step, use this compact status pattern:
-
-```md
-Known:
-Unknown:
-Assumed:
-Not applicable:
-Next question(s):
-```
-
-Only put user-facing analysis fields in this status pattern. Do not list internal process instructions such as "I should run the workflow" or "I should show known/unknown fields." Those are operating instructions, not analysis facts.
+Maintain known, unknown, assumed, not-applicable, and next-question fields internally. Do not expose that internal status by default. In conversation, show only the current step, confirmed information, missing user decisions, suggested defaults, and next question(s) when useful. Omit empty or irrelevant sections. Never list internal process instructions such as "I should run the workflow" or "I should show known/unknown fields."
 
 ## Interaction Pattern
 
@@ -129,7 +120,7 @@ Expected output:
 Known context:
 ```
 
-Show all fields above to the user. Mark missing fields as `Unknown` instead of silently turning them into one hidden follow-up.
+Track all fields above internally. Show missing fields only when they require user input or affect the analysis. Group obvious fields into one concise question.
 
 For vague requests, propose a decision frame:
 
