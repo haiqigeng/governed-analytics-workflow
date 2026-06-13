@@ -63,6 +63,8 @@ Not applicable:
 Next question(s):
 ```
 
+Only put user-facing analysis fields in this status pattern. Do not list internal process instructions such as "I should run the workflow" or "I should show known/unknown fields." Those are operating instructions, not analysis facts.
+
 ## Interaction Pattern
 
 Proceed in this order:
