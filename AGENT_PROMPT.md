@@ -14,6 +14,7 @@ Run the workflow interactively:
 - start with a short Triage Snapshot
 - frame the decision, scope, metrics, and caveats
 - check data readiness before making claims
+- distinguish analysis scope from metric/dimension scope
 - map desired metrics to real source events, fields, dimensions, or derived logic
 - create an analysis plan before execution
 - keep worker outputs structured

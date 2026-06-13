@@ -21,7 +21,7 @@ Use this skill to run analytics work as an interactive, reviewable process. AI a
 
 ## Core Terms
 
-- Grain: the level one row, metric, or claim describes. Examples: event, session, user, page, form instance, submission, account.
+- Metric/dimension scope, also called grain: the level one row, metric, dimension value, or claim describes. Examples: event, session, user, page, form instance, submission, account.
 - Lineage: the trace from a claim back to its source fields, filters, transformations, query/notebook, output table, and caveats.
 - Source mapping: the process of matching desired business metrics to actual tables, events, fields, dimensions, or derived logic in the available data.
 
@@ -137,7 +137,7 @@ When you say "scrolling on programme pages", I can frame that as: "Should key co
 
 ## 3. Frame The Analysis
 
-Define population, time window, inclusion/exclusion rules, grain, metrics, segments, caveats, and definition of done.
+Define analysis scope, time window, inclusion/exclusion rules, metric/dimension scope (grain), metrics, segments, caveats, and definition of done.
 
 Example:
 
@@ -153,7 +153,7 @@ Thank-you, application confirmation, staging, and test URLs.
 Time window:
 Last 28 complete days.
 
-Grain:
+Metric/dimension scope (grain):
 session_id + programme_page_url.
 
 Metrics:
@@ -166,7 +166,7 @@ Definition of done:
 We can say whether key lower-page content is likely receiving limited exposure and what should be tested next.
 ```
 
-If the user does not know the grain, propose options and explain the consequence. Example: form analysis can be event-level for field interactions, session-level for abandonments, and submission-level for completed contacts.
+If the user does not know the metric/dimension scope, propose options and explain the consequence. Example: form analysis can be event-level for field interactions, session-level for abandonments, and submission-level for completed contacts.
 
 ## 4. Check Data Readiness
 
@@ -189,7 +189,7 @@ Recommended next step:
 Potential metrics are only hypotheses until mapped to actual source fields or derived logic. Create a metric-source mapping:
 
 ```md
-| Logical metric | Source event/field | Direct or derived | Grain | Required filters/logic | Availability | Caveat |
+| Logical metric | Source event/field | Direct or derived | Metric/dimension scope | Required filters/logic | Availability | Caveat |
 | --- | --- | --- | --- | --- | --- | --- |
 | form_start_rate | first field_focus after form_view | Derived | session + form | form_start / form_view | Partial | Depends on field tracking |
 | submit_success_rate | form_submit_success | Direct | form submission | successes / form views or starts | Ready | Denominator must be approved |
@@ -264,7 +264,7 @@ If using one agent, simulate these roles sequentially:
 ```text
 Data profiler: inspect schemas, samples, row counts, freshness, and anomalies.
 Execution worker: write/run queries or transformations; return code, results, row counts, caveats.
-Readiness checker: validate source compatibility, metric definitions, and grain.
+Readiness checker: validate source compatibility, metric definitions, and metric/dimension scope.
 Quality reviewer: check unsupported claims, missing caveats, stale context, wrong filters, and causal overreach.
 Writing worker: draft stakeholder language using only reviewed result packets.
 Orchestrator: maintain context, route tasks, ask humans at gates, assemble artifacts.
@@ -294,7 +294,7 @@ Check:
 - date ranges are consistent
 - filters match framing
 - joins do not duplicate rows
-- metric grain is correct
+- metric/dimension scope is correct
 - sample sizes are sufficient
 - segments do not hide key differences
 - assumptions remain labeled
@@ -380,7 +380,7 @@ Reviewer checks:
 
 - Is the business question framed correctly?
 - Are the sources, filters, and exclusions appropriate?
-- Is the metric grain correct?
+- Is the metric/dimension scope correct?
 - Can the key numbers be recreated?
 - Are claims proportional to evidence?
 - Are caveats visible enough?
