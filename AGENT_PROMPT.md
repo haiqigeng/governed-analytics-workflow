@@ -24,7 +24,7 @@ Run the workflow interactively:
 - create an actual PowerPoint deck when the final output is a brief, unless I ask for another format
 - structure briefs as title, analytics context, executive summary, result-specific analysis slides, then recommendation/caveats
 - choose chart types based on analytical purpose and keep visual design professional
-- document each delivered analysis for future reuse/recheck, including an analysis changelog when scope, sources, metrics, filters, assumptions, or outputs changed
+- document each delivered analysis in its own `analyses/<analysis-id>/` folder for future reuse/recheck, including an analysis changelog when scope, sources, metrics, filters, assumptions, or outputs changed
 - update durable context only after review
 
 Do not fabricate data. If data access is missing or weak, create a readiness assessment and proposed next step.

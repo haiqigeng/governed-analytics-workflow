@@ -2,7 +2,7 @@
 
 An instruction-first AI agent skill for running analytics work as a governed, traceable, human-reviewed process.
 
-The workflow helps an AI agent turn a business question into structured analytics artifacts: combined triage/intake, framing, data readiness, source mapping, bounded internal execution, quality review, reproducibility packet, human approval, PowerPoint brief output, final documentation, and durable context updates.
+The workflow helps an AI agent turn a business question into structured analytics artifacts: combined triage/intake, framing, data readiness, source mapping, bounded internal execution, quality review, reproducibility packet, human approval, PowerPoint brief output, per-analysis documentation, and durable context updates.
 
 ## Why This Exists
 
@@ -78,21 +78,21 @@ Triage and intake
 
 The workflow can produce artifacts such as:
 
-- `analytics-intake.md`
-- `analysis-framing.md`
-- `readiness-assessment.md`
-- `analysis-plan.md`
-- `worker-result-packets.md`
-- `quality-review.md`
-- `reproducibility-packet.md`
-- `stakeholder-brief.pptx`
-- `analysis-documentation.md`
-- `analysis-changelog.md`
+- `analyses/<analysis-id>/analytics-intake.md`
+- `analyses/<analysis-id>/analysis-framing.md`
+- `analyses/<analysis-id>/readiness-assessment.md`
+- `analyses/<analysis-id>/analysis-plan.md`
+- `analyses/<analysis-id>/worker-result-packets.md`
+- `analyses/<analysis-id>/quality-review.md`
+- `analyses/<analysis-id>/reproducibility-packet.md`
+- `analyses/<analysis-id>/stakeholder-brief.pptx`
+- `analyses/<analysis-id>/analysis-documentation.md`
+- `analyses/<analysis-id>/analysis-changelog.md`
 - `decision-log-entry.md`
 
 The most important artifact is the reproducibility packet. It should let a human reviewer recreate or challenge the analysis using the source data, filters, queries, row counts, metric definitions, assumptions, and caveats.
 
-After delivery, the workflow should also create or update human-readable documentation for future reuse and recheck. Include final artifact paths, source and metric definitions, review status, caveats, rejected or superseded claims, and an analysis changelog. If scope, sources, metrics, filters, assumptions, or outputs changed during the analysis, document what changed, why, who approved it, and when.
+After delivery, the workflow should create or update human-readable documentation inside that analysis folder. Include final artifact paths, source and metric definitions, review status, caveats, rejected or superseded claims, and an analysis changelog. If scope, sources, metrics, filters, assumptions, or outputs changed during the analysis, document what changed, why, who approved it, and when.
 
 When the requested output is a brief, the default final artifact is a PowerPoint deck with concise text and professional data visuals.
 
@@ -120,7 +120,7 @@ Users do not care about fees.
 
 ## Project Status
 
-Private v0.2.2 release. The skill is usable as a portable Markdown-based agent workflow and does not require Python, Node.js, or any runtime dependency.
+Private v0.2.3 release. The skill is usable as a portable Markdown-based agent workflow and does not require Python, Node.js, or any runtime dependency.
 
 ## License
 

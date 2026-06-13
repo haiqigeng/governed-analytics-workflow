@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.2.3 - 2026-06-14
+
+Per-analysis documentation update.
+
+- Required each delivered analysis to store documentation in its own `analyses/<analysis-id>/` folder.
+- Added a stable `analysis_id` convention for run artifacts.
+- Clarified that durable context should point to per-analysis documentation instead of absorbing all run details.
+
 ## v0.2.2 - 2026-06-14
 
 Final documentation update.

@@ -1,6 +1,6 @@
 ---
 name: governed-analytics-workflow
-description: Run an interactive, governed analytics workflow for business, product, marketing, web, revenue, or operations analysis. Use when an AI agent needs to turn a question into traceable analytics work with combined triage/intake, framing, data readiness checks, source mapping, internal bounded work modes, reproducible evidence, human review, PowerPoint brief outputs, final documentation, and durable context updates. Optimized for Codex, Claude Code, Gemini, and other coding or analysis agents.
+description: Run an interactive, governed analytics workflow for business, product, marketing, web, revenue, or operations analysis. Use when an AI agent needs to turn a question into traceable analytics work with combined triage/intake, framing, data readiness checks, source mapping, internal bounded work modes, reproducible evidence, human review, PowerPoint brief outputs, per-analysis documentation, and durable context updates. Optimized for Codex, Claude Code, Gemini, and other coding or analysis agents.
 ---
 
 # Governed Analytics Workflow
@@ -17,7 +17,7 @@ Use this skill to run analytics work as an interactive, reviewable process. AI a
 - Keep assumptions labeled until reviewed.
 - Do not publish a claim unless it has evidence, lineage, and caveat status.
 - Generate a reproducibility packet before human approval.
-- Document each delivered analysis for future reuse, recheck, and change history.
+- Document each delivered analysis in its own analysis folder for future reuse, recheck, and change history.
 - Store durable context only after review.
 - If data access is unavailable, create a readiness assessment and proposed plan instead of fabricating results.
 
@@ -78,6 +78,8 @@ Proceed in this order:
 10. Document delivery and analysis changes.
 11. Update durable context.
 12. Define follow-up monitoring or experiment.
+
+Create a stable `analysis_id` when artifacts are produced, such as `2026-06-14-contact-form-usage`. Store run artifacts under `analyses/<analysis_id>/` unless the user gives another location.
 
 Ask concise grouped questions at each gate. Example:
 
@@ -229,7 +231,7 @@ Expected artifacts:
 Caveats to preserve:
 ```
 
-Prefer these artifact names when creating files:
+Prefer these artifact names inside `analyses/<analysis_id>/` when creating files:
 
 ```text
 analytics-intake.md
@@ -404,6 +406,8 @@ Choose visualizations by communication need: funnel/Sankey for process flow or d
 
 After every delivered analysis, create or update human-readable documentation so a future analyst can reuse or recheck the work without reading the conversation.
 
+Documentation is per analysis, not a single global file. Store it with that run's artifacts, normally as `analyses/<analysis_id>/analysis-documentation.md` and `analyses/<analysis_id>/analysis-changelog.md`. Use a central index only to point to per-analysis folders.
+
 Include: question, decision, audience, owner, date range, delivery date, final outputs and paths, sources, queries/code, filters, metric definitions, source-mapping notes, key findings, caveats, review status, approver, rejected claims, and superseded claims.
 
 Include an `analysis-changelog.md` section or file. Record material changes made during the analysis: scope changes, source changes, metric or dimension definition changes, query/filter changes, assumption changes, output changes, why they changed, who approved them, and when. If nothing changed after plan approval, write: `Analysis changelog: no material changes after approved plan.`
@@ -412,7 +416,7 @@ Include an `analysis-changelog.md` section or file. Record material changes made
 
 Update durable context only after review.
 
-Store final decision, reviewed findings, metric definitions, source caveats, excluded interpretations, owner, review date, and superseded facts. Keep one canonical home per fact; when possible, store pointers to source artifacts instead of duplicating definitions across files.
+Store final decision, reviewed findings, metric definitions, source caveats, excluded interpretations, owner, review date, superseded facts, and the `analysis_id`. Keep one canonical home per fact; when possible, store pointers to the per-analysis documentation instead of duplicating definitions across files.
 
 Example:
 
