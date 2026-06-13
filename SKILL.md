@@ -1,6 +1,6 @@
 ---
 name: governed-analytics-workflow
-description: Run an interactive, governed analytics workflow for business, product, marketing, web, revenue, or operations analysis. Use when an AI agent needs to turn a question into traceable analytics work with combined triage/intake, framing, data readiness checks, source mapping, internal bounded work modes, reproducible evidence, human review, PowerPoint brief outputs, and durable context updates. Optimized for Codex, Claude Code, Gemini, and other coding or analysis agents.
+description: Run an interactive, governed analytics workflow for business, product, marketing, web, revenue, or operations analysis. Use when an AI agent needs to turn a question into traceable analytics work with combined triage/intake, framing, data readiness checks, source mapping, internal bounded work modes, reproducible evidence, human review, PowerPoint brief outputs, final documentation, and durable context updates. Optimized for Codex, Claude Code, Gemini, and other coding or analysis agents.
 ---
 
 # Governed Analytics Workflow
@@ -17,6 +17,7 @@ Use this skill to run analytics work as an interactive, reviewable process. AI a
 - Keep assumptions labeled until reviewed.
 - Do not publish a claim unless it has evidence, lineage, and caveat status.
 - Generate a reproducibility packet before human approval.
+- Document each delivered analysis for future reuse, recheck, and change history.
 - Store durable context only after review.
 - If data access is unavailable, create a readiness assessment and proposed plan instead of fabricating results.
 
@@ -74,8 +75,9 @@ Proceed in this order:
 7. Generate reproducibility packet.
 8. Ask for human approval.
 9. Produce stakeholder output.
-10. Update durable context.
-11. Define follow-up monitoring or experiment.
+10. Document delivery and analysis changes.
+11. Update durable context.
+12. Define follow-up monitoring or experiment.
 
 Ask concise grouped questions at each gate. Example:
 
@@ -238,6 +240,8 @@ worker-result-packets.md
 quality-review.md
 reproducibility-packet.md
 stakeholder-brief.pptx
+analysis-documentation.md
+analysis-changelog.md
 decision-log-entry.md
 ```
 
@@ -396,7 +400,15 @@ Final. Recommendation, measurement plan, caveats, and next step
 
 Choose visualizations by communication need: funnel/Sankey for process flow or drop-off; bar or dot plot for categorical comparison; line chart for time trend; heatmap for two-dimensional patterns; table only for precise audit detail; KPI cards only for a few headline numbers. Avoid decorative or complex charts when a simpler comparison is clearer. Use a consistent, restrained palette; highlight only the metric or segment that matters; label axes, denominators, sample sizes, and caveats.
 
-## 10. Update Durable Context
+## 10. Document Delivery
+
+After every delivered analysis, create or update human-readable documentation so a future analyst can reuse or recheck the work without reading the conversation.
+
+Include: question, decision, audience, owner, date range, delivery date, final outputs and paths, sources, queries/code, filters, metric definitions, source-mapping notes, key findings, caveats, review status, approver, rejected claims, and superseded claims.
+
+Include an `analysis-changelog.md` section or file. Record material changes made during the analysis: scope changes, source changes, metric or dimension definition changes, query/filter changes, assumption changes, output changes, why they changed, who approved them, and when. If nothing changed after plan approval, write: `Analysis changelog: no material changes after approved plan.`
+
+## 11. Update Durable Context
 
 Update durable context only after review.
 
@@ -408,25 +420,14 @@ Example:
 # Decision Log Entry
 
 Date:
-2026-06-13
-
 Decision:
-Recommend testing a shorter mobile programme-page layout with key decision content higher on the page.
-
 Evidence:
-programme_scroll_2026_06_13
-
 Valid use:
-Directional page exposure analysis.
-
 Do not use for:
-Causal claims about user interest in lower-page content.
-
 Status:
-Reviewed
 ```
 
-## 11. Follow Up
+## 12. Follow Up
 
 For recommendations, propose decision owner, next action, success metrics, experiment or monitoring plan, and revisit date.
 

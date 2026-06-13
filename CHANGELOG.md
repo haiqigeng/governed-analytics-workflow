@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.2.2 - 2026-06-14
+
+Final documentation update.
+
+- Added a dedicated delivery documentation step after stakeholder output.
+- Added expected `analysis-documentation.md` and `analysis-changelog.md` artifacts.
+- Required material changes during an analysis to be documented with what changed, why, approval, and date.
+
 ## v0.2.1 - 2026-06-14
 
 Presentation guidance update.
