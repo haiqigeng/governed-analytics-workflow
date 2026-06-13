@@ -2,7 +2,7 @@
 
 An instruction-first AI agent skill for running analytics work as a governed, traceable, human-reviewed process.
 
-The workflow helps an AI agent turn a business question into structured analytics artifacts: combined triage/intake, framing, data readiness, source mapping, bounded internal execution, quality review, reproducibility packet, human approval, PowerPoint brief output, per-analysis documentation, and durable context updates.
+The workflow helps an AI agent turn a business question into structured analytics artifacts: combined triage/intake, framing, data readiness, source mapping, bounded internal execution, quality review, reproducibility packet, human approval, PowerPoint brief output, presentation-generator handoff briefs, per-analysis documentation, and durable context updates.
 
 ## Why This Exists
 
@@ -86,6 +86,7 @@ The workflow can produce artifacts such as:
 - `analyses/<analysis-id>/quality-review.md`
 - `analyses/<analysis-id>/reproducibility-packet.md`
 - `analyses/<analysis-id>/stakeholder-brief.pptx`
+- `analyses/<analysis-id>/presentation-generator-brief.md`
 - `analyses/<analysis-id>/analysis-documentation.md`
 - `analyses/<analysis-id>/analysis-changelog.md`
 - `decision-log-entry.md`
@@ -94,7 +95,9 @@ The most important artifact is the reproducibility packet. It should let a human
 
 After delivery, the workflow should create or update human-readable documentation inside that analysis folder. Include final artifact paths, source and metric definitions, review status, caveats, rejected or superseded claims, and an analysis changelog. If scope, sources, metrics, filters, assumptions, or outputs changed during the analysis, document what changed, why, who approved it, and when.
 
-When the requested output is a brief, the default final artifact is a PowerPoint deck with concise text and professional data visuals.
+When the requested output is a brief, the workflow should also create `presentation-generator-brief.md`: a complete Markdown handoff for a dedicated deck/design generator. It should include slide-by-slide text, data tables, chart choices, design direction, caveats, and source references.
+
+The default final artifact is still a PowerPoint deck with concise text and professional data visuals when the environment can produce one well. If local deck quality is limited, use the Markdown generator brief as the primary handoff.
 
 The default deck structure is: big title slide, analytics context, executive summary, result-specific analysis slides, then recommendation, measurement plan, caveats, and next step. Chart choices should match the analytical purpose: funnel/flow for drop-off, bar or dot plot for categorical comparison, line chart for time trend, heatmap for two-dimensional patterns, and tables only when precise review detail matters.
 
@@ -120,7 +123,7 @@ Users do not care about fees.
 
 ## Project Status
 
-Private v0.2.3 release. The skill is usable as a portable Markdown-based agent workflow and does not require Python, Node.js, or any runtime dependency.
+Private v0.2.4 release. The skill is usable as a portable Markdown-based agent workflow and does not require Python, Node.js, or any runtime dependency.
 
 ## License
 

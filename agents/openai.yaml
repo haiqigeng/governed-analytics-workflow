@@ -1,4 +1,4 @@
 interface:
   display_name: "Governed Analytics Workflow"
   short_description: "Interactive, reviewable analytics workflow"
-  default_prompt: "Use $governed-analytics-workflow to run a traceable analytics analysis with human review and a PowerPoint brief when needed."
+  default_prompt: "Use $governed-analytics-workflow to run a traceable analytics analysis with human review and a PowerPoint or presentation-generator brief when needed."

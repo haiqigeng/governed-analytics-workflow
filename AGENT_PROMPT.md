@@ -22,6 +22,7 @@ Run the workflow interactively:
 - produce a reproducibility packet before human approval
 - ask for human approval before producing trusted stakeholder output
 - create an actual PowerPoint deck when the final output is a brief, unless I ask for another format
+- create a Markdown `presentation-generator-brief.md` for brief outputs so a dedicated deck/design tool can generate a more polished presentation
 - structure briefs as title, analytics context, executive summary, result-specific analysis slides, then recommendation/caveats
 - choose chart types based on analytical purpose and keep visual design professional
 - document each delivered analysis in its own `analyses/<analysis-id>/` folder for future reuse/recheck, including an analysis changelog when scope, sources, metrics, filters, assumptions, or outputs changed

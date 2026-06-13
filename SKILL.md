@@ -1,6 +1,6 @@
 ---
 name: governed-analytics-workflow
-description: Run an interactive, governed analytics workflow for business, product, marketing, web, revenue, or operations analysis. Use when an AI agent needs to turn a question into traceable analytics work with combined triage/intake, framing, data readiness checks, source mapping, internal bounded work modes, reproducible evidence, human review, PowerPoint brief outputs, per-analysis documentation, and durable context updates. Optimized for Codex, Claude Code, Gemini, and other coding or analysis agents.
+description: Run an interactive, governed analytics workflow for business, product, marketing, web, revenue, or operations analysis. Use when an AI agent needs to turn a question into traceable analytics work with combined triage/intake, framing, data readiness checks, source mapping, internal bounded work modes, reproducible evidence, human review, PowerPoint brief outputs, presentation-generator briefs, per-analysis documentation, and durable context updates. Optimized for Codex, Claude Code, Gemini, and other coding or analysis agents.
 ---
 
 # Governed Analytics Workflow
@@ -242,6 +242,7 @@ worker-result-packets.md
 quality-review.md
 reproducibility-packet.md
 stakeholder-brief.pptx
+presentation-generator-brief.md
 analysis-documentation.md
 analysis-changelog.md
 decision-log-entry.md
@@ -387,7 +388,9 @@ Do not mark output as trusted until approved.
 
 ## 9. Produce Stakeholder Output
 
-Separate facts, interpretation, recommendation, and caveats. When the requested output is a brief, default to an actual PowerPoint deck (`.pptx`) unless the user asks for another format. Use professional slide design, concise text, and visual presentation of the data. If the environment cannot create `.pptx`, state the limitation and provide a slide-by-slide specification as fallback.
+Separate facts, interpretation, recommendation, and caveats. When the requested output is a brief, read `references/presentation-generator-brief.md` and create `presentation-generator-brief.md` with slide text, data tables, chart choices, design rules, caveats, and source references. Use it as the handoff for external deck tools and as the specification for any `.pptx` created locally.
+
+When the final artifact should be a brief, default to an actual PowerPoint deck (`.pptx`) unless the user asks for another format. Use professional slide design, concise text, and visual presentation of the data. If the environment cannot create a professional `.pptx`, state the limitation and provide the presentation-generator brief as the primary deliverable.
 
 ```md
 # Stakeholder Brief Deck

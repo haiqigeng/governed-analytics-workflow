@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.2.4 - 2026-06-14
+
+Presentation generator handoff update.
+
+- Added a reusable `references/presentation-generator-brief.md` template.
+- Required brief outputs to include `presentation-generator-brief.md` for dedicated deck/design tools.
+- Added a filled synthetic contact-form presentation-generator example as a release asset.
+
 ## v0.2.3 - 2026-06-14
 
 Per-analysis documentation update.
