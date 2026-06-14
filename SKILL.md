@@ -79,6 +79,8 @@ Data/context:
 
 If important fields are missing, suggest reasonable defaults and ask the user to confirm or change them. Example: "I suggest marketing team as the audience, a PowerPoint brief as the output, and no deadline specified. Should I use these defaults?"
 
+If the expected output includes a PowerPoint, deck, or stakeholder brief, ask whether the user has a PPT template, brand guidelines, example deck, logo/assets, preferred chart style, or visualization reference site to follow. If none are provided, use the default presentation rules and label that as an assumption.
+
 Then ask one next question or one small group of related questions as ordinary prose after the triage fields. Do not introduce it with `Next question:` and do not list the same missing item both as a gap and as the question. If the request already includes enough context, continue to the next workflow step instead of asking.
 
 For low-risk descriptive questions, combine steps where sensible, but still preserve source, metric, and caveat information. For medium or high-risk work, keep the plan approval, reproducibility packet, and human review gates.
@@ -127,6 +129,7 @@ Risk:
 Time window:
 Expected output:
 Known context:
+Presentation inputs, if needed:
 ```
 
 Classify:
@@ -253,6 +256,7 @@ Metric-source mapping with source grain, calculation grain, numerator, denominat
 Validation checks:
 Expected artifacts:
 Caveats to preserve:
+Presentation inputs:
 ```
 
 Prefer these artifact names inside `analyses/<analysis_id>/` when creating files:
@@ -430,6 +434,10 @@ Do not mark output as trusted until approved.
 Separate facts, interpretation, recommendation, and caveats. When the requested output is a brief, read `references/presentation-generator-brief.md` and create `presentation-generator-brief.md` with slide text, data tables, chart choices, design rules, caveats, and source references. Use it as the handoff for external deck tools and as the specification for any `.pptx` created locally.
 
 When the final artifact should be a brief, default to an actual PowerPoint deck (`.pptx`) unless the user asks for another format. Use professional slide design, concise text, and visual presentation of the data. If the environment cannot create a professional `.pptx`, state the limitation and provide the presentation-generator brief as the primary deliverable.
+
+Before generating any `.pptx`, confirm or record whether there is a user-provided PPT template, brand guide, example deck, logo/assets, preferred chart style, or visualization-reference site. Use provided assets and references when available. If none are available, state that the default deck design and chart-selection rules are being used.
+
+When the user provides a visualization guide, website, or visual vocabulary, use it as the chart-selection reference and cite or name it in `presentation-generator-brief.md`. If the user previously mentioned such a guide but the URL or file is not in current context, ask for it instead of silently falling back to generic chart rules.
 
 Before producing stakeholder output, run a final presentation-readiness check: full metric domains are represented in source tables, selected slide highlights do not imply omitted values do not exist, caveats are visible on relevant slides, and recommendations are separated from verified facts.
 

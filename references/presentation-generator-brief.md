@@ -12,9 +12,13 @@ Create a professional PowerPoint-style stakeholder brief for:
 - Decision supported: [decision]
 - Desired tone: executive, concise, evidence-led, design-polished
 - Output: widescreen 16:9 presentation
+- PPT template or example deck: [path/link or Not provided]
+- Brand assets/guidelines: [path/link or Not provided]
+- Visualization reference guide/site: [name/link or Not provided]
 
 ## Hard Rules
 - Do not invent numbers, sources, findings, or recommendations.
+- Use the provided PPT template, brand guide, example deck, or visualization reference when available; if not available, state that default presentation rules were used.
 - Keep caveats visible on the relevant slides, not hidden only at the end.
 - Do not imply a highlighted subset is the full analysis; state when slides focus on selected values, entities, or segments.
 - Keep the full source metric domain in the reproducibility packet or appendix when the analysis uses buckets, stages, statuses, ratings, or ordered dimensions.
@@ -31,6 +35,8 @@ Create a professional PowerPoint-style stakeholder brief for:
 - Suggested colors: background #F7F9FC, text #172033, primary #2563EB, positive #16A34A, warning #F59E0B, risk #DC2626, grid #D8DEE9.
 - Typography: modern sans serif, strong title hierarchy, body text large enough for presentation mode.
 - Layout: generous margins, aligned content, consistent slide footer with date range/source/caveat status.
+- Template use: [which master/layouts/assets to use, or default generated layout]
+- Chart-selection reference: [visualization guide used, or default rules]
 
 ## Required Deck Structure
 1. Big title slide
@@ -100,6 +106,7 @@ Use only when useful after the detailed analysis.
 
 ## Source And Review Notes
 - Sources used: [source names/paths]
+- Presentation inputs: [template, brand guide, example deck, visualization guide]
 - Reproducibility packet: [path/link]
 - Analysis documentation: [path/link]
 - Review status: [approved/approved with caveats/rejected/revise scope]
