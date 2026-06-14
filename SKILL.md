@@ -1,6 +1,6 @@
 ---
 name: governed-analytics-workflow
-description: Run an interactive, governed analytics workflow for business, product, marketing, web, revenue, or operations analysis. Use when an AI agent needs to turn a question into traceable analytics work with combined triage/intake, framing, data readiness checks, source mapping, internal bounded work modes, reproducible evidence, human review, PowerPoint brief outputs, presentation-generator briefs, per-analysis documentation, and durable context updates. Optimized for Codex, Claude Code, Gemini, and other coding or analysis agents.
+description: Run an interactive, governed analytics workflow for business, product, marketing, digital, revenue, or operations analysis. Use when an AI agent needs to turn a question into traceable analytics work with combined triage/intake, framing, data readiness checks, source mapping, internal bounded work modes, reproducible evidence, human review, PowerPoint brief outputs, presentation-generator briefs, per-analysis documentation, and durable context updates. Optimized for Codex, Claude Code, Gemini, and other coding or analysis agents.
 ---
 
 # Governed Analytics Workflow
@@ -30,7 +30,7 @@ Use this skill to run analytics work as an interactive, reviewable process. AI a
 
 ## Core Terms
 
-- Metric/dimension scope, also called grain: the level one row, metric, dimension value, or claim describes. Examples: event, session, user, page, form instance, submission, account.
+- Metric/dimension scope, also called grain: the level one row, metric, dimension value, or claim describes. Examples: event, entity, transaction, period, item, or account.
 - Lineage: the trace from a claim back to its source fields, filters, transformations, query/notebook, output table, and caveats.
 - Source mapping: the process of matching desired business metrics to actual tables, events, fields, dimensions, or derived logic in the available data.
 
@@ -107,7 +107,7 @@ Proceed in this order:
 
 Use these exact step names in the user-facing step marker. When a step is complete, move the marker forward in the next workflow reply.
 
-Create a stable `analysis_id` when artifacts are produced, such as `2026-06-14-contact-form-usage`. Store run artifacts under `analyses/<analysis_id>/` unless the user gives another location.
+Create a stable `analysis_id` when artifacts are produced, such as `2026-06-14-decision-topic-summary`. Store run artifacts under `analyses/<analysis_id>/` unless the user gives another location.
 
 Ask concise grouped questions at each gate. Example:
 
@@ -155,37 +155,37 @@ Example:
 # Analysis Framing
 
 Population:
-Eligible customer accounts active at the start of the renewal period.
+Eligible entities in scope for the decision.
 
 Exclusions:
-Internal test accounts, cancelled accounts before period start, and accounts without renewal eligibility.
+Test records, invalid records, out-of-scope entities, and records without the required eligibility condition.
 
 Time window:
 Last 28 complete days.
 
 Metric/dimension scope (grain):
-account_id + renewal_period.
+entity_id + analysis_period.
 
 Metrics:
-renewal_rate, expansion_rate, support_contact_rate, product_usage_rate.
+outcome_rate, stage_completion_rate, cost_per_outcome, activity_rate.
 
 Segments:
-plan tier, region, acquisition channel, tenure band.
+entity type, geography, channel, cohort, time period.
 
 Breakdowns to consider:
 entity, geography, channel, cohort, time, device, product/category, top/bottom performers.
 
 Definition of done:
-We can say which customer groups show lower renewal and what evidence-backed retention action should be tested next.
+We can say which groups differ on the decision metric and what evidence-backed action should be tested next.
 ```
 
-If the user does not know the metric/dimension scope, propose options and explain the consequence. Example: form analysis can be event-level for field interactions, session-level for abandonments, and submission-level for completed contacts.
+If the user does not know the metric/dimension scope, propose options and explain the consequence. Example: an analysis can be event-level for raw interactions, entity-level for outcomes, and period-level for trends.
 
 Before finalizing framing, propose decision-relevant breakdowns instead of only the most obvious aggregate. Default candidates are entity/item, geography, channel/source, cohort, time trend, device/platform, product/category, and top/bottom rankings. Keep only breakdowns that are available, stable enough, and useful for the decision.
 
 ## 3. Check Data Readiness
 
-Verify source tables/files, event names, identifiers, page taxonomy, metric definitions, date/timezone logic, freshness, known tracking gaps, and PII/access constraints.
+Verify source tables/files, event names, identifiers, business taxonomy, metric definitions, date/timezone logic, freshness, known tracking gaps, and PII/access constraints.
 
 If the analyst is new to the company, the business domain is unfamiliar, or source ownership/taxonomy is unclear, do a lightweight orientation pass before execution: identify source owners, canonical dashboards/tables, glossary terms, business rules, known tracking gaps, and who can approve definitions. Keep this as a short readiness section, not a separate long process.
 
@@ -205,7 +205,7 @@ Recommended next step:
 
 Potential metrics are only hypotheses until mapped to actual source fields or derived logic. Create a metric-source mapping.
 
-For every derived metric, specify source grain, calculation grain, numerator, denominator, and deduplication rule. Never calculate a rate by dividing raw event grain directly by visit, visitor, account, or form-instance grain. Normalize to one calculation grain first. Use event-count divided by visit-count only when the metric is explicitly an intensity metric, such as average clicks per visit.
+For every derived metric, specify source grain, calculation grain, numerator, denominator, and deduplication rule. Never calculate a rate by dividing raw event grain directly by entity, user, account, item, transaction, or period grain. Normalize to one calculation grain first. Use event-count divided by entity-count only when the metric is explicitly an intensity metric, such as average interactions per eligible entity.
 
 For threshold, stage, bucket, funnel, status, rating, or ordered-dimension metrics, explicitly define the baseline population and include all expected source values in the base result table. Stakeholder outputs may highlight a subset, but the reproducibility packet must show the full domain or explain why values were excluded.
 
@@ -214,9 +214,9 @@ For ranking outputs, rank by normalized rates or decision metrics after applying
 ```md
 | Logical metric | Source event/field | Direct or derived | Source grain | Calculation grain | Numerator | Denominator | Deduplication rule | Availability | Caveat |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| form_start_rate | first field_focus after form_view | Derived | event | session + form | distinct session + form with start | distinct session + form with view | one start per session + form | Partial | Depends on field tracking |
-| submit_success_rate | form_submit_success | Derived | event | form instance | form instances with success | started form instances | one success per form instance | Ready | Denominator must be approved |
-| error_presence_rate | form_validation_error | Derived | event | form instance | form instances with at least one error | started form instances | one error flag per form instance | Partial | Field-level errors may be missing |
+| eligible_entity_rate | eligibility_flag + source entity table | Derived | entity | entity | distinct eligible entities | distinct in-scope entities | one eligibility flag per entity | Partial | Depends on eligibility definition |
+| outcome_completion_rate | outcome event or outcome status | Derived | event or status | entity + period | distinct entities with outcome | eligible entities | one outcome per entity + period | Ready | Denominator must be approved |
+| issue_presence_rate | issue event or issue status | Derived | event or status | entity + period | entities with at least one issue | eligible entities | one issue flag per entity + period | Partial | Issue capture may be incomplete |
 ```
 
 If a dimension or metric does not exist directly, define a derivation recipe and label it `Derived`. If it cannot be derived safely, label it `Unavailable` and recommend tracking changes.
@@ -228,16 +228,16 @@ Status:
 Partial
 
 Available sources:
-account_renewal, subscription_invoice, product_usage, support_ticket
+source_table_a, source_event_b, reference_dimension_c, dashboard_or_export_d
 
 Missing or weak sources:
-No stable reason-for-churn field and incomplete cancellation feedback.
+No stable outcome reason field and incomplete qualitative feedback.
 
 Metric caveats:
-Renewal rate shows observed outcome; it does not prove why customers renewed or churned.
+Outcome rate shows observed behavior; it does not prove why the outcome happened.
 
 Recommended next step:
-Run directional renewal analysis and recommend improved cancellation-reason capture for future work.
+Run directional analysis and recommend improved reason/outcome capture for future work.
 ```
 
 If readiness is poor and risk is medium or high, stop and ask whether to improve tracking, narrow the question, or proceed with a caveated directional analysis.
@@ -348,13 +348,13 @@ Check:
 Reject unsupported language:
 
 ```text
-Customers do not value onboarding.
+Group A does not value the product.
 ```
 
 Use supported language:
 
 ```text
-Only 31% of eligible new accounts completed the onboarding checklist, suggesting measured onboarding completion is limited.
+Only 31% of eligible entities completed the target milestone, suggesting measured completion is limited.
 ```
 
 ## 7. Generate The Reproducibility Packet
@@ -392,16 +392,16 @@ Use claim-to-evidence mapping:
 
 ```md
 Claim:
-31% of eligible new accounts completed onboarding within 14 days.
+31% of eligible entities completed the target milestone within the defined window.
 
 Evidence:
-Output table analytics_sandbox.onboarding_result_2026_06_13, row all_accounts, column completed_onboarding_14d_rate.
+Output table analytics_sandbox.analysis_result_2026_06_13, row all_entities, column milestone_completion_rate.
 
 Calculation:
-COUNT(DISTINCT account_id with onboarding_completed_at <= signup_at + 14 days) / COUNT(DISTINCT eligible account_id)
+COUNT(DISTINCT entity_id with milestone_completed_at <= eligibility_start_at + defined window) / COUNT(DISTINCT eligible entity_id)
 
 Caveat:
-Onboarding completion is a measured product milestone; it does not prove customer satisfaction or long-term retention.
+Milestone completion is a measured outcome; it does not prove satisfaction, intent, or long-term impact.
 ```
 
 Raw data guidance:
@@ -460,7 +460,7 @@ Final, only when useful. Measurement plan, caveats, appendix, or next step
 
 Choose visualizations by communication need using the Data Visualisation Catalogue functions first, then simplify for executive readability. Avoid decorative or complex charts when a simpler comparison is clearer. Use a consistent, restrained palette; highlight only the metric or segment that matters; label axes, denominators, sample sizes, and caveats.
 
-When source context matters for interpretation, such as page layout, product UX, dashboard screens, maps, or operational workflows, preserve recognizable source context in stakeholder visuals where permitted. Prefer annotated screenshots, crawl captures, or workflow images over abstract charts alone.
+When source context matters for interpretation, such as product interfaces, dashboards, spatial views, documents, or operational workflows, preserve recognizable source context in stakeholder visuals where permitted. Prefer annotated screenshots, exported views, or workflow images over abstract charts alone.
 
 ## 10. Document Delivery
 
@@ -505,10 +505,10 @@ Example:
 
 ```md
 Next action:
-Run an A/B test of a revised onboarding reminder sequence for eligible new accounts.
+Run a controlled change to the recommended intervention for eligible entities.
 
 Success metrics:
-Onboarding completion rate, activation milestone rate, support contact rate, renewal intent signal.
+Target outcome rate, intermediate milestone rate, guardrail metric, and operational load metric.
 
 Revisit:
 After two complete weeks or when minimum sample size is reached.
@@ -533,8 +533,8 @@ For final analytics outputs, include at minimum: question, decision supported, d
 
 Guard against:
 
-- treating clicks, views, scroll depth, or engagement proxies as intent without evidence
-- mixing events, sessions, users, and pages
+- treating behavioral proxy metrics as intent without evidence
+- mixing event, entity, account, item, transaction, and period grains
 - mixing source grains and calculation grains in rate metrics
 - omitting expected source buckets, stages, statuses, or categories from base outputs
 - using a highlighted subset in slides as if it were the complete analysis

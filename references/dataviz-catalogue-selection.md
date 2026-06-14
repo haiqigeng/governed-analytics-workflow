@@ -45,7 +45,7 @@ Use the catalogue's function categories as the default vocabulary:
 - Avoid word clouds for decision-making unless paired with a ranked table or bar chart.
 - For top/bottom rankings, use sorted bars or dot/lollipop charts with denominator thresholds.
 - For funnels and ordered drop-off, use a funnel, stepped bar, or line/area over stages; show denominator and stage definition.
-- For UX, page, dashboard, map, or workflow analysis, combine the chart with recognizable source context when allowed.
+- For interface, dashboard, spatial, document, or workflow analysis, combine the chart with recognizable source context when allowed.
 
 ## Required Presentation Brief Fields
 
