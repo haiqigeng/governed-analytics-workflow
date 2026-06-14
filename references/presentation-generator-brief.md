@@ -14,7 +14,7 @@ Create a professional PowerPoint-style stakeholder brief for:
 - Output: widescreen 16:9 presentation
 - PPT template or example deck: [path/link or Not provided]
 - Brand assets/guidelines: [path/link or Not provided]
-- Visualization reference guide/site: [name/link or Not provided]
+- Visualization reference guide/site: The Data Visualisation Catalogue (`https://datavizcatalogue.com/index.html`) unless user provides another guide
 
 ## Hard Rules
 - Do not invent numbers, sources, findings, or recommendations.
@@ -36,7 +36,7 @@ Create a professional PowerPoint-style stakeholder brief for:
 - Typography: modern sans serif, strong title hierarchy, body text large enough for presentation mode.
 - Layout: generous margins, aligned content, consistent slide footer with date range/source/caveat status.
 - Template use: [which master/layouts/assets to use, or default generated layout]
-- Chart-selection reference: [visualization guide used, or default rules]
+- Chart-selection reference: [Data Visualisation Catalogue function and URL, or user-provided guide]
 
 ## Required Deck Structure
 1. Big title slide
@@ -86,8 +86,11 @@ Repeat this section for each result.
 
 #### Slide [n]: [result title]
 - Main message: [one sentence]
+- Catalogue function: [comparison/proportion/relationship/hierarchy/concept/location/part-to-whole/distribution/how-things-work/process/movement-flow/pattern/range/time/text/reference]
 - Chart type: [bar/dot/line/funnel/Sankey/heatmap/table/KPI]
 - Why this chart: [comparison/trend/drop-off/flow/pattern/audit detail]
+- Alternatives considered: [chart types considered from the catalogue]
+- Why alternatives were rejected: [readability, data shape, audience, caveat, or decision-fit reason]
 - Data:
   | Dimension | Metric | Value | Notes |
   |---|---:|---:|---|

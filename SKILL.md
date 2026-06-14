@@ -79,7 +79,7 @@ Data/context:
 
 If important fields are missing, suggest reasonable defaults and ask the user to confirm or change them. Example: "I suggest marketing team as the audience, a PowerPoint brief as the output, and no deadline specified. Should I use these defaults?"
 
-If the expected output includes a PowerPoint, deck, or stakeholder brief, ask whether the user has a PPT template, brand guidelines, example deck, logo/assets, preferred chart style, or visualization reference site to follow. If none are provided, use the default presentation rules and label that as an assumption.
+If the expected output includes a PowerPoint, deck, or stakeholder brief, ask whether the user has a PPT template, brand guidelines, example deck, logo/assets, or preferred chart style to follow. Use The Data Visualisation Catalogue as the default visualization reference unless the user provides another guide.
 
 Then ask one next question or one small group of related questions as ordinary prose after the triage fields. Do not introduce it with `Next question:` and do not list the same missing item both as a gap and as the question. If the request already includes enough context, continue to the next workflow step instead of asking.
 
@@ -435,9 +435,9 @@ Separate facts, interpretation, recommendation, and caveats. When the requested 
 
 When the final artifact should be a brief, default to an actual PowerPoint deck (`.pptx`) unless the user asks for another format. Use professional slide design, concise text, and visual presentation of the data. If the environment cannot create a professional `.pptx`, state the limitation and provide the presentation-generator brief as the primary deliverable.
 
-Before generating any `.pptx`, confirm or record whether there is a user-provided PPT template, brand guide, example deck, logo/assets, preferred chart style, or visualization-reference site. Use provided assets and references when available. If none are available, state that the default deck design and chart-selection rules are being used.
+Before generating any `.pptx`, confirm or record whether there is a user-provided PPT template, brand guide, example deck, logo/assets, or preferred chart style. Use provided assets when available. If none are available, state that the default deck design is being used.
 
-When the user provides a visualization guide, website, or visual vocabulary, use it as the chart-selection reference and cite or name it in `presentation-generator-brief.md`. If the user previously mentioned such a guide but the URL or file is not in current context, ask for it instead of silently falling back to generic chart rules.
+Use The Data Visualisation Catalogue (`https://datavizcatalogue.com/index.html`) as the default chart-selection reference for stakeholder briefs. When choosing visualizations, prefer its "Search by Function" framing and read `references/dataviz-catalogue-selection.md`. If internet access is available, consult the live catalogue for the relevant function and chart type before finalizing slide visuals. If the user provides a different visualization guide, website, or visual vocabulary, use that instead and cite or name it in `presentation-generator-brief.md`.
 
 Before producing stakeholder output, run a final presentation-readiness check: full metric domains are represented in source tables, selected slide highlights do not imply omitted values do not exist, caveats are visible on relevant slides, and recommendations are separated from verified facts.
 
@@ -453,7 +453,7 @@ Required slides:
 Final, only when useful. Measurement plan, caveats, appendix, or next step
 ```
 
-Choose visualizations by communication need: funnel/Sankey for process flow or drop-off; bar or dot plot for categorical comparison; line chart for time trend; heatmap for two-dimensional patterns; table only for precise audit detail; KPI cards only for a few headline numbers. Avoid decorative or complex charts when a simpler comparison is clearer. Use a consistent, restrained palette; highlight only the metric or segment that matters; label axes, denominators, sample sizes, and caveats.
+Choose visualizations by communication need using the Data Visualisation Catalogue functions first, then simplify for executive readability. Avoid decorative or complex charts when a simpler comparison is clearer. Use a consistent, restrained palette; highlight only the metric or segment that matters; label axes, denominators, sample sizes, and caveats.
 
 When source context matters for interpretation, such as page layout, product UX, dashboard screens, maps, or operational workflows, preserve recognizable source context in stakeholder visuals where permitted. Prefer annotated screenshots, crawl captures, or workflow images over abstract charts alone.
 
