@@ -24,6 +24,7 @@ Use this skill to run analytics work as an interactive, reviewable process. AI a
 - Generate a reproducibility packet before human approval.
 - Document each delivered analysis in its own analysis folder for future reuse, recheck, and change history.
 - Give each artifact a clear status line and maintain an artifact index when multiple files are created.
+- Close delivered work with a concise user-facing handoff summary: final status, reviewed caveats, primary artifact paths, decision/action needed, and what was not verified.
 - Store durable context only after review.
 - If data access is unavailable, create a readiness assessment and proposed plan instead of fabricating results.
 
@@ -111,7 +112,7 @@ Create a stable `analysis_id` when artifacts are produced, such as `2026-06-14-c
 Ask concise grouped questions at each gate. Example:
 
 ```text
-I can proceed, but the data only supports a directional answer because section impressions are missing. Should I continue with caveats or switch to a tracking-readiness recommendation?
+I can proceed, but the data only supports a directional answer because the source lacks a stable outcome identifier. Should I continue with caveats or switch to a tracking-readiness recommendation?
 ```
 
 ## 1. Triage And Intake
@@ -154,28 +155,28 @@ Example:
 # Analysis Framing
 
 Population:
-Sessions on URLs matching /programmes/*.
+Eligible customer accounts active at the start of the renewal period.
 
 Exclusions:
-Thank-you, application confirmation, staging, and test URLs.
+Internal test accounts, cancelled accounts before period start, and accounts without renewal eligibility.
 
 Time window:
 Last 28 complete days.
 
 Metric/dimension scope (grain):
-session_id + programme_page_url.
+account_id + renewal_period.
 
 Metrics:
-max_scroll_depth, reached_25_pct, reached_50_pct, reached_75_pct, reached_90_pct, cta_click_rate.
+renewal_rate, expansion_rate, support_contact_rate, product_usage_rate.
 
 Segments:
-device category, traffic channel, programme page.
+plan tier, region, acquisition channel, tenure band.
 
 Breakdowns to consider:
 entity, geography, channel, cohort, time, device, product/category, top/bottom performers.
 
 Definition of done:
-We can say whether key lower-page content is likely receiving limited exposure and what should be tested next.
+We can say which customer groups show lower renewal and what evidence-backed retention action should be tested next.
 ```
 
 If the user does not know the metric/dimension scope, propose options and explain the consequence. Example: form analysis can be event-level for field interactions, session-level for abandonments, and submission-level for completed contacts.
@@ -185,6 +186,8 @@ Before finalizing framing, propose decision-relevant breakdowns instead of only 
 ## 3. Check Data Readiness
 
 Verify source tables/files, event names, identifiers, page taxonomy, metric definitions, date/timezone logic, freshness, known tracking gaps, and PII/access constraints.
+
+If the analyst is new to the company, the business domain is unfamiliar, or source ownership/taxonomy is unclear, do a lightweight orientation pass before execution: identify source owners, canonical dashboards/tables, glossary terms, business rules, known tracking gaps, and who can approve definitions. Keep this as a short readiness section, not a separate long process.
 
 Return:
 
@@ -225,16 +228,16 @@ Status:
 Partial
 
 Available sources:
-page_view, scroll_25, scroll_50, scroll_75, scroll_90, cta_click
+account_renewal, subscription_invoice, product_usage, support_ticket
 
 Missing or weak sources:
-No section-level impression event.
+No stable reason-for-churn field and incomplete cancellation feedback.
 
 Metric caveats:
-Scroll depth approximates exposure; it does not prove reading.
+Renewal rate shows observed outcome; it does not prove why customers renewed or churned.
 
 Recommended next step:
-Run directional scroll-depth analysis and recommend section-impression tracking for future work.
+Run directional renewal analysis and recommend improved cancellation-reason capture for future work.
 ```
 
 If readiness is poor and risk is medium or high, stop and ask whether to improve tracking, narrow the question, or proceed with a caveated directional analysis.
@@ -345,13 +348,13 @@ Check:
 Reject unsupported language:
 
 ```text
-Users do not care about fees.
+Customers do not value onboarding.
 ```
 
 Use supported language:
 
 ```text
-Only 31% of sessions reached the approximate Fees section, suggesting limited measured exposure.
+Only 31% of eligible new accounts completed the onboarding checklist, suggesting measured onboarding completion is limited.
 ```
 
 ## 7. Generate The Reproducibility Packet
@@ -389,16 +392,16 @@ Use claim-to-evidence mapping:
 
 ```md
 Claim:
-31% of programme-page sessions reached 75% scroll depth.
+31% of eligible new accounts completed onboarding within 14 days.
 
 Evidence:
-Output table analytics_sandbox.programme_scroll_result_2026_06_13, row all_devices, column reached_75_pct.
+Output table analytics_sandbox.onboarding_result_2026_06_13, row all_accounts, column completed_onboarding_14d_rate.
 
 Calculation:
-COUNTIF(max_scroll_depth >= 75) / COUNT(*)
+COUNT(DISTINCT account_id with onboarding_completed_at <= signup_at + 14 days) / COUNT(DISTINCT eligible account_id)
 
 Caveat:
-75% scroll depth approximates lower-page exposure but does not prove reading.
+Onboarding completion is a measured product milestone; it does not prove customer satisfaction or long-term retention.
 ```
 
 Raw data guidance:
@@ -441,6 +444,8 @@ Use The Data Visualisation Catalogue (`https://datavizcatalogue.com/index.html`)
 
 Before producing stakeholder output, run a final presentation-readiness check: full metric domains are represented in source tables, selected slide highlights do not imply omitted values do not exist, caveats are visible on relevant slides, and recommendations are separated from verified facts.
 
+When a `.pptx` is generated locally, visually inspect it when tooling supports screenshots, PDF export, or slide XML/media checks. Verify slide order, text fit, chart readability, visible caveats, denominator labels, and that template/brand inputs were applied. If visual inspection is not possible, state that limitation in the handoff.
+
 ```md
 # Stakeholder Brief Deck
 
@@ -471,6 +476,8 @@ Include an `analysis-changelog.md` section or file. Record material changes made
 
 When user feedback or quality review finds a method flaw after output is created, mark affected claims and artifacts as `Superseded`, create or regenerate the corrected artifact, and explain the correction in conversation.
 
+After documenting delivery, give the user a compact handoff summary in conversation. Include review status, top-line answer, recommendation or decision needed, links/paths to final artifacts, caveats that must travel with the output, and any verification not performed.
+
 ## 11. Update Durable Context
 
 Update durable context only after review.
@@ -498,10 +505,10 @@ Example:
 
 ```md
 Next action:
-Run an A/B test with Fees, Careers, and CTA summary moved above detailed curriculum on mobile.
+Run an A/B test of a revised onboarding reminder sequence for eligible new accounts.
 
 Success metrics:
-CTA click rate, application starts, form completion rate, scroll to key sections.
+Onboarding completion rate, activation milestone rate, support contact rate, renewal intent signal.
 
 Revisit:
 After two complete weeks or when minimum sample size is reached.
@@ -526,7 +533,7 @@ For final analytics outputs, include at minimum: question, decision supported, d
 
 Guard against:
 
-- treating scroll depth, clicks, or engagement as intent without evidence
+- treating clicks, views, scroll depth, or engagement proxies as intent without evidence
 - mixing events, sessions, users, and pages
 - mixing source grains and calculation grains in rate metrics
 - omitting expected source buckets, stages, statuses, or categories from base outputs

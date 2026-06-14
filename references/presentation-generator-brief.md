@@ -110,6 +110,7 @@ Use only when useful after the detailed analysis.
 ## Source And Review Notes
 - Sources used: [source names/paths]
 - Presentation inputs: [template, brand guide, example deck, visualization guide]
+- Visual QA performed: [slide screenshots/PDF check/XML-media check/manual review/not possible]
 - Reproducibility packet: [path/link]
 - Analysis documentation: [path/link]
 - Review status: [approved/approved with caveats/rejected/revise scope]
