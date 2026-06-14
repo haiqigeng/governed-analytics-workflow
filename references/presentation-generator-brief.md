@@ -16,9 +16,12 @@ Create a professional PowerPoint-style stakeholder brief for:
 ## Hard Rules
 - Do not invent numbers, sources, findings, or recommendations.
 - Keep caveats visible on the relevant slides, not hidden only at the end.
+- Do not imply a highlighted subset is the full analysis; state when slides focus on selected values, entities, or segments.
+- Keep the full source metric domain in the reproducibility packet or appendix when the analysis uses buckets, stages, statuses, ratings, or ordered dimensions.
 - Use one main message per slide.
 - Use charts only where they clarify the decision.
 - Label chart axes, units, denominators, sample sizes, and date range.
+- Label ranking denominators and minimum threshold rules.
 - Prefer clean business design over decorative illustration.
 - Avoid crowded slides, dark backgrounds, heavy gradients, and excessive color.
 - Keep source/caveat text readable.
@@ -31,10 +34,11 @@ Create a professional PowerPoint-style stakeholder brief for:
 
 ## Required Deck Structure
 1. Big title slide
-2. Analytics context
+2. Context page with only the important triage/intake elements
 3. Executive summary
-4+. Analysis slides, one per key result
-Final. Recommendation, measurement plan, caveats, and next step
+4. Recommendation, if required
+5+. Detailed analysis slides, one per key result
+Final, only when useful. Measurement plan, caveats, appendix, or next step
 
 ## Slide Specifications
 
@@ -47,21 +51,31 @@ Final. Recommendation, measurement plan, caveats, and next step
 ### Slide 2: Analytics Context
 - Business question: [question]
 - Decision supported: [decision]
+- Audience: [audience]
 - Scope: [included/excluded pages, users, events, time window]
 - Data readiness: [source availability, synthetic/demo/real, known limitations]
 - Metric definitions: [main metrics and scope/grain]
-- Design: structured context blocks, no decorative icons unless subtle.
+- Design: structured context blocks using only decision-relevant triage/intake elements; avoid restating the full workflow checklist.
 
 ### Slide 3: Executive Summary
 - 3 to 5 key findings:
   - [finding 1 with number]
   - [finding 2 with number]
   - [finding 3 with number]
-- Recommendation: [recommended decision/action]
+- Decision implication: [what the findings mean for the decision]
 - Confidence/caveat status: [verified/directional/needs validation]
-- Design: use KPI tiles only for headline metrics, plus concise recommendation block.
+- Completeness note: [whether full metric domain and key breakdowns were checked]
+- Design: use KPI tiles only for headline metrics; keep detailed evidence for later slides.
 
-### Slide 4+: Analysis Slides
+### Slide 4: Recommendation
+Use only when the analysis requires or supports a recommendation.
+- Recommendation: [recommended action]
+- Why now: [evidence-based rationale]
+- Expected impact: [metric or decision outcome affected]
+- Caveat: [what must remain qualified]
+- Design: decision-focused, concise, no dense appendix table.
+
+### Slide 5+: Detailed Analysis Slides
 Repeat this section for each result.
 
 #### Slide [n]: [result title]
@@ -74,15 +88,15 @@ Repeat this section for each result.
   | [dimension value] | [metric name] | [value] | [notes] |
 - Interpretation: [what the viewer should conclude]
 - Caveat: [what this does not prove]
+- Completeness: [full domain shown, selected subset explained, or not applicable]
 - Design notes: [highlighting, labels, ordering, color use]
 
-### Final Slide: Recommendation And Next Step
-- Recommendation: [recommended action]
-- Why now: [evidence-based rationale]
+### Final Slide: Measurement, Caveats, Or Next Step
+Use only when useful after the detailed analysis.
 - Measurement plan: [success metrics, guardrail metrics, test duration]
 - Next step: [owner/action/timing]
 - Caveats: [remaining limitations]
-- Design: decision-focused, no dense appendix table.
+- Design: action-focused, no dense appendix table.
 
 ## Source And Review Notes
 - Sources used: [source names/paths]
