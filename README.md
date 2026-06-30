@@ -1,5 +1,7 @@
 # Governed Analytics Workflow
 
+[![Latest release](https://img.shields.io/github/v/release/haiqigeng/=semver)](https://github.com/haiqigeng/governed-analytics-workflow/releases/latest) ![License](https://img.shields.io/github/license/haiqigeng/governed-analytics-workflow)
+
 An interactive, reviewable analytics workflow for AI-assisted business analysis.
 
 This repository contains a Codex skill that helps an analyst or AI agent turn a vague business question into a traceable analysis process with scoped metrics, data readiness checks, reproducible evidence, human review, and stakeholder-ready outputs.
@@ -59,7 +61,7 @@ For low-risk descriptive work, steps can be combined. For medium- or high-risk d
 Clone or copy this repository into your Codex skills directory:
 
 ```powershell
-git clone https://github.com/HQ-Guillaume/governed-analytics-workflow.git "$env:USERPROFILE\.codex\skills\governed-analytics-workflow"
+git clone https://github.com/haiqigeng/governed-analytics-workflow.git "$env:USERPROFILE\.codex\skills\governed-analytics-workflow"
 ```
 
 Restart Codex after installation so the skill is discovered.
