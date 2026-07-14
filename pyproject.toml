@@ -1,0 +1,9 @@
+[project]
+name = "governed-analytics-workflow"
+version = "1.0.0"
+description = "Adaptive, evidence-governed analytics workflow skill"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+
+[tool.unittest]
+start-directory = "tests"

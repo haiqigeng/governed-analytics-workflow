@@ -1,121 +1,175 @@
-# Presentation Generator Brief Template
-
-Use this template when handing an approved analytics result to a dedicated presentation or design generator. Fill every bracketed field or mark it `Not applicable`.
-
-```md
 # Presentation Generator Brief
 
-## Goal
-Create a professional PowerPoint-style stakeholder brief for:
-- Analysis: [analysis title]
-- Audience: [audience]
-- Decision supported: [decision]
-- Desired tone: executive, concise, evidence-led, design-polished
-- Output: widescreen 16:9 presentation
-- PPT template or example deck: [path/link or Not provided]
-- Brand assets/guidelines: [path/link or Not provided]
-- Visualization reference guide/site: The Data Visualisation Catalogue (`https://datavizcatalogue.com/index.html`) unless user provides another guide
+Create this brief only after the analysis contract, evidence, and claim set are reviewed at the required risk level. It is a delivery specification, not a place to perform new analysis.
 
-## Hard Rules
-- Do not invent numbers, sources, findings, or recommendations.
-- Use the provided PPT template, brand guide, example deck, or visualization reference when available; if not available, state that default presentation rules were used.
-- Keep caveats visible on the relevant slides, not hidden only at the end.
-- Do not imply a highlighted subset is the full analysis; state when slides focus on selected values, entities, or segments.
-- Keep the full source metric domain in the reproducibility packet or appendix when the analysis uses buckets, stages, statuses, ratings, or ordered dimensions.
-- Use one main message per slide.
-- Use charts only where they clarify the decision.
-- Label chart axes, units, denominators, sample sizes, and date range.
-- Label ranking denominators and minimum threshold rules.
-- Prefer clean business design over decorative illustration.
-- Avoid crowded slides, dark backgrounds, heavy gradients, and excessive color.
-- Keep source/caveat text readable.
+## Generator Contract
 
-## Visual Direction
-- Palette: neutral background, dark text, one primary accent, one positive accent, one warning/accent color.
-- Suggested colors: background #F7F9FC, text #172033, primary #2563EB, positive #16A34A, warning #F59E0B, risk #DC2626, grid #D8DEE9.
-- Typography: modern sans serif, strong title hierarchy, body text large enough for presentation mode.
-- Layout: generous margins, aligned content, consistent slide footer with date range/source/caveat status.
-- Template use: [which master/layouts/assets to use, or default generated layout]
-- Chart-selection reference: [Data Visualisation Catalogue function and URL, or user-provided guide]
+- Use only claims with stakeholder-eligible status in `analysis-manifest.json`.
+- Preserve claim wording, evidence posture, population, period, units, fingerprints, and caveats.
+- Use only canonical result tables or approved evidence references.
+- Do not calculate, interpolate, merge, or infer missing results.
+- Do not introduce a new recommendation without decision lineage.
+- Apply the user's template, brand guide, language, source-visible wording, and visualization system when supplied.
+- Follow `synthesis-and-visualisation.md` for chart selection and rendered QA.
 
-## Required Deck Structure
-1. Big title slide
-2. Context page with only the important triage/intake elements
-3. Executive summary
-4. Recommendation, if required
-5+. Detailed analysis slides, one per key result
-Final, only when useful. Measurement plan, caveats, appendix, or next step
+## Brief Header
 
-## Slide Specifications
-
-### Slide 1: Big Title
-- Title: [analysis title]
-- Subtitle: [one-line business context]
-- Metadata: [audience], [date range], [review/caveat status]
-- Design: confident title page, minimal text, no chart.
-
-### Slide 2: Analytics Context
-- Business question: [question]
-- Decision supported: [decision]
-- Audience: [audience]
-- Scope: [included/excluded pages, users, events, time window]
-- Data readiness: [source availability, synthetic/demo/real, known limitations]
-- Metric definitions: [main metrics and scope/grain]
-- Design: structured context blocks using only decision-relevant triage/intake elements; avoid restating the full workflow checklist.
-
-### Slide 3: Executive Summary
-- 3 to 5 key findings:
-  - [finding 1 with number]
-  - [finding 2 with number]
-  - [finding 3 with number]
-- Decision implication: [what the findings mean for the decision]
-- Confidence/caveat status: [verified/directional/needs validation]
-- Completeness note: [whether full metric domain and key breakdowns were checked]
-- Design: use KPI tiles only for headline metrics; keep detailed evidence for later slides.
-
-### Slide 4: Recommendation
-Use only when the analysis requires or supports a recommendation.
-- Recommendation: [recommended action]
-- Why now: [evidence-based rationale]
-- Expected impact: [metric or decision outcome affected]
-- Caveat: [what must remain qualified]
-- Design: decision-focused, concise, no dense appendix table.
-
-### Slide 5+: Detailed Analysis Slides
-Repeat this section for each result.
-
-#### Slide [n]: [result title]
-- Main message: [one sentence]
-- Catalogue function: [comparison/proportion/relationship/hierarchy/concept/location/part-to-whole/distribution/how-things-work/process/movement-flow/pattern/range/time/text/reference]
-- Chart type: [bar/dot/line/funnel/Sankey/heatmap/table/KPI]
-- Why this chart: [comparison/trend/drop-off/flow/pattern/audit detail]
-- Alternatives considered: [chart types considered from the catalogue]
-- Why alternatives were rejected: [readability, data shape, audience, caveat, or decision-fit reason]
-- Data:
-  | Dimension | Metric | Value | Notes |
-  |---|---:|---:|---|
-  | [dimension value] | [metric name] | [value] | [notes] |
-- Interpretation: [what the viewer should conclude]
-- Caveat: [what this does not prove]
-- Completeness: [full domain shown, selected subset explained, or not applicable]
-- Design notes: [highlighting, labels, ordering, color use]
-
-### Final Slide: Measurement, Caveats, Or Next Step
-Use only when useful after the detailed analysis.
-- Measurement plan: [success metrics, guardrail metrics, test duration]
-- Next step: [owner/action/timing]
-- Caveats: [remaining limitations]
-- Design: action-focused, no dense appendix table.
-
-## Source And Review Notes
-- Sources used: [source names/paths]
-- Presentation inputs: [template, brand guide, example deck, visualization guide]
-- Visual QA performed: [slide screenshots/PDF check/XML-media check/manual review/not possible]
-- Reproducibility packet: [path/link]
-- Analysis documentation: [path/link]
-- Review status: [approved/approved with caveats/rejected/revise scope]
-- Approver: [name/team/date]
-
-## Appendix Data
-Include only if the generator supports appendices. Keep tables readable and clearly labeled.
+```text
+Analysis ID:
+Manifest path:
+Output audience:
+Decision or learning objective:
+Primary problem type:
+Secondary problem types:
+Risk:
+Review status:
+Approved claim IDs:
+Period and timezone:
+Population and grain:
+Template/brand inputs:
+Language and terminology rules:
+Visualization guide:
+Live catalogue check status:
+Required delivery format:
 ```
+
+## Narrative Architecture
+
+Do not use a fixed number of slides. Include only sections needed by the audience and evidence.
+
+Typical sequence:
+
+1. Title with analysis name, audience, date, and review posture.
+2. Concise context covering the decision, scope, population, sources, and definitions necessary to read the findings.
+3. Executive summary with the most decision-relevant approved claims and implications.
+4. Analysis sections ordered by the confirmed question tree and problem types.
+5. Recommendations or next actions only where evidence supports them.
+6. Measurement, monitoring, validation, experiment, caveat, or methods appendix when useful.
+
+For mixed analyses, preserve branch boundaries. A descriptive branch should establish the relevant data before an association, prediction, anomaly, category, or theme branch relies on it.
+
+## Per-Slide Specification
+
+Repeat for every slide:
+
+```text
+Slide ID:
+Question ID:
+Claim IDs:
+Slide function: context | finding | comparison | explanation | recommendation | method | appendix
+Audience question answered:
+Message title:
+Evidence posture:
+Body copy:
+Decision implication:
+Required caveats:
+Result/data reference:
+Metric IDs and fingerprint hashes:
+Visual ID:
+Visual type:
+Source context or screenshot reference:
+Speaker notes:
+Dependencies:
+```
+
+Titles should state the supported message, not merely name a metric. Do not use a conclusion title when evidence posture is `assumed` or `needs_validation`.
+
+## Visual Specification
+
+For slides containing a chart or analytical visual, include:
+
+```text
+Communication function:
+Data structure and metric shape:
+Candidate chart types:
+Selected chart:
+Why it fits:
+Rejected alternatives, when non-obvious:
+Population and denominator label:
+Units and period:
+Sample size and uncertainty:
+Expected domain and zero state:
+Colour/highlight rule:
+Annotation rule:
+Live catalogue checked:
+Rendered QA status:
+```
+
+Do not add a chart merely to fill space. Use a table, annotated screenshot, or concise text when it communicates the evidence more honestly.
+
+## Data Blocks
+
+Provide exact plotted values in a structured table for every chart. Example:
+
+```md
+| category | value | denominator | unit | sample_size | lower_bound | upper_bound | metric_id |
+| --- | ---: | ---: | --- | ---: | ---: | ---: | --- |
+| A | 0.31 | 1240 | rate | 1240 | 0.28 | 0.34 | M1 |
+```
+
+Preserve expected zero or missing categories. Distinguish `0`, `not applicable`, `not measured`, and `missing`.
+
+## Recommendations
+
+For every recommendation:
+
+```text
+Recommendation ID:
+Decision supported:
+Supporting claim IDs:
+Evidence posture:
+Proposed action:
+Why now:
+Expected learning or outcome:
+Success metrics:
+Guardrails:
+Owner:
+Revisit condition:
+```
+
+Frame observational findings as hypotheses or tests when causal impact is not established.
+
+## Audience And Language
+
+- Use plain language appropriate to the audience's analytics literacy.
+- Define population and rates before comparing them.
+- Use exact interface or business labels where confusion is possible.
+- Avoid technical source names in main slides unless the audience needs them.
+- Explain caveats as limits on interpretation, not defensive footnotes.
+- Keep detailed lineage, formulas, and technical mappings in notes or appendices.
+
+## Design Direction
+
+Record:
+
+```text
+Template file:
+Brand assets:
+Approved fonts:
+Palette:
+Chart palette and highlight colour:
+Footer/confidentiality:
+Image/screenshot treatment:
+Density and whitespace expectations:
+Accessibility requirements:
+```
+
+If no design system is provided, use a restrained, readable business presentation. Do not imitate a brand that was not supplied.
+
+## Final QA Record
+
+```text
+Claim set frozen at:
+Slide plan approved by:
+Data-to-chart check:
+Rendered visual inspection:
+Audience-naive review:
+Technical review:
+Stale dependency check:
+Template/brand check:
+Caveat check:
+Unverified items:
+Final status: draft | ready_for_review | approved | approved_with_caveats | rejected | superseded
+```
+
+The final artifact cannot be `approved` while any analytical slide depends on a non-approved claim, missing evidence reference, incompatible fingerprint, failed visual decision, or stale artifact.

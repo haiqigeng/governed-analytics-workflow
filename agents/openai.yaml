@@ -1,4 +1,4 @@
 interface:
   display_name: "Governed Analytics Workflow"
-  short_description: "Interactive, reviewable analytics workflow"
-  default_prompt: "Use $governed-analytics-workflow to run a traceable analytics analysis with human review and a PowerPoint or presentation-generator brief when needed."
+  short_description: "Adaptive, evidence-governed analytics workflow"
+  default_prompt: "Use $governed-analytics-workflow to interpret an unclear analytics request, confirm the real decision and question tree, and produce reviewed evidence-governed outputs."

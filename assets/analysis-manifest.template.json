@@ -1,0 +1,78 @@
+{
+  "schema_version": "1.0",
+  "analysis_id": "replace-with-analysis-id",
+  "status": "draft",
+  "needs_discovery": {
+    "mode": "standard",
+    "triggers": [],
+    "stated_request": [],
+    "request_map": [],
+    "inferred_business_need": "",
+    "decision": {
+      "decision_id": "D1",
+      "statement": "",
+      "owner": "",
+      "options": [],
+      "deadline_or_revisit": "",
+      "consequence_of_error": ""
+    },
+    "stakeholders": [],
+    "assumptions": [],
+    "alternative_framings": [],
+    "evidence_ceiling": "",
+    "premortem_risks": [],
+    "framing_status": "proposed"
+  },
+  "question_tree": {
+    "status": "draft",
+    "primary_problem_type": "find_patterns",
+    "secondary_problem_types": [],
+    "questions": [
+      {
+        "question_id": "Q1",
+        "parent_id": null,
+        "text": "",
+        "role": "core",
+        "problem_type": "find_patterns",
+        "decision_relevance": "",
+        "source_ids": [],
+        "metric_ids": [],
+        "method": "",
+        "validation_rules": [],
+        "expected_output": "",
+        "status": "draft"
+      }
+    ],
+    "coverage": []
+  },
+  "contract": {
+    "status": "draft",
+    "risk": "medium",
+    "audience": [],
+    "owner": "",
+    "population": "",
+    "exclusions": [],
+    "period": {
+      "start": "",
+      "end": "",
+      "timezone": ""
+    },
+    "primary_grain": "",
+    "segments": [],
+    "claim_limits": [],
+    "expected_outputs": [],
+    "presentation_inputs": [],
+    "definition_of_done": "",
+    "approval_gates": []
+  },
+  "sources": [],
+  "metrics": [],
+  "evidence": [],
+  "claims": [],
+  "visuals": [],
+  "recommendations": [],
+  "artifacts": [],
+  "changes": [],
+  "approvals": [],
+  "durable_context": []
+}

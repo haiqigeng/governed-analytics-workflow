@@ -1,0 +1,109 @@
+from __future__ import annotations
+
+import subprocess
+import sys
+import tempfile
+import unittest
+import shutil
+from pathlib import Path
+from zipfile import ZipFile
+
+
+ROOT = Path(__file__).resolve().parents[1]
+
+
+class ReleaseTest(unittest.TestCase):
+    def test_release_check_passes(self) -> None:
+        for cache in ROOT.rglob("__pycache__"):
+            shutil.rmtree(cache)
+        result = subprocess.run(
+            [sys.executable, "-B", str(ROOT / "tools" / "check_release.py"), "--tag", "v1.0.0", "--release-notes", str(ROOT / "CHANGELOG.md")],
+            cwd=ROOT,
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        self.assertEqual(0, result.returncode, result.stdout + result.stderr)
+
+    def test_release_check_rejects_tag_version_mismatch(self) -> None:
+        result = subprocess.run(
+            [
+                sys.executable,
+                "-B",
+                str(ROOT / "tools" / "check_release.py"),
+                "--tag",
+                "v2.0.0",
+                "--release-notes",
+                str(ROOT / "CHANGELOG.md"),
+            ],
+            cwd=ROOT,
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        self.assertNotEqual(0, result.returncode)
+        self.assertIn("does not match project version", result.stderr)
+
+    def test_runtime_package_is_deterministic_and_scoped(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            first = Path(temp) / "first.zip"
+            second = Path(temp) / "second.zip"
+            for output in (first, second):
+                result = subprocess.run(
+                    [sys.executable, "-B", str(ROOT / "tools" / "build_skill_package.py"), "--output", str(output)],
+                    cwd=ROOT,
+                    capture_output=True,
+                    text=True,
+                    check=False,
+                )
+                self.assertEqual(0, result.returncode, result.stdout + result.stderr)
+            self.assertEqual(first.read_bytes(), second.read_bytes())
+            with ZipFile(first) as archive:
+                names = set(archive.namelist())
+            self.assertIn("governed-analytics-workflow/SKILL.md", names)
+            self.assertIn("governed-analytics-workflow/scripts/analysis_guard.py", names)
+            self.assertIn("governed-analytics-workflow/assets/analysis-manifest.template.json", names)
+            self.assertNotIn("governed-analytics-workflow/README.md", names)
+            self.assertFalse(any(name.startswith("governed-analytics-workflow/tests/") for name in names))
+
+    def test_packaged_guard_validates_packaged_template(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            archive_path = Path(temp) / "skill.zip"
+            result = subprocess.run(
+                [
+                    sys.executable,
+                    "-B",
+                    str(ROOT / "tools" / "build_skill_package.py"),
+                    "--output",
+                    str(archive_path),
+                ],
+                cwd=ROOT,
+                capture_output=True,
+                text=True,
+                check=False,
+            )
+            self.assertEqual(0, result.returncode, result.stdout + result.stderr)
+
+            extracted = Path(temp) / "extracted"
+            with ZipFile(archive_path) as archive:
+                archive.extractall(extracted)
+
+            skill_root = extracted / "governed-analytics-workflow"
+            result = subprocess.run(
+                [
+                    sys.executable,
+                    "-B",
+                    str(skill_root / "scripts" / "analysis_guard.py"),
+                    "validate",
+                    str(skill_root / "assets" / "analysis-manifest.template.json"),
+                ],
+                cwd=skill_root,
+                capture_output=True,
+                text=True,
+                check=False,
+            )
+            self.assertEqual(0, result.returncode, result.stdout + result.stderr)
+
+
+if __name__ == "__main__":
+    unittest.main()

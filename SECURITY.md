@@ -20,8 +20,12 @@ Include:
 ## Scope
 
 This project is an analytics workflow guide. Security-sensitive areas include
-source mapping, uploaded files, generated analysis packets, stakeholder outputs,
-and any instructions that could expose private data or unsupported claims.
+source mapping, uploaded files, manifests, generated analysis packets, stakeholder
+outputs, and any instructions that could expose private data or unsupported claims.
 
 Do not publish client data, credentials, private dashboards, raw exports, or
 confidential business metrics in issues, examples, tests, or documentation.
+
+Run `python scripts/analysis_guard.py scan <path>` before sharing an analysis
+folder and `python tools/check_release.py --release-notes CHANGELOG.md` before
+publishing the reusable skill.

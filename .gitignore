@@ -8,5 +8,11 @@ Thumbs.db
 *.zip
 *.tmp
 *.log
+dist/
+__pycache__/
+*.py[cod]
+.coverage
+.pytest_cache/
+.ruff_cache/
 analyses/
 outputs/
