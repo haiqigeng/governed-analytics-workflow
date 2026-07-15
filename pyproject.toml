@@ -1,6 +1,6 @@
 [project]
 name = "governed-analytics-workflow"
-version = "2.0.1"
+version = "2.0.2"
 description = "Reasoning-first, evidence-governed analytics workflow skill"
 requires-python = ">=3.10"
 license = { text = "MIT" }

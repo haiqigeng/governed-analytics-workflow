@@ -222,9 +222,9 @@ The reusable package contains no client data, credentials, source integrations, 
 ## Release Checks
 
 ```powershell
-python tools/check_release.py --tag v2.0.1 --release-notes CHANGELOG.md
+python tools/check_release.py --tag v2.0.2 --release-notes CHANGELOG.md
 python -m unittest discover -s tests -v
-python tools/build_skill_package.py --output dist/governed-analytics-workflow-v2.0.1.zip
+python tools/build_skill_package.py --output dist/governed-analytics-workflow-v2.0.2.zip
 ```
 
 Tagged releases build the same deterministic runtime package tested locally.

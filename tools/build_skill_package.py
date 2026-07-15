@@ -38,6 +38,7 @@ def build(output: Path) -> None:
         for path in package_files():
             relative = ARCHIVE_ROOT / path.relative_to(ROOT)
             info = ZipInfo(relative.as_posix(), date_time=(2026, 1, 1, 0, 0, 0))
+            info.create_system = 3
             info.compress_type = ZIP_STORED
             info.external_attr = 0o644 << 16
             archive.writestr(info, canonical_runtime_bytes(path))

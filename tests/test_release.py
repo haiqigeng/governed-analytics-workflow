@@ -22,7 +22,7 @@ class ReleaseTest(unittest.TestCase):
         for cache in ROOT.rglob("__pycache__"):
             shutil.rmtree(cache)
         result = subprocess.run(
-            [sys.executable, "-B", str(ROOT / "tools" / "check_release.py"), "--tag", "v2.0.1", "--release-notes", str(ROOT / "CHANGELOG.md")],
+            [sys.executable, "-B", str(ROOT / "tools" / "check_release.py"), "--tag", "v2.0.2", "--release-notes", str(ROOT / "CHANGELOG.md")],
             cwd=ROOT,
             capture_output=True,
             text=True,
@@ -66,12 +66,14 @@ class ReleaseTest(unittest.TestCase):
             with ZipFile(first) as archive:
                 names = set(archive.namelist())
                 compression_types = {entry.compress_type for entry in archive.infolist()}
+                creator_systems = {entry.create_system for entry in archive.infolist()}
             self.assertIn("governed-analytics-workflow/SKILL.md", names)
             self.assertIn("governed-analytics-workflow/scripts/analysis_guard.py", names)
             self.assertIn("governed-analytics-workflow/assets/analysis-manifest.template.json", names)
             self.assertNotIn("governed-analytics-workflow/README.md", names)
             self.assertFalse(any(name.startswith("governed-analytics-workflow/tests/") for name in names))
             self.assertEqual({ZIP_STORED}, compression_types)
+            self.assertEqual({3}, creator_systems)
 
     def test_runtime_text_is_normalized_for_cross_platform_determinism(self) -> None:
         with tempfile.TemporaryDirectory() as temp:

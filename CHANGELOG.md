@@ -1,10 +1,37 @@
 # Changelog
 
+## 2.0.2 - 2026-07-15
+
+### Why This Release Matters
+
+Version 2.0.2 completes the cross-platform deterministic packaging work by fixing the ZIP creator-system metadata explicitly instead of inheriting it from the build host.
+
+### What Changed
+
+- Set every ZIP entry's creator system to a fixed Unix-compatible value on all platforms.
+- Added a regression assertion for the creator-system field alongside stored compression and canonical text bytes.
+- Preserved the v2.0 analytical runtime without behavioural changes.
+
+### What Users Should Do
+
+- Use the `v2.0.2` archive for new installations and automated distribution.
+- No manifest or installed-runtime migration is required from `v2.0.0` or `v2.0.1`.
+
+### Validation
+
+- Full 54-test suite and release checks.
+- ZIP entry comparison confirmed that creator-system metadata was the only remaining difference between Windows and GitHub Actions builds.
+- Release acceptance requires the local and published SHA-256 digests to match.
+
+### Known Limits
+
+- The runtime ZIP uses stored mode and is therefore larger than a compressed archive; this is intentional to remove compression-library variability.
+
 ## 2.0.1 - 2026-07-15
 
 ### Why This Release Matters
 
-Version 2.0.1 makes the v2 runtime archive reproducible across Windows and Linux checkouts, even when Git materializes text files with different local line endings.
+Version 2.0.1 normalized runtime content across Windows and Linux checkouts. Verification then found one remaining host-specific ZIP creator-system header, corrected in `v2.0.2`.
 
 ### What Changed
 
@@ -15,7 +42,7 @@ Version 2.0.1 makes the v2 runtime archive reproducible across Windows and Linux
 
 ### What Users Should Do
 
-- Use the `v2.0.1` archive for clean installations and automated distribution.
+- Prefer the superseding `v2.0.2` archive for clean installations and automated distribution.
 - Existing installed v2.0 runtime files do not require a behavioural migration.
 
 ### Validation
@@ -25,7 +52,7 @@ Version 2.0.1 makes the v2 runtime archive reproducible across Windows and Linux
 
 ### Known Limits
 
-- The archive is intentionally larger than a deflated ZIP in exchange for cross-platform byte reproducibility; runtime behaviour and installation contents are unchanged.
+- The archive still inherited a platform-specific creator-system header; runtime behaviour and installation contents were unaffected.
 
 ## 2.0.0 - 2026-07-15
 
