@@ -1,6 +1,31 @@
 # Needs Discovery And Analysis Contract
 
-Use this reference to locate the real analytical need inside vague, lengthy, metric-led, solution-led, or contradictory information. The question tree is the output of needs discovery, not a substitute for it.
+Use this reference to infer the real analytical need from incomplete, excessive, metric-led, solution-led, or contradictory input. The request is evidence about the stakeholder's context, not the analysis specification. The question tree is produced after reasoning; it does not replace reasoning.
+
+## Contents
+
+- Always-on reasoning kernel
+- Adaptive discovery router
+- Request decomposition and construct validity
+- Decision and context reasoning
+- Conditional methods
+- Analysis blueprint and question tree
+- User interaction and stop conditions
+- Analysis contract
+
+## Always-On Reasoning Kernel
+
+Apply these seven moves to every analysis:
+
+1. **Decompose the request.** Separate facts, objectives, constraints, hypotheses, suggested metrics, suggested methods, suggested solutions, output preferences, and uncertainties.
+2. **Infer the underlying need.** Establish the likely decision or learning objective and what different findings would change.
+3. **Validate constructs.** Test whether each requested measure represents the concept the requester wants to understand.
+4. **Assess context necessity.** Identify only the contextual evidence needed to define, explain, validate, or act on the result.
+5. **Set the evidence ceiling.** State the strongest claim the design and available sources can support.
+6. **Define population logic.** Recommend population, scope, period, timezone, grain, filters, exclusions, and denominator.
+7. **Design the complete data plan.** Include decision, context, diagnostic, quality, and validation data even when the requester did not name them.
+
+Keep this reasoning concise. Record its decisions and assumptions, not hidden chain-of-thought.
 
 ## Adaptive Discovery Router
 
@@ -8,164 +33,222 @@ Choose the least intensive mode that can produce a defensible frame.
 
 | Signal | Light | Standard | Deep |
 | --- | --- | --- | --- |
-| Decision clarity | Clear | Partly stated | Missing, contradictory, or solution-led |
-| Questions | One | Several related | Many mixed or competing questions |
+| Need clarity | Clear | Partly stated | Missing, contradictory, or solution-led |
+| Questions | One | Several related | Competing or mixed questions |
 | Sources/stakeholders | One or familiar | Several | Multiple grains, owners, or audiences |
 | Consequence of error | Low | Medium | High, public, expensive, or hard to reverse |
 | Causal/preferred conclusion | Absent | Possible | Explicit or politically consequential |
-| User-facing behaviour | Proceed with concise restatement | Show framing proposal | Show framing proposal and require confirmation before material execution |
+| Behaviour | Reason internally and proceed | Recommend a frame and proceed unless corrected | Investigate broadly; pause only for a material fork or approval |
 
-Record the mode and triggers internally. Do not expose method names unless they help the user review the frame.
+Depth changes the amount of discovery and review, not the quality of the always-on reasoning kernel.
 
 ## Request Decomposition
 
-Classify material statements before accepting them:
+Treat material statements as follows:
 
 | Class | Treatment |
 | --- | --- |
 | Observed fact | Preserve with provenance and freshness status |
 | Business objective | Use to infer the decision or learning objective |
 | Constraint | Treat as binding when explicit and feasible |
-| Hypothesis | Test or preserve as unverified; never promote silently |
+| Hypothesis | Test or retain as unverified |
 | Suggested metric | Evaluate construct, grain, denominator, actionability, and availability |
-| Suggested method | Treat as a preference unless methodologically required |
-| Suggested solution | Separate from the problem; test the need before endorsing the solution |
-| Output preference | Preserve unless it conflicts with evidence or safety |
-| Uncertainty | Convert to a question, assumption, or readiness gap |
+| Suggested method | Treat as a candidate unless methodologically required |
+| Suggested solution | Separate from the problem and test the need first |
+| Output preference | Preserve unless it conflicts with evidence integrity |
+| Uncertainty | Convert to an assumption, question, readiness gap, or user decision |
 
-Prior analyses, dashboards, emails, and stakeholder statements are context. They are not automatically current or correct. Record what was inspected and whether it is authoritative, stale, illustrative, or superseded.
+Prior analyses, dashboards, stakeholder statements, and browser observations are context. Classify them as `authoritative`, `current`, `illustrative`, `stale`, or `superseded` before reuse.
 
-## Decision-Backward Framing
+## Construct-To-Measure Validation
+
+For every important requested concept, record:
+
+```text
+intended construct
+proposed observable measure
+measurement grain
+direct measure or proxy
+coverage and missingness
+known semantic limits
+valid uses
+invalid interpretations
+```
+
+Examples of required reframing include:
+
+- visit duration is not section reading time;
+- threshold reach is not direct content visibility;
+- interaction is not satisfaction or value;
+- outcome association is not causal contribution;
+- raw use across all entities is not an availability-adjusted interaction rate.
+
+If the measure cannot support the intended construct, recommend the strongest defensible proxy and the measurement improvement needed for a direct answer.
+
+## Decision-Backward Framing And Reasoning
 
 Infer or establish:
 
 ```text
 decision owner
 decision or learning objective
-available options or actions
-decision deadline or revisit condition
+available actions or options
+deadline or revisit condition
 cost of being wrong
-what different analytical answers would change
+what different answers would change
 ```
 
-Apply the answer-to-action test. If result A and result B would lead to the same action and no meaningful learning difference, the question is probably supporting rather than core.
+Use the answer-to-action test. If plausible answers would not change an action or meaningful learning outcome, treat the item as context, diagnostic support, or optional work rather than a core decision question.
 
-Some analyses are exploratory and have no immediate decision. State a learning objective and what future decision, measurement, or investigation it should enable. Do not invent a false decision merely to fill a template.
+Exploratory analysis may use a learning objective. Do not invent a false immediate decision.
 
-## Conditional Discovery Methods
+## Context Necessity Test
 
-Use only methods triggered by the request.
+Include a contextual data item only when it does at least one of the following:
 
-### Analytical Laddering
+- defines the population, baseline, denominator, or normal range;
+- explains the relevant business process or user journey;
+- makes a decision comparison interpretable;
+- tests a composition, measurement, or selection explanation;
+- supports a realistic action or follow-up.
 
-Use when indicators or requested outputs are clearer than their purpose. Ask internally why each measure matters until reaching a decision or learning objective. Ask the user only when the ladder ends in materially different plausible needs.
+Record why context is included and define a stop rule. Do not create a generic descriptive chapter by default.
 
-### Assumption And Hypothesis Mapping
+## Conditional Reasoning Methods
 
-For each important assumption, capture:
+Activate methods from observed triggers, not because they exist.
 
-```text
-statement
-source or owner
-why it matters
-evidence needed
-alternative explanations
-claim ceiling
-status
-```
+Use these stable route identifiers in `analysis_blueprint.conditional_routes`:
 
-### Alternative Framing
-
-Compare internally:
-
-- `literal`: answer the request as written;
-- `inferred`: answer the underlying business need;
-- `minimum_useful`: answer only what is necessary for the decision or learning objective.
-
-Recommend one. Show alternatives only when choosing among them materially changes scope, timing, risk, or interpretation.
-
-### Stakeholder And Decision Mapping
-
-Identify requester, decision owner, affected teams, technical reviewer, final audience, and conflicting expectations. The requester may supply useful context without being the analytical or decision authority.
-
-### Evidence-Ceiling Test
-
-State the strongest claim the available design and sources can support. Common reframings include:
-
-| Requested language | Defensible observational language |
+| Route identifier | Trigger |
 | --- | --- |
-| causes | is associated with; precedes; differs with |
-| contributes | participates in the observed path; is associated with the outcome |
-| users value | users use, reach, select, repeat, or report |
-| content is seen | threshold reached; element exposed when directly instrumented |
-| improvement | observed change; causal improvement only with an adequate design |
+| `ambiguity` | The literal request is unclear, metric-led, solution-led, or internally inconsistent. |
+| `multiple_stakeholders` | Stakeholders have materially different decisions, definitions, or consequences. |
+| `multiple_sources` | More than one source must be compared, reconciled, or combined. |
+| `outcome_comparison` | Behaviour, exposure, or attributes are compared against a later outcome. |
+| `sample_browser_or_qualitative_evidence` | Evidence is sampled, browser-observed, or qualitative. |
+| `prediction` | A future outcome, score, or forecast is required. |
+| `categorisation` | Cases must be assigned to labels or operational groups. |
+| `anomaly_detection` | Observations must be judged against an expected baseline. |
+| `theme_identification` | Unstructured evidence must be coded into recurring themes. |
+| `consequential_work` | Error could create material harm, irreversible action, or external exposure. |
 
-### Minimum-Useful-Scope Review
+### Ambiguity Or Metric-Led Requests
 
-Keep questions and breakdowns that are decision-relevant, feasible, non-duplicative, and interpretable. Park requests whose marginal value does not justify added complexity or false precision.
+- **Analytical laddering:** ask internally why each requested metric matters until reaching a decision or learning need.
+- **Alternative framing:** compare literal, inferred, and minimum-useful frames; recommend one.
+- **Assumption mapping:** record statement, owner, importance, evidence required, alternatives, claim ceiling, and status.
 
-### Pre-Mortem
+### Multiple Stakeholders
 
-For complex or consequential work, imagine the delivered analysis was rejected or caused a poor decision. Convert plausible failure reasons into framing, readiness, validation, or presentation requirements.
+Map requester, decision owner, affected teams, source owners, technical reviewers, and final audience. Pause only when competing expectations would create materially different analyses or decisions.
 
-## Question Tree
+### Multiple Sources
 
-### States
+Determine source authority, semantic compatibility, grain, time, identifiers, coverage, joinability, and permitted uses before comparison or combination.
 
-- `draft`: inferred from the request and context;
-- `confirmed`: reviewed or accepted for the current risk level;
-- `operational`: accepted leaves have source, metric, method, validation, and output mappings.
+### Outcome Comparison
 
-### Levels
+Prove exposure and outcome order. Separate pre-outcome behaviour from full-period description. Check composition, confounding, selection, reverse causality, and sensitivity before explanatory wording.
+
+### Sample, Browser, Or Qualitative Evidence
+
+Apply a representativeness gate. Use `illustrative` when evidence shows a possible behaviour but cannot estimate prevalence; use `directional` only when coverage supports a cautious pattern.
+
+### Consequential Work
+
+- **Pre-mortem:** imagine the analysis caused a poor decision; convert plausible causes into requirements.
+- **Falsification:** state what evidence would weaken or overturn the preferred interpretation.
+- **Independent review:** use a clean-context reviewer with the contract and evidence, not the intended verdict.
+
+Problem-type-specific routes are defined in `problem-type-playbooks.md`.
+
+## Analysis Blueprint
+
+Build the blueprint after selecting the recommended framing:
 
 ```text
-Level 0: decision or learning objective
-Level 1: core analytical questions
-Level 2: analytical subquestions
-Level 3: diagnostic and validation questions
+business need
+-> context questions
+-> decision questions
+-> diagnostic questions
+-> data-quality and validation questions
+-> required data
+-> methods and evidence
+-> claims
+-> presentation and action
 ```
-
-Keep the user-facing tree concise. A normal complex analysis usually needs two to four core questions. Operational leaves may be more numerous, but every leaf must earn its place.
 
 ### Question Roles
 
-Use:
+Use active roles:
 
 ```text
-core
-supporting
+context
+decision
 diagnostic
-optional
-duplicate
-misleading
-unavailable
-out_of_scope
+data_quality
+validation
 ```
 
-Only `core`, `supporting`, and necessary `diagnostic` leaves normally create execution work. Optional branches require a clear marginal benefit. Preserve excluded items in request coverage so they do not disappear silently.
+Use excluded roles:
 
-### Operational Leaf Contract
+```text
+optional
+parked
+rejected
+unavailable
+superseded
+```
+
+The user-facing tree should normally contain two to four decision or context questions. The operational tree may contain more diagnostic and quality leaves.
+
+### Operational Question Contract
+
+Every active question must contain:
 
 ```json
 {
-  "question_id": "Q1.2",
-  "parent_id": "Q1",
+  "question_id": "Q1",
+  "parent_id": null,
   "text": "",
-  "role": "supporting",
+  "role": "decision",
+  "purpose": "",
   "problem_type": "find_patterns",
   "decision_relevance": "",
   "source_ids": [],
+  "data_requirement_ids": [],
   "metric_ids": [],
+  "population": "",
+  "grain": "",
   "method": "",
   "validation_rules": [],
   "expected_output": "",
-  "status": "confirmed"
+  "status": "operational"
 }
 ```
 
+### Data-Plan Contract
+
+Every data requirement must state:
+
+```text
+requirement ID and linked question IDs
+purpose
+source IDs
+population and grain
+scope and denominator
+measure or fields needed
+method
+validation rules
+status
+```
+
+Classify the requirement as context, decision, diagnostic, quality, or validation data. The agent proposes these requirements; the requester does not need to enumerate them.
+
 ### Request Coverage
 
-Map every material request item to one of:
+Map every material request item to:
 
 ```text
 answered_by_question
@@ -176,91 +259,35 @@ unavailable
 superseded
 ```
 
-Record a reason for every item not answered directly.
+Record a reason for every item not answered directly. Request coverage prevents silent omission without making the request authoritative.
 
-Give each stated item a stable ID before mapping it:
+## User Interaction
 
-```json
-{
-  "stated_request": [
-    {"request_item_id": "R1", "text": "Original request or faithful paraphrase"}
-  ],
-  "coverage": [
-    {
-      "request_item_id": "R1",
-      "disposition": "answered_by_question",
-      "question_ids": ["Q1"],
-      "reason": ""
-    }
-  ]
-}
-```
+Show the recommended frame rather than asking the requester to construct it. Ask a targeted question only when:
 
-## Decision Lineage
+- two defensible framings support materially different decisions;
+- the outcome or business definition is disputed;
+- a consequential claim requires human approval;
+- essential evidence or access cannot be inferred or obtained;
+- a binding constraint conflicts with a defensible analysis.
 
-Maintain this chain:
+Otherwise state the assumption, choose the most defensible path, and continue.
 
-```text
-business need
--> decision or learning objective
--> question
--> problem type and method
--> evidence
--> claim
--> recommendation or next action
-```
-
-Use it to reject:
-
-- a metric with no question;
-- a query with no analytical or validation purpose;
-- a claim with no evidence;
-- a chart with no approved claim;
-- a recommendation with no supporting claims;
-- an unanswered core question presented as complete.
-
-## User-Facing Framing Proposal
-
-For `Standard` or `Deep` work, show:
-
-```text
-What I believe the business needs:
-Decision or learning objective:
-Proposed core questions:
-What I am treating as hypotheses:
-What I recommend parking or reframing:
-Proposed problem types:
-Evidence ceiling:
-Decision needed:
-```
-
-Prefer one recommended frame. Do not make a non-expert requester choose among technical methods.
+When new information changes population, outcome, grain, source authority, metric meaning, method, or claim ceiling, revise the blueprint and mark dependent claims and artifacts stale.
 
 ## Analysis Contract
 
-The confirmed contract should include:
+The approved contract must identify:
 
 | Area | Required content |
 | --- | --- |
-| Purpose | Need, decision/learning objective, owner, audience, deadline |
-| Discovery | Mode, triggers, request coverage, assumptions, evidence ceiling |
-| Questions | Confirmed tree, primary/secondary problem types, definition of done |
+| Purpose | Inferred need, decision or learning objective, owner, audience, deadline |
+| Reasoning | Decomposition, selected frame, confidence, assumptions, construct checks, evidence ceiling |
+| Blueprint | Active questions, problem types, context rationale, data plan, stop rule |
 | Scope | Population, exclusions, period, timezone, grain, segments |
-| Evidence | Source authority, semantic mapping, representativeness, freshness |
-| Metrics | Definitions and fingerprints |
-| Methods | Operations, comparisons, problem-type validation, claim limits |
-| Delivery | Artifacts, presentation inputs, review and approval gates |
+| Evidence | Source authority, semantics, representativeness, freshness, joinability |
+| Metrics | Definitions, fingerprints, coverage, measurement limits |
+| Methods | Estimands, baselines, comparisons, uncertainty, validation, sensitivity, claim limits |
+| Delivery | Expected artifacts, presentation inputs, review and approval gates |
 
-Contract changes that affect population, outcome, grain, source authority, metric definition, problem type, method, or claim ceiling are material. Record them and mark dependent work stale.
-
-## Stop Conditions
-
-Pause before material execution when:
-
-- two plausible framings would support different decisions;
-- the decision owner or outcome definition is disputed;
-- a high-risk claim exceeds the evidence ceiling;
-- required data access, identifiers, or grain are unavailable;
-- a mandatory constraint conflicts with a defensible analysis.
-
-Otherwise recommend a reasonable default, label it, and continue.
+Do not approve the contract merely because every field is populated. Review whether it represents the real need and whether the proposed evidence can answer it.

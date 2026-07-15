@@ -1,99 +1,106 @@
 ---
 name: governed-analytics-workflow
-description: Run an adaptive, governed analytics workflow for vague, metric-led, multi-source, or consequential business, product, marketing, digital, revenue, and operations questions. Use when an AI agent must discover the real decision need, build a question tree, select methods by analytical problem type, verify source semantics and readiness, execute reproducible work, govern claim promotion, and create reviewed stakeholder outputs such as PowerPoint briefs. Designed for Codex, Claude Code, Gemini, and other file- and tool-capable agents.
+description: Run an adaptive, reasoning-first, governed analytics workflow for unclear, metric-led, multi-source, or consequential business, product, marketing, digital, revenue, and operations questions. Use when an AI agent must infer the real decision need rather than accept raw inputs as the analysis specification, build an operational question tree and analysis blueprint, design contextual and decision data, select methods by analytical problem type, validate grain, scope, semantics, quality, and statistics, govern claims, and produce natural stakeholder outputs such as PowerPoint briefs. Designed for Codex, Claude Code, Gemini, and other file- and tool-capable agents.
 ---
 
 # Governed Analytics Workflow
 
-Turn unclear requests into decision-relevant, reproducible analysis. Treat requesters as authorities on business context and constraints, not automatically on analytical design. Agents may propose framing, methods, interpretations, and actions; humans approve consequential meaning and decisions.
+Turn incomplete or misleading requests into decision-relevant, reproducible analysis. Treat the request as stakeholder evidence, not as an approved analytical specification. Own the framing, data plan, methods, validation, and communication; ask the user only when unresolved business ambiguity would materially change the work.
 
 ## Non-Negotiable Rules
 
-- Interpret the request before selecting metrics or querying data.
-- Treat requested metrics, breakdowns, methods, explanations, and charts as candidates unless they are explicit constraints.
-- Build a question tree and map every operation, claim, and stakeholder visual to it.
-- Use one primary analytical problem type and secondary types only for distinct subquestions.
-- Scale ceremony to ambiguity and risk. Do not require approval for every exploratory read or query.
-- Gate promotion from observation to stakeholder claim.
+- Interpret the request before selecting metrics.
+- Infer the underlying decision or learning need before selecting metrics or querying data.
+- Apply the always-on reasoning kernel: request decomposition, need inference, construct validation, context necessity, evidence ceiling, scope/grain/denominator definition, and complete data-plan design.
+- Activate additional reasoning methods only when their trigger is present.
+- Build the question tree after initial reasoning and place it inside an analysis blueprint.
+- Use only `context`, `decision`, `diagnostic`, `data_quality`, or `validation` for active question roles. Never use legacy `core` or `supporting` roles.
+- Include context only when it defines, explains, validates, or changes interpretation or action.
+- Give every active question a purpose, data requirement, population, grain, method, validation rule, and expected output.
 - Give every important metric a definition fingerprint and every source an authority record.
-- Validate business and interface meaning, not only technical field existence.
+- Validate technical calculations and business meaning separately.
+- Block claim promotion when a critical quality check fails or remains unknown.
+- Keep descriptive, diagnostic, associative, predictive, qualitative, and causal claims distinct.
 - Do not generalize sample, browser, qualitative, or single-page evidence beyond its representativeness.
-- Keep association, prediction, and causal claims separate.
-- Let presentation workers communicate approved claims; they may not create new analytical results.
+- Let presentation workers communicate approved claims; they may not create analytical results.
+- Choose charts for communication fitness; use variety only as a tie-breaker.
+- Use exact business language and plain sentences. Avoid generic, inflated, or formulaic wording.
 - Version reviewed context and mark replaced claims or artifacts `superseded`; never silently overwrite them.
-- If access or evidence is insufficient, narrow the question or report readiness instead of fabricating an answer.
+- If evidence is insufficient, narrow the claim, improve measurement, or report readiness instead of fabricating an answer.
 
 ## Start Behaviour
 
-Read the request and supplied context before asking questions. Choose an internal needs-discovery mode:
+Read the request and available context before asking questions. Choose the lightest mode that can produce a defensible frame:
 
-- `Light`: clear, low-risk, single-question work.
-- `Standard`: partial ambiguity, several questions, or a medium-risk decision.
-- `Deep`: vague, contradictory, metric- or solution-led, multi-stakeholder, causal, or high-impact work.
+- `Light`: clear, low-risk work; keep framing internal and proceed.
+- `Standard`: partial ambiguity or several related questions; show the recommended frame and proceed unless a material correction is required.
+- `Deep`: contradictory, solution-led, causal, multi-stakeholder, or consequential work; investigate context and pause only for materially divergent framings, disputed outcomes, missing essential evidence, or consequential approval.
 
-Show only the four phases, not a twelve-item wall of process:
-
-```text
-1. Contract - interpret the need, confirm the question tree, scope, definitions, and evidence limits
-2. Evidence - check readiness, execute bounded work, validate, and review claims
-3. Synthesis - answer the tree, choose visuals, and produce stakeholder output
-4. Delivery - document, version context, and define follow-up
-```
-
-For `Standard` or `Deep` work, begin with a concise framing proposal:
+For `Standard` or `Deep` work, show a concise analyst recommendation:
 
 ```text
 What I believe the business needs:
 Decision or learning objective:
-Proposed core questions:
+Necessary context:
+Proposed decision and diagnostic questions:
 What I am treating as hypotheses:
 What I recommend parking or reframing:
-Primary and secondary problem types:
-Decision needed:
+Triggered route IDs:
+Evidence ceiling:
+Material decision needed, if any:
 ```
 
-Do not ask the user to design grain, methods, or metrics from scratch. Recommend them and ask only for corrections or decisions that materially change the work. For `Light` work, keep the same reasoning internal and proceed when the framing is unambiguous.
+Do not ask the requester to design metrics, grain, methods, or the full data plan.
 
 ## Reference Router
 
-- Read [needs-discovery-and-analysis-contract.md](references/needs-discovery-and-analysis-contract.md) before framing `Standard` or `Deep` work, or whenever a request is long, unclear, metric-led, solution-led, or internally inconsistent.
-- Read [problem-type-playbooks.md](references/problem-type-playbooks.md) after drafting the question tree and before approving methods or validation.
-- Read [evidence-claims-and-review.md](references/evidence-claims-and-review.md) before source mapping, execution, claim promotion, independent review, or durable-context updates.
-- Read [synthesis-and-visualisation.md](references/synthesis-and-visualisation.md) before narrative design, chart selection, or stakeholder-output generation.
+- Read [needs-discovery-and-analysis-contract.md](references/needs-discovery-and-analysis-contract.md) before framing `Standard` or `Deep` work, or whenever the request is unclear, metric-led, solution-led, contradictory, or missing context.
+- Read [problem-type-playbooks.md](references/problem-type-playbooks.md) after selecting the framing and before approving methods or validation.
+- Read [evidence-claims-and-review.md](references/evidence-claims-and-review.md) before source mapping, quality review, execution, claim promotion, recommendations, or durable-context updates.
+- Read [synthesis-and-visualisation.md](references/synthesis-and-visualisation.md) before narrative design, chart selection, wording review, or stakeholder-output generation.
 - Read [presentation-generator-brief.md](references/presentation-generator-brief.md) when a deck, PowerPoint, or external presentation handoff is requested.
 
 ## Four Phases And Twelve Checkpoints
 
-The four phases are the user-facing model. The twelve checkpoints are the operational contract and may be combined only when risk and complexity allow.
+```text
+1. Frame - infer the need, challenge the request, design the blueprint, and set the evidence ceiling
+2. Evidence - map sources, validate readiness, execute bounded work, and review results
+3. Synthesis - answer the blueprint with approved claims, appropriate visuals, and natural language
+4. Delivery - validate the artifact, preserve lineage, and define follow-up
+```
 
-| Phase | Checkpoint | Required outcome |
+### Phase 1: Frame
+
+#### 1. Interpret Before Structuring
+
+Separate facts, objectives, constraints, hypotheses, suggested metrics, suggested methods, suggested solutions, output preferences, and uncertainties. Reconstruct the relevant process and identify the likely decision or learning objective. Test whether the requested measure represents the intended construct.
+
+Use conditional reasoning only when triggered:
+
+| Route ID | Trigger | Methods |
 | --- | --- | --- |
-| Contract | 1. Interpret the request | Decomposed request, inferred need, decision or learning objective, discovery mode |
-| Contract | 2. Build and confirm the question tree | Core/supporting questions, coverage map, problem types, parked items |
-| Contract | 3. Check data readiness | Source authority, semantics, grain, fingerprints, representativeness, evidence ceiling |
-| Contract | 4. Approve the analysis contract | Scope, methods, validation, outputs, risk gates, definition of done |
-| Evidence | 5. Execute bounded work | Reproducible operations and structured result packets |
-| Evidence | 6. Validate results and candidate claims | Complete domains, compatible definitions, claim posture, caveats |
-| Evidence | 7. Assemble reproducibility evidence | Queries/code, results, row counts, lineage, decisions, limitations |
-| Evidence | 8. Review and promote claims | Independent review and risk-appropriate approval |
-| Synthesis | 9. Produce stakeholder output | Question-led narrative using only approved claims and chart decisions |
-| Delivery | 10. Document delivery and changes | Active outputs, generated review views, change history, stale/superseded state |
-| Delivery | 11. Update durable context | Versioned reviewed facts, definitions, owners, validity dates, superseded entries |
-| Delivery | 12. Define follow-up | Monitoring, validation, experiment, refresh, or no follow-up with rationale |
+| `ambiguity` | Ambiguity or metric-led request | Analytical laddering, alternative framing, assumption mapping |
+| `multiple_stakeholders` | Materially different stakeholder decisions | Stakeholder and decision mapping |
+| `multiple_sources` | Sources must be compared or combined | Source authority, semantic compatibility, join validation |
+| `outcome_comparison` | Exposure or behaviour is compared with an outcome | Temporal eligibility, composition, confounding, sensitivity |
+| `sample_browser_or_qualitative_evidence` | Sample, browser, or qualitative evidence | Representativeness gate |
+| `prediction` | Future outcome, score, or forecast | Leakage, holdout, calibration, drift |
+| `categorisation` | Cases assigned to labels | Label quality, class balance, stability |
+| `anomaly_detection` | Observations judged against normal behaviour | Baseline, seasonality, false-positive review |
+| `theme_identification` | Unstructured evidence coded into themes | Corpus coverage, codebook, negative cases, reviewer agreement |
+| `consequential_work` | Error could cause material harm | Pre-mortem, falsification, independent review |
 
-## Phase 1: Contract
+Record triggered routes with these exact IDs in `analysis_blueprint.conditional_routes`.
 
-### 1. Interpret The Request
+#### 2. Build The Analysis Blueprint
 
-Separate facts, objectives, constraints, hypotheses, suggested metrics, suggested methods, suggested solutions, output preferences, and uncertainties. Infer what decision or learning objective the work should support. Use decision-backward reasoning and the answer-to-action test: if different answers would not change a decision or learning outcome, the item is probably supporting context.
+Create the question tree only after choosing a recommended framing. Use active roles `context`, `decision`, `diagnostic`, `data_quality`, and `validation`; use `optional`, `parked`, `rejected`, `unavailable`, or `superseded` for excluded branches.
 
-For complex work, use the conditional methods in the needs-discovery reference: analytical laddering, assumption mapping, alternative framing, stakeholder mapping, evidence-ceiling analysis, minimum-useful-scope review, and a pre-mortem. These are internal tools, not a questionnaire to impose on the user.
+Do not rename the roles for presentation. `decision` replaces the legacy `core` label; `context` replaces legacy `supporting` only when the branch is truly necessary context.
 
-### 2. Build And Confirm The Question Tree
+Require context only when it defines the population or baseline, explains the process, supports interpretation, tests composition or measurement effects, validates a denominator, or informs action. Record a stop rule so context does not expand without value.
 
-Create a draft tree with one decision root, a small set of core questions, and supporting or diagnostic leaves. Classify each leaf as `core`, `supporting`, `diagnostic`, `optional`, `duplicate`, `misleading`, `unavailable`, or `out_of_scope`.
-
-Assign one of these types to each accepted analytical leaf:
+Operationalize every active question with source, required data, population, grain, metric, method, validation, and expected output. Classify each analytical leaf as:
 
 ```text
 make_predictions
@@ -104,114 +111,97 @@ discover_connections
 find_patterns
 ```
 
-Maintain request coverage so every material item is answered, supporting, parked, rejected, or unavailable. Confirm the concise tree for `Standard` and `Deep` work. Then operationalize accepted leaves with source, grain, metric, method, validation, and expected-output mappings.
+#### 3. Approve The Contract
 
-### 3. Check Data Readiness
+Define population, exclusions, period, timezone, grain, sources, metric fingerprints, methods, comparisons, quality gates, claim limits, outputs, and definition of done. Ask for user approval only when an unresolved choice materially changes the decision, risk, or claim ceiling.
 
-Create a source-authority record for every source and a definition fingerprint for every important metric. Verify source semantics, identifiers, coverage, freshness, time logic, access/PII constraints, availability denominators, and joinability. Record allowed and forbidden source uses.
+### Phase 2: Evidence
 
-Apply a representativeness gate before turning sampled evidence into a population statement. Browser inspection can validate visible wording, interaction outcomes, geometry, and instrumentation behaviour; it does not by itself establish aggregate prevalence or impact.
+#### 4. Map Sources And Define Methods
 
-Apply problem-type readiness checks. If the evidence cannot support the requested claim, reframe to the strongest defensible answer. For medium/high-risk work, pause for a decision when the evidence ceiling materially changes the business interpretation.
+Record source authority, freshness, coverage, natural grain, identifiers, joinability, permitted uses, and semantic limits. Define each metric and method contract, including estimand, eligible population, baseline, time logic, uncertainty, sensitivity, and permitted claim level.
 
-### 4. Approve The Analysis Contract
+#### 5. Validate Readiness
 
-The contract must identify:
+Validate source authority and freshness, population, period, timezone, filters, identifiers, grain, deduplication, denominators, missing-versus-zero semantics, expected domains, metric meaning, and source coverage. Add conditional checks for joins, availability, temporal ordering, sampling, outliers, sample size, uncertainty, multiple comparisons, confounding, selection bias, and sensitivity.
 
-```text
-decision or learning objective
-audience and owner
-risk and needs-discovery mode
-confirmed question tree and problem types
-population, exclusions, period, timezone, and grain
-source authority and metric fingerprints
-methods, comparisons, validation, and claim limits
-expected artifacts and presentation inputs
-definition of done and approval gates
-```
+Record every check as `pass`, `warning`, `fail`, `unknown`, or `not_applicable`, with severity, evidence, impact, and required action. Critical `fail` or `unknown` results block validated or approved claims.
 
-For medium/high-risk work, ask for contract approval before material execution. For low-risk work, record the contract and proceed unless an unresolved choice could change the answer.
+#### 6. Execute Bounded Work
 
-## Phase 2: Evidence
+Every operation must answer an active question or documented validation need. Preserve queries, code, source references, row counts, result tables, fingerprints, assumptions, and caveats. Workers may inspect and calculate; they may not approve claims, change definitions, publish, or update durable context.
 
-### 5. Execute Bounded Work
+#### 7. Validate Results And Claims
 
-Every operation must answer a question-tree leaf or a documented validation need. Use reproducible queries, scripts, notebooks, exports, API calls, or browser evidence. Keep exploration separate from promoted claims.
-
-When workers or subagents are available, give them bounded task packets with allowed sources and an output schema. Workers may inspect and calculate; they may not publish, approve claims, update durable context, or take irreversible actions. A single agent may execute the same modes sequentially.
-
-### 6. Validate Results And Candidate Claims
-
-Validate code and result meaning separately. Check filters, joins, grain, full expected domains, zero/start states, denominators, deduplication, sample size, time ordering, availability, missingness, uncertainty, segment composition, representativeness, and causal language.
+Check filters, joins, grain, domains, zero states, denominators, deduplication, time ordering, availability, missingness, uncertainty, segment composition, representativeness, and claim language. Use effect size, stability, and business importance rather than statistical significance alone.
 
 Promote findings through:
 
 ```text
 observation -> candidate -> validated -> approved
                          \-> rejected
-approved or validated -> superseded when replaced
+validated or approved -> superseded when replaced
 ```
 
-Claims generated from limited evidence may be approved as `directional` only when the limitation remains visible. Source count alone is never a confidence score.
+Keep observation, interpretation, claim, and recommendation separate. Observational evidence should normally produce a hypothesis or test, not an unsupported prescription.
 
-### 7. Assemble Reproducibility Evidence
+### Phase 3: Synthesis
 
-Maintain claim-to-evidence and decision-lineage mappings in the manifest. Preserve operations, source references, output tables, row counts, fingerprints, validation outcomes, assumptions, caveats, and anonymized examples when allowed. Generate a human-readable reproducibility packet only when risk, review, or the requested delivery requires one.
+#### 8. Answer The Analysis Blueprint
 
-### 8. Review And Promote Claims
+Answer each active context, decision, diagnostic, data-quality, and validation question with an approved claim, a documented limitation, or an explicit unavailable result. Keep branches separate when their populations, methods, or evidence postures differ.
 
-Use independent review lenses:
+#### 9. Design Visuals And Language
 
-- technical and methodological correctness;
-- target-audience interpretation;
-- domain-aware but analysis-naive interpretation.
+For each analytical visual, record the communication function, data structure, chart candidates, selected chart, measurement card, catalogue decision, wording review, and rendered QA. The measurement card must state population, grain, period, denominator, coverage, unit, temporal scope, missing/zero treatment, and claim posture.
 
-Where possible, review from a clean context using the contract, evidence packet, proposed claims, and draft output rather than the producer's complete reasoning history. Human approval is required before high-risk or externally durable claims are treated as trusted. Low-risk claims may use an automated promotion path only when fingerprints, evidence, and caveats pass validation.
+Use the Data Visualisation Catalogue once per distinct communication function when internet access is available. Use the offline function map otherwise and record the fallback. Prefer repeated clear charts over decorative variety; use a different form when the question or data structure warrants it.
 
-## Phase 3: Synthesis
+#### 10. Build The Stakeholder Narrative
 
-### 9. Produce Stakeholder Output
+Build from the analysis blueprint and approved claims, not from the request's order or a fixed template. Separate verified facts, interpretation, recommendation, and limitations. Freeze the claim set and narrative before generating medium- or high-risk decks.
 
-Build the narrative from the confirmed question tree and approved claims, not from the order of the request or a generic slide template. Separate verified facts, interpretation, recommendation, and caveats. Choose depth and structure according to the problem type and audience.
+### Phase 4: Delivery
 
-Freeze the claim set and slide architecture before generating a deck for medium/high-risk work. Every analytical slide must reference approved claim IDs and canonical result data. Apply The Data Visualisation Catalogue, chart-decision, hard-rejection, specialist-chart, wording, and rendered-QA rules in the synthesis reference. User-provided templates, brand guides, and visualization systems override default styling, not evidence rules.
+#### 11. Review And Version
 
-## Phase 4: Delivery
+Inspect rendered output for chart accuracy, labels, zero states, denominators, uncertainty, caveats, text fit, terminology, and natural wording. Use technical, target-audience, and domain-aware but analysis-naive review lenses.
 
-### 10. Document Delivery And Changes
+Keep one active deliverable per purpose. Mark dependencies stale when definitions or claims change. Update durable context only with reviewed knowledge.
 
-Keep one active version of each deliverable. Mark replaced outputs `superseded`. Generate review packets, documentation, or changelog views from the canonical manifest instead of maintaining duplicate truths. When a fingerprint, source mapping, or claim changes, mark dependent artifacts `stale` until regenerated and reviewed.
+#### 12. Define Follow-Up
 
-### 11. Update Durable Context
-
-Update durable context only with reviewed knowledge. Append versions with old/new value or definition, validity window, run date, owner, reviewer, reason, and source analysis ID. Never overwrite history silently. Store pointers to the analysis manifest rather than copying facts into multiple homes.
-
-### 12. Define Follow-Up
-
-Choose the follow-up that fits the problem type: monitoring, model drift/recalibration, label review, anomaly-threshold review, qualitative refresh, validation study, controlled experiment, measurement improvement, or no follow-up. Name the owner, success criteria, guardrails, and revisit condition when applicable.
+Choose monitoring, validation, experiment, measurement improvement, refresh, or no follow-up based on the problem type. Record the owner, success metric, guardrails, and revisit condition for every recommendation.
 
 ## Canonical Run Artifacts
 
-Use `analyses/<analysis_id>/` unless the user provides another location. Start from `assets/analysis-manifest.template.json` or run:
+Use `analyses/<analysis_id>/` unless the user provides another location. Create a v2 run with:
 
 ```text
 python scripts/analysis_guard.py init analyses/<analysis_id> --analysis-id <analysis_id>
 ```
 
-The canonical source of truth is `analysis-manifest.json`. Keep raw or derived evidence under `evidence/`. Add `results.md` and the requested delivery format when useful. Generate `analysis-plan.md`, `reproducibility-packet.md`, `analysis-documentation.md`, or `analysis-changelog.md` only when human review, risk, or delivery needs justify them.
-
-Use stable IDs for decisions, questions, sources, metrics, evidence, claims, visuals, and artifacts. Run the guard before stakeholder delivery:
+Keep `analysis-manifest.json` as the canonical contract, evidence under `evidence/`, and only the review views or deliverables the work needs. Validate by stage:
 
 ```text
-python scripts/analysis_guard.py validate analyses/<analysis_id>/analysis-manifest.json --strict
-python scripts/analysis_guard.py stale analyses/<analysis_id>/analysis-manifest.json
+python scripts/analysis_guard.py validate analyses/<analysis_id>/analysis-manifest.json --stage contract
+python scripts/analysis_guard.py validate analyses/<analysis_id>/analysis-manifest.json --stage evidence
+python scripts/analysis_guard.py quality analyses/<analysis_id>/analysis-manifest.json
+python scripts/analysis_guard.py validate analyses/<analysis_id>/analysis-manifest.json --stage delivery
+python scripts/analysis_guard.py stale analyses/<analysis_id>/analysis-manifest.json --fail-on-stale
 python scripts/analysis_guard.py scan analyses/<analysis_id>
 ```
 
-If the utility is unavailable, apply the same checks manually and record that automated validation was not performed.
+Migrate a v1 manifest into a separate v2 file with:
+
+```text
+python scripts/analysis_guard.py migrate path/to/analysis-manifest.json --output path/to/analysis-manifest-v2.json
+```
+
+Migration preserves history, marks new requirements unresolved, and demotes legacy validated or approved claims until v2 review. It never silently rewrites the source manifest.
 
 ## Agent And Tool Portability
 
-Use local equivalents for files, queries, notebooks, APIs, browsers, charts, and presentations. Do not require a particular vendor, agent, MCP server, operating system, or analytics platform. When a capability is missing, preserve the contract and evidence format, mark the limitation, and offer the strongest feasible path.
+Use local equivalents for files, queries, notebooks, APIs, browsers, statistics, charts, and presentations. Do not require one vendor, agent, MCP server, operating system, or analytics platform. Record missing capabilities and use the strongest feasible fallback.
 
-Never copy credentials, client data, prior analysis results, or machine-specific absolute paths into the reusable skill. Keep generated work visible in the user's chosen workspace and access-controlled where needed.
+Never copy credentials, client data, prior analysis results, or machine-specific paths into the reusable skill. Keep generated analysis work in the user's chosen workspace and access-controlled where needed.

@@ -34,8 +34,11 @@ REQUIRED_FILES = (
     "tools/build_skill_package.py",
     "tests/test_analysis_guard.py",
     "tests/test_forward_cases.py",
+    "tests/test_reasoning_benchmarks.py",
     "tests/test_release.py",
     "tests/fixtures/forward_cases.json",
+    "tests/fixtures/forward_results_v2.json",
+    "tests/fixtures/reasoning_benchmarks.json",
 )
 STALE_FILES = ("references/dataviz-catalogue-selection.md",)
 FORBIDDEN_NAMES = {"__pycache__", ".pytest_cache", ".ruff_cache", "dist"}
@@ -82,7 +85,7 @@ def check_frontmatter() -> list[str]:
     if values.get("name") != "governed-analytics-workflow":
         errors.append("frontmatter name is incorrect")
     description = values.get("description", "").lower()
-    for term in ("question tree", "problem type", "codex", "claude code", "gemini"):
+    for term in ("infer", "question tree", "analysis blueprint", "problem type", "codex", "claude code", "gemini"):
         if term not in description:
             errors.append(f"frontmatter description missing: {term}")
     return errors
@@ -118,6 +121,7 @@ def check_content() -> list[str]:
     for term in (
         "Interpret the request before selecting metrics",
         "Four Phases And Twelve Checkpoints",
+        "always-on reasoning kernel",
         "make_predictions",
         "categorise_things",
         "spot_unusual",
@@ -126,6 +130,7 @@ def check_content() -> list[str]:
         "find_patterns",
         "observation -> candidate -> validated -> approved",
         "Data Visualisation Catalogue",
+        "measurement card",
     ):
         if term not in skill:
             errors.append(f"SKILL.md missing required contract text: {term}")
@@ -137,10 +142,14 @@ def check_content() -> list[str]:
         "## Why It Exists",
         "## Adaptive Workflow",
         "## Needs Discovery",
+        "## Analysis Blueprint",
         "## Analytical Problem Types",
+        "## Data Quality",
         "## Evidence Governance",
         "## Visualisation",
         "## Runtime Artifacts",
+        "## Migration",
+        "## Forward Benchmark",
         "## Release Checks",
     ):
         if heading not in readme:
@@ -156,6 +165,8 @@ def check_content() -> list[str]:
         errors.append(f"manifest template is invalid JSON: {exc}")
     else:
         guard = load_guard()
+        if template.get("schema_version") != "2.0":
+            errors.append("manifest template must use schema 2.0")
         errors.extend(f"manifest template: {error}" for error in guard.validate_manifest(template))
         errors.extend(f"runtime scan: {finding}" for finding in guard.scan_path(ROOT / "SKILL.md"))
         for folder in ("agents", "references", "assets", "scripts"):

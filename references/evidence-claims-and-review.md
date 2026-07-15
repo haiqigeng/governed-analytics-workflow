@@ -1,6 +1,16 @@
-# Evidence, Claims, And Review
+# Evidence, Quality, Claims, And Review
 
-Use this reference to govern source roles, metric compatibility, bounded execution, claim promotion, independent review, artifact freshness, and durable context.
+Use this reference to govern source roles, data readiness, metric compatibility, bounded execution, claim promotion, recommendations, independent review, and artifact freshness.
+
+## Contents
+
+- Source authority and semantic validation
+- Metric and method contracts
+- Quality checks and readiness gates
+- Bounded execution
+- Claims and recommendations
+- Independent review
+- Staleness, context, privacy, and access
 
 ## Source Authority
 
@@ -24,66 +34,155 @@ Create one record per source:
 }
 ```
 
-Multiple sources do not become compatible because they describe the same topic. Never divide, join, or compare across sources until grain, population, period, identifiers, and authority permit it.
+Multiple sources do not become compatible because they describe the same topic. Do not divide, join, or compare across sources until grain, population, period, identifiers, semantics, and authority permit it.
 
 ## Semantic Validation
 
-Technical availability is not business validity. For every important event, field, status, interaction, or category:
+Technical availability is not business validity. For every important event, field, status, category, or interface action:
 
-1. Inspect the source dictionary and observed values.
-2. Verify visible or operational behaviour when relevant.
-3. Map technical signals to one business/user outcome.
-4. Identify multiple signals for the same outcome and one signal with multiple meanings.
-5. Preserve technical mappings in evidence; use recognizable business wording in stakeholder output.
+1. Inspect documentation and observed values.
+2. Verify the operational or visible outcome when relevant.
+3. Identify technical aliases that represent one business outcome.
+4. Identify one technical value that represents several outcomes.
+5. Record direct measures, proxies, and invalid interpretations.
+6. Define deduplication and precedence rules before calculation.
 
-Browser inspection may establish wording, interaction result, page geometry, or instrumentation behaviour. It cannot establish aggregate reach, prevalence, or effect without population evidence.
+Browser evidence can validate wording, visible outcomes, geometry, and instrumentation behaviour. It does not establish aggregate prevalence or impact by itself.
 
-## Definition Fingerprints
+## Metric Definition And Method Contract
 
-Every decision metric needs:
+Every important metric needs a definition fingerprint:
+
+```text
+population
+calculation grain
+time window and timezone
+scope and filters
+numerator and denominator
+deduplication
+source/query reference
+run date
+```
+
+Also record:
+
+```text
+intended construct
+direct measure or proxy
+coverage and missingness
+measurement limit
+target quantity or estimand
+baseline or comparison
+time logic
+uncertainty method
+sensitivity checks
+permitted claim types
+```
+
+Do not compare metrics with incompatible fingerprints unless the difference is intentional, visible, and justified.
+
+## Quality Checks
+
+Record checks as structured evidence:
 
 ```json
 {
-  "population": "",
-  "calculation_grain": "",
-  "time_window": {"start": "", "end": "", "timezone": ""},
-  "scope": {},
-  "filters": [],
-  "numerator": "",
-  "denominator": "",
-  "deduplication": "",
-  "source_query_ref": "",
-  "run_date": ""
+  "check_id": "DQ1",
+  "category": "grain_identifiers",
+  "condition": "always | conditional",
+  "question_ids": ["Q1"],
+  "source_ids": ["S1"],
+  "metric_ids": ["M1"],
+  "status": "pass | warning | fail | unknown | not_applicable",
+  "severity": "critical | major | minor | info",
+  "evidence_ref": "",
+  "impact": "",
+  "required_action": "",
+  "checked_at": ""
 }
 ```
 
-Add `expected_domain` and `observed_domain` for buckets, stages, statuses, ratings, categories, or ordered values. Include zero/start states when part of the population. Add `metric_shape` such as `exclusive_distribution`, `cumulative_reach`, `rate`, `intensity`, `trend`, or `model_metric`.
+### Always-On Categories
 
-Fingerprint compatibility is required before comparison. At minimum align population, calculation grain, time window, scope, filters that define eligibility, and outcome definition. Explain intentional differences rather than hiding them.
-
-## Representativeness Gate
-
-Before generalizing sampled evidence, record:
+For evidence or claim readiness, cover:
 
 ```text
-target population
-sampling frame and selection method
-sample size and coverage
-important variants or archetypes
-devices, periods, or contexts represented
-known exclusions
-claim scope supported by the sample
+source_authority
+source_freshness
+population_scope
+period_timezone
+grain_identifiers
+deduplication
+denominator
+missing_zero
+domain_completeness
+metric_semantics
+source_coverage
 ```
 
-Use `illustrative` when evidence demonstrates a possible behaviour but cannot estimate prevalence. Use `directional` when coverage supports a cautious pattern but not a population estimate. Never multiply a directional geometry/sample observation by an aggregate rate to manufacture precision.
+Use `not_applicable` only with a reason. A template row is not evidence of a completed check.
+
+### Conditional Categories
+
+Add when triggered:
+
+```text
+join_cardinality
+availability
+temporal_ordering
+representativeness
+outliers_skew
+minimum_sample
+uncertainty
+multiple_comparisons
+composition_confounding
+selection_bias
+sensitivity
+prediction_leakage
+prediction_calibration
+label_quality
+anomaly_baseline
+theme_validation
+```
+
+### Quality Gates
+
+- A critical `fail` or `unknown` blocks `validated` and `approved` claims.
+- A major warning requires a visible impact and required action.
+- A warning affecting interpretation must appear on dependent claims and visuals.
+- `not_applicable` requires a rationale in `impact` or `required_action`.
+- Structural validation cannot prove that an external query, model, or business interpretation is correct; retain source evidence and independent review.
 
 ## Availability And Temporal Eligibility
 
 - Use eligible denominators for optional content, products, features, or journeys.
-- If availability cannot be measured, report raw usage and the denominator limitation; do not call it an interaction rate for all entities.
+- If availability cannot be measured, report raw use and the denominator limitation.
 - Prove event order before describing behaviour as pre-outcome.
-- Exclude or separately describe outcomes that precede the required exposure.
-- Keep full-period descriptive behaviour separate from pre-outcome contribution-oriented comparisons.
+- Exclude or separately describe outcomes that precede required exposure.
+- Keep full-period descriptive behaviour separate from contribution-oriented comparisons.
+- Treat missing timestamps, ambiguous ordering, and censoring as quality conditions, not silent assumptions.
+
+## Representativeness Gate
+
+Before generalizing sampled evidence, record target population, sampling frame, selection method, sample size, coverage, important variants, devices or contexts represented, known exclusions, and supported claim scope.
+
+Use `illustrative` when evidence demonstrates a possible behaviour but cannot estimate prevalence. Use `directional` only when coverage supports a cautious pattern. Never multiply a sample geometry observation by an aggregate rate to manufacture precision.
+
+## Statistical Review
+
+Apply problem-type methods, then review:
+
+- distribution, skew, outliers, and missingness;
+- effect size and uncertainty;
+- practical importance, not significance alone;
+- minimum sample and small cells;
+- segment composition and Simpson's-paradox risk;
+- multiple comparisons and selective reporting;
+- confounding, selection, and reverse causality;
+- sensitivity to definitions, filters, time windows, and buckets;
+- temporal eligibility and leakage.
+
+Record inconclusive results. Absence of statistical evidence is not proof of no effect, and statistical detection is not proof of business value.
 
 ## Bounded Work Packets
 
@@ -127,12 +226,14 @@ Workers cannot publish, approve their own claims, change source-of-truth definit
 
 ```text
 observation: captured result not yet interpreted or validated
-candidate: potentially useful statement awaiting validation
-validated: evidence, fingerprint, and claim posture passed review
+candidate: decision-relevant statement awaiting validation
+validated: evidence, quality gates, fingerprints, and posture passed review
 approved: authorized for the intended stakeholder use
 rejected: checked and unsupported or misleading
-superseded: replaced by a newer definition, result, or review decision
+superseded: replaced by a newer definition, result, or decision
 ```
+
+Keep observation, interpretation, claim, and recommendation separate.
 
 Claim record:
 
@@ -142,94 +243,93 @@ Claim record:
   "question_ids": ["Q1"],
   "statement": "",
   "status": "candidate",
+  "claim_type": "descriptive | diagnostic | associative | predictive | qualitative | causal | unknown (unpromoted migration only)",
   "evidence_posture": "verified | directional | assumed | needs_validation",
+  "temporal_scope": "full_period | pre_outcome | post_outcome | cross_sectional | not_applicable | unknown",
+  "population": "",
+  "denominator": "",
+  "coverage": "",
+  "missingness": "",
+  "uncertainty": "",
   "evidence_refs": [],
   "metric_ids": [],
-  "valid_as_of": "",
-  "caveats": [],
   "alternative_explanations": [],
-  "owner": "",
+  "decision_use": "",
+  "valid_as_of": "",
   "approved_by": "",
-  "approved_at": "",
-  "supersedes": []
+  "approved_at": ""
 }
 ```
 
-Tag evidence posture when the claim enters the system, not only during final review. More source references do not automatically increase confidence; source authority, compatibility, design, and directness matter.
+Validated or approved claims require compatible metric fingerprints, validated evidence, complete measurement context, no blocking quality result, a permitted claim type, and a current validity date. Causal claims require a causal-design reference.
 
-## Promotion Gates
+Migration may set `claim_type` to `unknown` when v1 evidence did not declare a posture. Resolve it before validation or approval; the migration must not infer a descriptive posture merely because the legacy record lacks one.
 
-| Transition | Minimum requirement |
-| --- | --- |
-| Observation -> Candidate | Decision relevance and question linkage |
-| Candidate -> Validated | Evidence refs, compatible fingerprints, validation results, caveats, claim ceiling |
-| Validated -> Approved | Intended audience/use, risk-appropriate reviewer, visible caveats |
-| Any active state -> Superseded | Replacement pointer and change reason |
+## Recommendations
 
-`Light` low-risk work may promote validated claims without a separate human meeting when all automated/manual checks pass and intended use remains low consequence. High-risk, externally durable, public, compliance, compensation, budget, or executive claims require human approval.
+Recommendation record:
 
-## Quality Review
+```text
+recommendation ID and decision ID
+supporting approved claim IDs
+hypothesis
+expected mechanism
+target population
+proposed action
+success metrics
+guardrails
+experiment or implementation requirement
+owner
+revisit condition
+```
+
+Observational findings should normally support a test, validation study, measurement improvement, or bounded operational action. Do not turn association into a redesign prescription without an adequate causal design.
+
+## Independent Review
 
 ### Technical Lens
 
-- code/query correctness and reproducibility;
-- source authority and freshness;
-- filters, joins, grain, time, and deduplication;
-- full domains, zero states, denominators, and missingness;
-- sample size, uncertainty, model/type-specific validation;
-- semantic and temporal validity;
-- claim-to-evidence traceability.
+- source authority, freshness, code, and query reproducibility;
+- filters, joins, grain, time, deduplication, domains, denominators, missingness;
+- uncertainty, sensitivity, sample size, and problem-type validation;
+- semantic, temporal, and claim-to-evidence validity.
 
 ### Audience Lens
 
-- understandable population, measure, unit, and period;
-- no unexplained percentages or technical labels;
+- understandable population, measure, unit, period, denominator, and coverage;
+- no technical labels without explanation;
 - caveats visible where interpretation occurs;
-- chart and wording do not imply a stronger claim;
-- decision implication is clear without hiding uncertainty.
+- no title or chart implying a stronger claim;
+- decision implication clear without hiding uncertainty.
 
 ### Domain-Aware, Analysis-Naive Lens
 
 - assumptions a close analyst may have stopped noticing;
 - mismatch with business process or interface behaviour;
 - plausible alternative explanations;
-- missing context a knowledgeable new reader would need.
+- missing context a knowledgeable new reader needs.
 
-Prefer an independent reviewer or clean-context pass. Supply the contract, evidence packet, claim register, and output brief. Do not bias the reviewer with the intended verdict.
+Prefer a clean-context reviewer supplied with the contract, evidence packet, proposed claims, and draft output rather than the intended verdict.
 
 ## Artifact Dependencies And Staleness
 
-Artifacts declare dependencies on question, metric, claim, visual, and evidence IDs plus the current fingerprint hashes of decision metrics. When an upstream definition or status changes:
+Artifacts declare question, metric, evidence, claim, visual, and recommendation dependencies plus current metric fingerprint hashes. When an upstream definition or status changes:
 
-1. mark dependent claims `needs_validation` or `superseded` as appropriate;
+1. demote dependent claims to `candidate` or mark them `superseded`;
 2. mark dependent artifacts `stale`;
 3. regenerate only affected outputs;
 4. review before restoring `active` status.
 
-Keep one active artifact per purpose. Retain old versions only when they support audit or comparison, with explicit superseded status.
+Keep one active artifact per purpose.
 
 ## Versioned Durable Context
 
-Store only reviewed knowledge. Each update records:
-
-```text
-context key
-old value or definition
-new value or definition
-validity/data window
-run date
-source analysis and claim IDs
-owner and reviewer
-change reason
-status
-```
-
-Prefer pointers to the canonical analysis manifest. Do not copy definitions into several files that can drift independently.
+Store only reviewed knowledge. Record old and new values or definitions, validity window, run date, source analysis and claim IDs, owner, reviewer, reason, and status. Prefer pointers to the canonical manifest over copied facts.
 
 ## Privacy And Access
 
 - Keep raw sources access-controlled.
-- Use anonymized examples unless authorized identifiers are necessary.
+- Use anonymized examples unless identifiers are necessary and authorized.
 - Never place credentials or secrets in manifests, evidence, logs, decks, repositories, or durable context.
 - Record access limitations and evidence not inspected.
-- Run the portability/secret scan before sharing or publishing artifacts.
+- Run the portability and secret scan before sharing or publishing artifacts.

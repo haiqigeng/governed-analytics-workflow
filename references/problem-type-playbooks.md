@@ -1,6 +1,6 @@
 # Analytical Problem-Type Playbooks
 
-Use problem types after needs discovery and question-tree drafting. They route methods and validation; they do not replace the business decision or dictate a chart.
+Use problem types after selecting the recommended framing and drafting the analysis blueprint. They route methods and validation; they do not replace the business decision, determine required context by themselves, or dictate a chart.
 
 ## Routing Rules
 
@@ -9,6 +9,28 @@ Use problem types after needs discovery and question-tree drafting. They route m
 - A type may be revised when readiness changes, but record the contract change and stale dependencies.
 - Apply universal profiling internally: population, time coverage, grain, missingness, label/outcome prevalence where relevant, and source freshness.
 - Require a stakeholder-facing descriptive chapter only when it helps answer the confirmed tree. It is central to `find_patterns`, but supporting for many other types.
+- Select the method from the question, target quantity, design, and evidence readiness rather than from a requested metric or preferred conclusion.
+- Keep the type-specific branch separate from descriptive context and quality validation.
+
+## Method Contract
+
+For every active analytical method, record:
+
+```text
+question and decision use
+target quantity or estimand
+eligible population and grain
+baseline or comparison
+time logic
+method and assumptions
+effect-size and uncertainty treatment
+minimum sample or evidence requirement
+validation and sensitivity checks
+permitted claim level
+follow-up when the evidence ceiling is reached
+```
+
+Statistical significance alone is never sufficient. Review practical magnitude, stability, uncertainty, and business relevance.
 
 ## Make Predictions
 
@@ -30,6 +52,8 @@ Use problem types after needs discovery and question-tree drafting. They route m
 
 **Follow-up:** Drift monitoring, recalibration, retraining criteria, outcome capture, and decision-impact review.
 
+**Conditional route:** Activate only when the task requires an unknown or future value for a defined decision time. Reject features unavailable at prediction time and evaluation that reuses training observations.
+
 ## Categorise Things
 
 **Purpose:** Assign observations to known classes or create useful, stable groupings.
@@ -49,6 +73,8 @@ Use problem types after needs discovery and question-tree drafting. They route m
 **Common outputs:** Category definitions, assignment quality, segment profiles, uncertain/unclassified share, and actionability by class.
 
 **Follow-up:** Label review, taxonomy governance, drift/stability checks, and manual escalation rules.
+
+**Conditional route:** Activate label provenance, class balance, unknown handling, and stability checks. Use clustering only when discovered groups have a decision purpose and a stability review.
 
 ## Spot Something Unusual
 
@@ -70,6 +96,8 @@ Use problem types after needs discovery and question-tree drafting. They route m
 
 **Follow-up:** Alert precision review, threshold tuning, incident outcomes, and baseline refresh.
 
+**Conditional route:** Activate only after defining the normal baseline and the cost of false positives and false negatives. Separate data-pipeline anomalies from business anomalies.
+
 ## Identify Themes
 
 **Purpose:** Extract recurring concepts, needs, concerns, or narratives from unstructured evidence.
@@ -89,6 +117,8 @@ Use problem types after needs discovery and question-tree drafting. They route m
 **Common outputs:** Ranked or structured themes, supporting evidence, segment differences, exceptions, and unanswered questions. Avoid word clouds as the sole decision surface.
 
 **Follow-up:** Codebook refinement, new-sample validation, qualitative interviews, and recurring corpus refresh.
+
+**Conditional route:** Activate corpus coverage, language, privacy, codebook, negative-case, and reviewer-agreement checks. Do not infer population prevalence from unrepresentative text.
 
 ## Discover Connections
 
@@ -110,6 +140,8 @@ Use problem types after needs discovery and question-tree drafting. They route m
 
 **Follow-up:** Better measurement, replication, causal design, controlled experiment, or no causal follow-up when unnecessary.
 
+**Conditional route:** Activate temporal eligibility, grain compatibility, composition, confounding, reverse-causality, uncertainty, multiple-comparison, and sensitivity checks. Keep full-period description separate from pre-outcome analysis.
+
 ## Find Patterns
 
 **Purpose:** Describe recurring distributions, trends, sequences, cohorts, funnels, or usage structures.
@@ -129,6 +161,8 @@ Use problem types after needs discovery and question-tree drafting. They route m
 **Common outputs:** Distributions, trends, small multiples, cohorts, stage progression, and decision-relevant contrasts.
 
 **Follow-up:** Monitoring, deeper diagnostic questions, measurement improvement, or experiments derived from robust patterns.
+
+**Conditional route:** Activate complete-domain, zero/start-state, missingness, exclusive-versus-cumulative, denominator, outlier, segment-composition, and bucketing-sensitivity checks.
 
 ## Mixed-Type Analysis
 
@@ -152,3 +186,5 @@ Keep separate evidence and claim limits for each branch. A predictive branch can
 - Does claim language stay within the type's evidence ceiling?
 - Does stakeholder output include the information needed to use the result responsibly?
 - Is follow-up appropriate to the type rather than defaulting to an experiment?
+- Is required context included because it changes interpretation, rather than because a standard chapter expects it?
+- Is the method contract complete enough for another analyst to reproduce and challenge the result?

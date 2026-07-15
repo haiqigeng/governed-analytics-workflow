@@ -1,0 +1,126 @@
+{
+  "skill_version": "2.0.0",
+  "run_date": "2026-07-15",
+  "activation_surface": "installed runtime package",
+  "blind_input_contract": "Executing agents received only the skill runtime, the raw request, and the requested output fields. They did not receive benchmark expectations or scoring criteria.",
+  "rubric_source": "tests/fixtures/reasoning_benchmarks.json",
+  "review_method": "Manual rubric review by the release implementation agent after blind execution.",
+  "cases": [
+    {
+      "case_id": "renewal_risk_outreach",
+      "primary_problem_type": "make_predictions",
+      "scores": {
+        "real_need_identification": 3,
+        "alternative_framing": 2,
+        "necessary_context": 2,
+        "irrelevant_analysis_excluded": 2,
+        "data_plan_completeness": 3,
+        "definition_and_method_correctness": 3,
+        "evidence_limits_and_claim_discipline": 3,
+        "presentation_clarity": 2
+      },
+      "total": 20,
+      "critical_failure": false,
+      "result": "pass",
+      "review_note": "Separated churn risk from intervention benefit, excluded post-cutoff leakage, and specified temporal validation, calibration, capacity, permissions, and bounded claims."
+    },
+    {
+      "case_id": "support_queue_routing",
+      "primary_problem_type": "categorise_things",
+      "scores": {
+        "real_need_identification": 3,
+        "alternative_framing": 2,
+        "necessary_context": 2,
+        "irrelevant_analysis_excluded": 2,
+        "data_plan_completeness": 3,
+        "definition_and_method_correctness": 3,
+        "evidence_limits_and_claim_discipline": 3,
+        "presentation_clarity": 2
+      },
+      "total": 20,
+      "critical_failure": false,
+      "result": "pass",
+      "review_note": "Reframed mutable queue history as weak labels, defined first-owner ground truth, abstention, chronological testing, per-class errors, coverage, shadow mode, and rollback."
+    },
+    {
+      "case_id": "daily_order_spikes",
+      "primary_problem_type": "spot_unusual",
+      "scores": {
+        "real_need_identification": 3,
+        "alternative_framing": 2,
+        "necessary_context": 2,
+        "irrelevant_analysis_excluded": 2,
+        "data_plan_completeness": 3,
+        "definition_and_method_correctness": 3,
+        "evidence_limits_and_claim_discipline": 3,
+        "presentation_clarity": 2
+      },
+      "total": 20,
+      "critical_failure": false,
+      "result": "pass",
+      "review_note": "Separated the literal threshold screen from anomaly detection, reconciled source semantics at order grain, used a seasonal baseline, and restricted causal wording."
+    },
+    {
+      "case_id": "feedback_priority_themes",
+      "primary_problem_type": "identify_themes",
+      "scores": {
+        "real_need_identification": 3,
+        "alternative_framing": 2,
+        "necessary_context": 2,
+        "irrelevant_analysis_excluded": 2,
+        "data_plan_completeness": 3,
+        "definition_and_method_correctness": 3,
+        "evidence_limits_and_claim_discipline": 3,
+        "presentation_clarity": 1
+      },
+      "total": 19,
+      "critical_failure": false,
+      "result": "pass",
+      "review_note": "Bounded findings to the self-selected corpus, separated frequency from priority, required complete coding, negative cases, reviewer agreement, rank sensitivity, and quote governance."
+    },
+    {
+      "case_id": "tutorial_purchase_connection",
+      "primary_problem_type": "discover_connections",
+      "scores": {
+        "real_need_identification": 3,
+        "alternative_framing": 2,
+        "necessary_context": 2,
+        "irrelevant_analysis_excluded": 2,
+        "data_plan_completeness": 3,
+        "definition_and_method_correctness": 3,
+        "evidence_limits_and_claim_discipline": 3,
+        "presentation_clarity": 2
+      },
+      "total": 20,
+      "critical_failure": false,
+      "result": "pass",
+      "review_note": "Separated watcher association from mandatory-policy effect, specified target-trial eligibility and intention-to-treat analysis, and required experimental guardrails before rollout."
+    },
+    {
+      "case_id": "completion_distribution",
+      "primary_problem_type": "find_patterns",
+      "scores": {
+        "real_need_identification": 3,
+        "alternative_framing": 2,
+        "necessary_context": 2,
+        "irrelevant_analysis_excluded": 2,
+        "data_plan_completeness": 3,
+        "definition_and_method_correctness": 3,
+        "evidence_limits_and_claim_discipline": 3,
+        "presentation_clarity": 2
+      },
+      "total": 20,
+      "critical_failure": false,
+      "result": "pass",
+      "review_note": "Restored the eligible-start denominator, kept missing telemetry distinct from confirmed zero, separated exclusive classes from cumulative reach, and rejected unsupported drop-off causes."
+    }
+  ],
+  "summary": {
+    "cases": 6,
+    "problem_types": 6,
+    "minimum_score": 19,
+    "maximum_score": 20,
+    "critical_failures": 0,
+    "passed": true
+  }
+}

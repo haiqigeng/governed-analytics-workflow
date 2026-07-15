@@ -17,7 +17,7 @@ class ReleaseTest(unittest.TestCase):
         for cache in ROOT.rglob("__pycache__"):
             shutil.rmtree(cache)
         result = subprocess.run(
-            [sys.executable, "-B", str(ROOT / "tools" / "check_release.py"), "--tag", "v1.0.0", "--release-notes", str(ROOT / "CHANGELOG.md")],
+            [sys.executable, "-B", str(ROOT / "tools" / "check_release.py"), "--tag", "v2.0.0", "--release-notes", str(ROOT / "CHANGELOG.md")],
             cwd=ROOT,
             capture_output=True,
             text=True,
@@ -32,7 +32,7 @@ class ReleaseTest(unittest.TestCase):
                 "-B",
                 str(ROOT / "tools" / "check_release.py"),
                 "--tag",
-                "v2.0.0",
+                "v3.0.0",
                 "--release-notes",
                 str(ROOT / "CHANGELOG.md"),
             ],
@@ -103,6 +103,31 @@ class ReleaseTest(unittest.TestCase):
                 check=False,
             )
             self.assertEqual(0, result.returncode, result.stdout + result.stderr)
+
+    def test_packaged_guard_exposes_v2_commands(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            archive_path = Path(temp) / "skill.zip"
+            result = subprocess.run(
+                [sys.executable, "-B", str(ROOT / "tools" / "build_skill_package.py"), "--output", str(archive_path)],
+                cwd=ROOT,
+                capture_output=True,
+                text=True,
+                check=False,
+            )
+            self.assertEqual(0, result.returncode, result.stdout + result.stderr)
+            extracted = Path(temp) / "extracted"
+            with ZipFile(archive_path) as archive:
+                archive.extractall(extracted)
+            guard = extracted / "governed-analytics-workflow" / "scripts" / "analysis_guard.py"
+            result = subprocess.run(
+                [sys.executable, "-B", str(guard), "--help"],
+                capture_output=True,
+                text=True,
+                check=False,
+            )
+            self.assertEqual(0, result.returncode, result.stdout + result.stderr)
+            for command in ("migrate", "validate", "quality"):
+                self.assertIn(command, result.stdout)
 
 
 if __name__ == "__main__":

@@ -1,6 +1,16 @@
-# Synthesis And Visualisation
+# Synthesis, Visualisation, And Language
 
-Use this reference after evidence review. Synthesis answers the confirmed question tree with approved claims; it does not rescue weak evidence through polished language or visuals.
+Use this reference after evidence and claim review. Synthesis answers the analysis blueprint with approved claims; it does not rescue weak evidence through polished language or decorative charts.
+
+## Contents
+
+- Narrative contract
+- Problem-type narrative routing
+- Chart selection and variety
+- Measurement cards
+- Wording review
+- Presentation boundary
+- Rendered output QA
 
 ## Narrative Contract
 
@@ -8,75 +18,68 @@ Build from:
 
 ```text
 decision or learning objective
--> core question
+-> necessary context
+-> decision question
 -> approved claims
 -> interpretation within the evidence ceiling
 -> recommendation, next action, or remaining uncertainty
 ```
 
-Do not reproduce the request's metric order. Do not force every analysis into the same deck structure. Let problem type, evidence, audience, and decision determine the sequence.
+Do not reproduce the request's metric order. Do not force every analysis into one deck structure. Include context only when it defines, explains, validates, or changes the decision interpretation.
 
-For medium/high-risk work, freeze these before generating a deck:
-
-- approved claim set and evidence posture;
-- narrative order and one message per slide;
-- selected supporting tables or figures;
-- caveats that must appear on each slide;
-- presentation template, brand, language, and audience conventions.
-
-Material changes after freeze mark affected slides and artifacts stale.
+For medium- or high-risk work, freeze approved claims, narrative order, result tables, required caveats, template, language, and terminology before generating a deck. Material changes mark affected slides stale.
 
 ## Problem-Type Narrative Biases
 
 | Type | Stakeholder narrative should normally establish |
 | --- | --- |
-| Make predictions | Decision context, baseline, performance/uncertainty, threshold trade-offs, use limits |
-| Categorise things | Category purpose, definitions, coverage, quality/stability, action by class |
-| Spot unusual | Expected baseline, detected departures, magnitude/context, investigation priority |
-| Identify themes | Corpus/coverage, themes, evidence and exceptions, implications without false prevalence |
-| Discover connections | Compatible population, relationship magnitude, robustness, alternatives, no unsupported cause |
-| Find patterns | Complete descriptive foundation, important segments/trends, interpretation, next questions/actions |
+| Make predictions | Decision context, baseline, performance, calibration, uncertainty, threshold trade-offs, use limits |
+| Categorise things | Category purpose, definitions, coverage, quality, stability, action by class |
+| Spot unusual | Expected baseline, departures, magnitude, context, false-positive risk, investigation priority |
+| Identify themes | Corpus and coverage, themes, evidence, exceptions, implications without false prevalence |
+| Discover connections | Compatible population, temporal scope, relationship magnitude, robustness, alternatives, no unsupported cause |
+| Find patterns | Complete relevant baseline, distributions or trends, important contrasts, interpretation, next questions or actions |
 
-Mixed analyses should preserve branch boundaries. Do not use one branch's evidence posture to strengthen another.
+Mixed analyses must preserve branch boundaries. One branch's evidence posture cannot strengthen another.
 
 ## Chart-Selection Gate
 
-The default external guide is The Data Visualisation Catalogue:
+Use The Data Visualisation Catalogue as the default external guide:
 
-- Main catalogue: `https://datavizcatalogue.com/index.html`
-- Search by function: `https://datavizcatalogue.com/search.html`
+- `https://datavizcatalogue.com/index.html`
+- `https://datavizcatalogue.com/search.html`
 
-For every stakeholder analysis containing charts:
+For each distinct communication function:
 
-1. Write the exact slide question and approved claim.
-2. Identify data structure: variable types, ordering, exclusivity, cumulative/stage logic, time, geography, number of categories/series, sample size, and uncertainty.
+1. State the slide question and approved claim.
+2. Identify variable types, ordering, exclusivity, cumulative or stage logic, time, geography, categories, series, sample size, and uncertainty.
 3. Select the communication function.
-4. If internet access is available, consult the live catalogue once for every distinct function used in the analysis. Open individual chart pages for unfamiliar, complex, or ambiguous choices.
-5. Shortlist valid candidates and reject those that misrepresent the data.
-6. Choose the simplest valid chart for the audience.
-7. Record the decision and required labels.
-8. Render and visually inspect the result.
+4. Consult the live catalogue once when internet access is available; open unfamiliar chart pages when needed.
+5. Shortlist valid candidates and reject misleading ones.
+6. Choose the clearest valid chart for the audience.
+7. Use variety only when equally valid choices exist or the communication function changes.
+8. Record required labels and render the result.
 
-If the live catalogue is unavailable, use this reference and record `live_catalogue_checked: false`. A user-provided visualization system overrides the default catalogue but not statistical integrity or QA.
+If the live catalogue is unavailable, use the function map below and record the fallback. A user-provided visual system can override styling, not evidence or chart integrity.
 
-## Function Map
+## Offline Function Map
 
-| Communication need | Function | Common stakeholder choices |
+| Need | Function | Common choices |
 | --- | --- | --- |
 | Compare categories or groups | Comparison | Sorted bar, grouped bar, dot plot, small multiples |
 | Show a distribution | Distribution | Histogram, box plot, density, ordered exclusive bars |
 | Show change over time | Data over time | Line, small multiples, indexed line, area when magnitude matters |
 | Show association | Relationship | Scatterplot, heatmap, grouped estimates with intervals |
-| Show part of a whole | Proportion | 100% stacked bar, simple stacked bar; pie/donut only for very few parts |
-| Show cumulative stage reach | Process or ordered progression | Stepped bars, stage bars, line; funnel only when stages are genuinely nested/sequential |
-| Show movement or flow | Movement/flow | Sankey or flow diagram only when paths/transfer are the message |
+| Show part of a whole | Proportion | 100% stacked bar, stacked bar; pie only for very few parts |
+| Show cumulative stage reach | Ordered progression | Stepped bars, stage bars, line; funnel only for genuinely nested stages |
+| Show movement or flow | Movement or flow | Sankey or flow only when path transfer is the message |
 | Show range or uncertainty | Range | Interval plot, error bars, box plot, forecast band |
 | Show hierarchy | Hierarchy | Tree or treemap when nesting is essential |
-| Show location | Location | Choropleth, dot/bubble map with normalized measures where required |
-| Show text themes | Analysing text | Ranked bars, theme matrix, evidence excerpts; not a standalone word cloud |
-| Explain an interface or spatial context | How things work/reference | Annotated screenshot, page map, table, process diagram |
+| Show location | Location | Choropleth, dot or bubble map with appropriate normalization |
+| Show text themes | Analysing text | Ranked bars, theme matrix, evidence excerpts |
+| Explain an interface or spatial context | Reference | Annotated screenshot, page map, table, process diagram |
 
-Specialist analytical diagnostics such as calibration, lift, precision-recall, residual, control, or survival plots may override catalogue choices. Explain their use and provide a simpler stakeholder interpretation when needed.
+Specialist diagnostics such as calibration, lift, precision-recall, residual, control, or survival plots may override catalogue choices. Explain them in plain language.
 
 ## Visual Decision Record
 
@@ -87,82 +90,114 @@ Specialist analytical diagnostics such as calibration, lift, precision-recall, r
   "question_id": "Q1",
   "result_ref": "",
   "message": "",
-  "communication_function": "distribution",
+  "communication_function": "comparison",
   "data_structure": {
-    "metric_shape": "exclusive_distribution",
+    "metric_shape": "rate",
     "ordered": true,
     "categories_overlap": false,
-    "series_count": 1
+    "series_count": 2
   },
-  "candidate_charts": ["ordered_bar", "histogram"],
-  "selected_chart": "ordered_bar",
-  "rejected_alternatives": [],
-  "required_labels": ["population", "denominator", "period"],
+  "candidate_charts": ["grouped_bar", "dot_plot"],
+  "selected_chart": "dot_plot",
+  "selection_rationale": "",
+  "variety_role": "tie_breaker | structure_required | not_applicable",
+  "required_labels": [],
   "live_catalogue_checked": true,
   "qa_status": "pending"
 }
 ```
 
-Detailed rejected-alternative prose is required only for a non-obvious, complex, or disputed choice.
+Do not require a different chart merely because a previous slide used the same form. Repetition is preferable when it makes comparison easier.
 
 ## Hard Rejection Rules
 
 Reject a visual when it:
 
 - presents mutually exclusive classes as sequential funnel stages;
-- uses a line to imply continuity between unordered categories;
-- uses part-to-whole encoding for overlapping categories;
+- uses a line across unordered categories;
+- uses part-to-whole encoding for overlapping groups;
 - omits an expected zero/start state or source-domain value;
 - displays a percentage without population and denominator meaning;
-- compares incompatible fingerprints, periods, grains, or axes;
-- ranks raw volume when the question requires normalized performance;
-- hides small samples or uncertainty that changes interpretation;
-- implies causality through title, arrows, ordering, or annotation without a causal design;
-- uses a complex radial, network, Sankey, treemap, or dual-axis chart when a simpler comparison is clearer;
-- turns illustrative browser/qualitative evidence into a population percentage;
+- compares incompatible periods, grains, fingerprints, or axes;
+- ranks raw volume when normalized performance is required;
+- hides sample size or uncertainty that changes interpretation;
+- implies causality without a causal design;
+- uses an unnecessarily complex radial, network, flow, treemap, or dual-axis chart;
+- turns illustrative evidence into a population percentage;
 - cannot be read by the target audience at rendered size.
 
-## Wording And Source Context
+## Measurement Card
 
-- Use exact user-visible, operational, or approved business vocabulary in main outputs.
-- Keep event, field, table, model, and technical taxonomy names in methodology or appendices.
-- Define analytical terms in plain language for non-expert audiences.
-- Do not call a proxy direct visibility, attention, satisfaction, intent, value, or contribution unless the measurement supports it.
-- When interface, document, dashboard, spatial, or workflow context matters, use annotated source views where permitted.
+Every analytical stakeholder visual must carry or clearly reference:
+
+```json
+{
+  "population": "",
+  "grain": "",
+  "period": "",
+  "denominator": "",
+  "coverage": "",
+  "unit": "",
+  "temporal_scope": "",
+  "missing_zero_treatment": "",
+  "claim_posture": "",
+  "source_ref": ""
+}
+```
+
+Place the information where the audience can understand the chart. It may be split between subtitle, labels, note, and speaker notes, but it must not be absent.
+
+## Wording Review
+
+Use exact user-visible, operational, or approved business vocabulary in main outputs. Keep technical field and event names in methods or appendices unless the audience needs them.
+
+Review each slide for:
+
+- direct, concrete sentences;
+- one supported message;
+- defined population, rate, and period;
+- technical terms explained in plain language;
+- facts separated from interpretation and recommendation;
+- no unsupported intent, attention, value, contribution, improvement, or causality;
+- no generic filler, inflated confidence, repetitive conclusion patterns, or abstract AI-style phrasing;
+- natural wording in the requested language;
+- exact interface wording where similar actions could be confused.
+
+Do not rely on a static banned-word list. Judge whether a domain-aware but analytics-naive reader can explain the message accurately after one reading.
+
+Wording review record:
+
+```json
+{
+  "audience": "",
+  "language": "",
+  "terminology_source": "",
+  "plain_language_passed": false,
+  "fact_interpretation_recommendation_separated": false,
+  "notes": ""
+}
+```
 
 ## Presentation Generator Boundary
 
-The presentation worker may:
+The presentation worker may select and order approved claims, simplify language without changing meaning, render approved visual designs, apply a template, and surface caveats and implications.
 
-- select and order approved claims;
-- simplify language without changing meaning;
-- choose and render approved visual designs;
-- apply a template, brand, and audience style;
-- surface caveats and decision implications.
-
-It may not:
-
-- calculate or merge new analytical results;
-- choose a different population, denominator, period, or grain;
-- promote a directional claim to verified;
-- turn association into causality;
-- omit required caveats;
-- invent explanations or recommendations without claim lineage.
+It may not calculate or merge results, change population or denominator, promote a claim, turn association into causality, omit required caveats, or invent an explanation or recommendation.
 
 ## Rendered Output QA
 
-Inspect slides or equivalent rendered pages, not only source code or XML. Check:
+Inspect rendered slides or pages, not only source code or XML. Check:
 
 - slide order and one-message discipline;
-- text fit, font size, contrast, and no overlap;
-- title accuracy and evidence posture;
-- axes, units, baselines, sorting, periods, sample sizes, and denominators;
-- full expected domains and zero states;
+- text fit, font size, contrast, and overlap;
+- title accuracy and claim posture;
+- axes, units, baselines, sorting, periods, samples, denominators, and coverage;
+- expected domains and zero states;
 - legend and label clarity;
-- caveats placed beside the claim they constrain;
-- template/brand application;
+- uncertainty and caveats beside the claims they constrain;
+- template and brand application;
 - source screenshots readable and correctly framed;
-- no stale claim, result, or fingerprint dependency;
-- visual decision record updated to `passed` or `failed` with notes.
+- terminology and translation consistency;
+- no stale claim, result, or fingerprint dependency.
 
-If rendering or visual inspection is impossible, state that limitation and do not claim visual QA passed.
+Set `qa_status` to `passed`, `failed`, or `not_possible` with notes. If rendering or inspection is impossible, state the limitation and do not claim visual QA passed.

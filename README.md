@@ -4,122 +4,158 @@
 [![Latest release](https://img.shields.io/github/v/release/haiqigeng/governed-analytics-workflow?sort=semver)](https://github.com/haiqigeng/governed-analytics-workflow/releases/latest)
 [![License](https://img.shields.io/github/license/haiqigeng/governed-analytics-workflow)](LICENSE)
 
-An adaptive, evidence-governed analytics skill for Codex, Claude Code, Gemini, and other file- and tool-capable AI agents.
+A reasoning-first, evidence-governed analytics skill for Codex, Claude Code, Gemini, and other file- and tool-capable AI agents.
 
 ## Why It Exists
 
-Analytics requesters often provide more information than the analysis needs: proposed indicators, preferred explanations, desired charts, old analyses, and solution ideas. Those inputs may be useful, but they are not automatically a valid analysis specification.
+Analytics requests are often incomplete, overloaded, or already framed around a preferred metric, chart, explanation, or solution. The requester may understand the business problem without knowing the population, grain, denominator, method, or evidence needed to answer it.
 
-This skill makes the agent responsible for locating the real decision or learning need before querying data. It then connects that need to a question tree, appropriate analytical methods, reproducible evidence, reviewed claims, honest visualisation, and a decision-ready delivery.
-
-The central rule is:
+This skill makes the agent responsible for analytical framing. It treats the request as stakeholder input, infers the real decision or learning need, designs the complete analysis, validates the evidence, governs claims, and communicates the result in language the audience can understand.
 
 ```text
-Business need
--> decision or learning objective
--> question tree
--> evidence
--> reviewed claim
+stakeholder input
+-> inferred business need
+-> analysis blueprint
+-> complete data plan
+-> validated evidence
+-> governed claims
 -> stakeholder output or action
 ```
 
-## Who It Serves
+It does not store hidden chain-of-thought or make the requester design the analysis.
 
-- Analysts interpreting unclear stakeholder briefs
-- Product, marketing, digital, revenue, and operations teams
-- Teams combining several analytics, qualitative, browser, or business sources
-- Decision-support work that needs traceability and review
-- Agents producing stakeholder briefs, PowerPoint decks, reproducibility evidence, or follow-up plans
+## What v2 Changes
 
-It is not a replacement for business ownership, legal/privacy judgement, causal study design, source permissions, or human approval of consequential decisions.
+Version 2.0 focuses on analytical judgment:
+
+- an always-on reasoning kernel challenges the literal request;
+- conditional methods activate only when their trigger is present;
+- the question tree sits inside an operational analysis blueprint;
+- context is included only when it improves interpretation or action;
+- stage-specific quality gates protect evidence, claims, and delivery;
+- claim posture and evidence ceilings are explicit;
+- every stakeholder visual carries measurement context and rendered QA;
+- wording review favours direct, natural, domain-correct language;
+- v1 manifests migrate without inheriting unreviewed approvals.
+
+The runtime remains compact and platform-neutral.
 
 ## Adaptive Workflow
 
-Users see four phases:
+The skill retains four phases and twelve operational checkpoints:
 
-1. **Contract:** interpret the need, confirm the question tree, scope, definitions, and evidence limits.
-2. **Evidence:** check readiness, execute bounded work, validate, and review claims.
-3. **Synthesis:** answer the tree, select visuals, and produce stakeholder output.
-4. **Delivery:** document, version durable context, and define follow-up.
+1. **Frame:** decompose the request, infer the need, build the blueprint, and approve the contract.
+2. **Evidence:** map sources and methods, validate readiness, execute bounded work, and review results and claims.
+3. **Synthesis:** answer the blueprint, design visuals and wording, and build the stakeholder narrative.
+4. **Delivery:** inspect and version the output, then define follow-up.
 
-Twelve operational checkpoints remain inside those phases. The skill selects a `Light`, `Standard`, or `Deep` discovery mode so a clear low-risk request stays fast while a vague or consequential request receives stronger framing and approval gates.
+Discovery depth adapts to the work:
+
+| Mode | Use |
+| --- | --- |
+| `Light` | Clear, low-risk work with no material framing fork |
+| `Standard` | Partial ambiguity, several related questions, or moderate risk |
+| `Deep` | Contradictory, solution-led, causal, multi-stakeholder, or consequential work |
+
+The agent proposes a defensible frame and asks the user only when unresolved business ambiguity or approval would materially change the analysis.
 
 ## Needs Discovery
 
-Before selecting metrics, the agent separates:
+Every analysis applies a small reasoning kernel:
 
-- facts and business objectives;
-- constraints and output preferences;
-- hypotheses and preferred explanations;
-- suggested metrics, methods, breakdowns, and solutions;
-- uncertainties and missing decisions.
+1. Decompose facts, objectives, constraints, hypotheses, suggested metrics, methods, solutions, output preferences, and uncertainties.
+2. Infer the underlying decision or learning objective.
+3. Test whether proposed measures represent the intended constructs.
+4. Identify only the context needed to define, explain, validate, or act.
+5. Set the strongest claim the evidence could support.
+6. Define population, scope, period, timezone, grain, filters, exclusions, and denominator.
+7. Design the complete decision, context, diagnostic, quality, and validation data plan.
 
-Depending on the case, it applies decision-backward framing, analytical laddering, assumption mapping, stakeholder mapping, evidence-ceiling analysis, alternative framing, minimum-useful-scope review, and a pre-mortem.
+Conditional routes add analytical laddering, stakeholder mapping, source compatibility, temporal eligibility, representativeness, model validation, anomaly baselines, theme review, pre-mortems, falsification, or independent review only when relevant.
 
-The result is a concise framing proposal and a question tree. The requester confirms the real need without having to design grain, metrics, or statistical methods.
+## Analysis Blueprint
 
-## Question Tree
-
-The tree progresses through three states:
+The question tree is generated after initial reasoning:
 
 ```text
-Draft -> Confirmed -> Operational
+business need
+-> context questions
+-> decision questions
+-> diagnostic questions
+-> data-quality and validation questions
+-> required data
+-> methods and evidence
+-> claims
+-> presentation and action
 ```
 
-Operational leaves contain a problem type, source, grain, metric, method, validation rule, and expected output. Every original request item is mapped to an answered question, supporting context, parked item, rejected assumption, unavailable item, or superseded need.
+Active question roles are `context`, `decision`, `diagnostic`, `data_quality`, and `validation`. Excluded branches use `optional`, `parked`, `rejected`, `unavailable`, or `superseded`.
 
-No query, claim, chart, or recommendation should exist without a path back to the tree.
+Every active question must define its purpose, data requirements, population, grain, metric, method, validation, and expected output. Every material request item is mapped to the tree or receives a documented reason for exclusion.
 
 ## Analytical Problem Types
 
-The skill supports six routes:
+One primary type guides the analysis; secondary types belong to distinct subquestions.
 
-| Type | Typical answer |
+| Type | Core validation |
 | --- | --- |
-| Make predictions | What is likely to happen or which case is likely next? |
-| Categorise things | Which class or useful segment does this belong to? |
-| Spot something unusual | What departs from an appropriate baseline? |
-| Identify themes | Which recurring ideas appear in unstructured evidence? |
-| Discover connections | Which variables, behaviours, or entities are associated? |
-| Find patterns | What distributions, trends, cohorts, paths, or recurring structures exist? |
+| Make predictions | Leakage, temporal holdout, calibration, threshold trade-offs, drift |
+| Categorise things | Label quality, class balance, per-class errors, stability |
+| Spot something unusual | Baseline, seasonality, sensitivity, false positives |
+| Identify themes | Corpus coverage, codebook quality, negative cases, reviewer agreement |
+| Discover connections | Compatible grain, temporal order, confounding, selection, sensitivity |
+| Find patterns | Complete domains, zero states, denominators, stable segments |
 
-One primary type guides the analysis. Secondary types are attached to distinct subquestions. Each playbook defines required inputs, baselines, methods, validation, claim limits, outputs, and follow-up.
+Each method records the quantity estimated, eligible population, baseline, time logic, uncertainty, validation, sensitivity, and permitted claim level.
+
+## Data Quality
+
+Every evidence-stage analysis checks:
+
+- source authority and freshness;
+- population, period, timezone, and filters;
+- natural grain and identifiers;
+- deduplication and denominator logic;
+- missing values versus zero values;
+- expected domain completeness;
+- metric semantics and source coverage.
+
+Conditional checks cover joins, availability, temporal ordering, representativeness, outliers, sample size, uncertainty, multiple comparisons, confounding, selection, and sensitivity. Prediction, categorisation, anomaly, and theme routes add their own quality requirements.
+
+Each check returns `pass`, `warning`, `fail`, `unknown`, or `not_applicable`. A critical failure or unresolved critical check blocks claim promotion. Warnings must follow the affected claims and visuals.
 
 ## Evidence Governance
 
-Important numbers receive a definition fingerprint containing population, grain, period, scope, filters, numerator, denominator, deduplication, query reference, and run date. Sources receive authority, coverage, freshness, joinability, allowed-use, and forbidden-use records.
+Important metrics receive a definition fingerprint containing population, grain, period, scope, filters, numerator, denominator, deduplication, query reference, and run date. Sources record authority, coverage, freshness, joinability, allowed uses, forbidden uses, and caveats.
 
 Findings move through a controlled lifecycle:
 
 ```text
-Observation -> Candidate -> Validated -> Approved
-                         \-> Rejected
-Approved or validated -> Superseded when replaced
+observation -> candidate -> validated -> approved
+                         \-> rejected
+validated or approved -> superseded when replaced
 ```
 
-The promotion point is governed, not every exploratory read or query. High-risk and externally durable claims require human approval. Independent review uses technical, audience, and domain-aware but analysis-naive lenses.
+Claims record posture, population, denominator, temporal scope, coverage, missingness, uncertainty, alternatives, decision use, evidence, metrics, and quality warnings. Observational evidence produces hypotheses or tests, not unsupported prescriptions. Changed metric fingerprints mark dependent claims and outputs stale.
 
 ## Visualisation
 
-For stakeholder analyses containing charts, the skill uses [The Data Visualisation Catalogue](https://datavizcatalogue.com/search.html) as the default function-first reference unless the user provides another system.
+Chart choice is function-first. The skill consults [The Data Visualisation Catalogue](https://datavizcatalogue.com/search.html) once per distinct communication function when internet access is available and uses a documented offline map otherwise.
 
-The live catalogue is consulted once per distinct communication function. Each analytical visual records its claim, data structure, candidate charts, selected chart, required labels, and rendered QA result.
+Appropriateness and readability come first. Variety is only a tie-breaker between equally valid choices. Hard rules reject exclusive classes shown as funnels, percentages without denominators, missing zero states, lines across unordered categories, part-to-whole charts for overlapping groups, incompatible comparisons, and causal-looking visuals without causal evidence.
 
-Hard rules reject misleading choices such as:
+Every stakeholder visual includes or clearly references:
 
-- exclusive classes displayed as a funnel;
-- percentages without a denominator;
-- missing zero or expected categories;
-- lines across unordered categories;
-- part-to-whole charts for overlapping groups;
-- incompatible grains or axes;
-- visuals that imply unsupported causality.
+```text
+population | grain | period | denominator | coverage
+unit | temporal scope | missing/zero treatment | claim posture | source
+```
 
-Specialist analytical diagnostics may override catalogue choices when methodologically required.
+Rendered output is inspected for chart accuracy, labels, text fit, readability, caveats, terminology, and natural wording.
 
 ## Runtime Artifacts
 
-The canonical run file is `analysis-manifest.json`. The default analysis folder stays small:
+The canonical run file is `analysis-manifest.json` using schema `2.0`:
 
 ```text
 analyses/<analysis-id>/
@@ -129,44 +165,43 @@ analyses/<analysis-id>/
 `-- requested delivery, when needed
 ```
 
-Plans, reproducibility packets, documentation, changelogs, and presentation briefs are generated only when risk, review, or delivery requires them. One active artifact is maintained per purpose; changed fingerprints mark dependent claims and outputs stale.
-
-Create a run:
+Create and validate a run:
 
 ```powershell
 python scripts/analysis_guard.py init analyses/example-analysis --analysis-id example-analysis
-```
-
-Validate before delivery:
-
-```powershell
-python scripts/analysis_guard.py validate analyses/example-analysis/analysis-manifest.json --strict
+python scripts/analysis_guard.py validate analyses/example-analysis/analysis-manifest.json --stage contract
+python scripts/analysis_guard.py validate analyses/example-analysis/analysis-manifest.json --stage evidence
+python scripts/analysis_guard.py quality analyses/example-analysis/analysis-manifest.json
+python scripts/analysis_guard.py validate analyses/example-analysis/analysis-manifest.json --stage claims
+python scripts/analysis_guard.py validate analyses/example-analysis/analysis-manifest.json --stage delivery
 python scripts/analysis_guard.py stale analyses/example-analysis/analysis-manifest.json --fail-on-stale
 python scripts/analysis_guard.py scan analyses/example-analysis
 ```
 
-The runtime utility uses only the Python standard library. The same contracts can be applied manually if Python is unavailable.
+The guard is deterministic and dependency-free. It validates contracts and selected semantic invariants; it cannot prove that an external query, model, or business interpretation is correct.
 
-## Repository Contents
+## Migration
 
-```text
-.
-|-- SKILL.md
-|-- agents/openai.yaml
-|-- references/
-|   |-- needs-discovery-and-analysis-contract.md
-|   |-- problem-type-playbooks.md
-|   |-- evidence-claims-and-review.md
-|   |-- synthesis-and-visualisation.md
-|   `-- presentation-generator-brief.md
-|-- assets/analysis-manifest.template.json
-|-- scripts/analysis_guard.py
-|-- tools/
-|-- tests/
-`-- .github/workflows/
+Migrate a v1 manifest into a separate file:
+
+```powershell
+python scripts/analysis_guard.py migrate path/to/analysis-manifest.json --output path/to/analysis-manifest-v2.json
 ```
 
-`tools/`, `tests/`, and repository documentation are not included in the runtime release package.
+Migration preserves legacy content, marks new v2 requirements unresolved, and demotes approved contracts, validated metrics, approved claims, stakeholder visuals, and active artifacts until review. It never invents definitions or silently overwrites the source. Use `--write` only when explicit in-place replacement is intended.
+
+## Forward Benchmark
+
+The repository contains a blind benchmark of raw, confusing requests across all six problem types. Executing agents receive only the raw request. The hidden rubric scores:
+
+- real-need identification and alternative framing;
+- necessary context and exclusion discipline;
+- complete operational data planning;
+- population, scope, grain, denominator, and method correctness;
+- evidence limitations and claim discipline;
+- presentation clarity.
+
+Release acceptance requires no critical failure and a score of at least 16 out of 20. Static tests also enforce schema migration, conditional routes, quality gates, claim ceilings, measurement cards, chart rules, wording review, staleness, portability, and deterministic packaging.
 
 ## Installation
 
@@ -176,47 +211,27 @@ Clone into the skills directory used by your agent:
 git clone https://github.com/haiqigeng/governed-analytics-workflow.git "$env:USERPROFILE\.codex\skills\governed-analytics-workflow"
 ```
 
-Alternatively, download the runtime zip from the latest GitHub release and extract the contained `governed-analytics-workflow` folder into the appropriate skills directory.
-
-Restart or reload the agent so it discovers the skill.
-
-## Example Prompts
-
-```text
-Use $governed-analytics-workflow to interpret this stakeholder email, propose the real analytical need and question tree, and wait for my framing confirmation.
-```
-
-```text
-Use $governed-analytics-workflow to investigate an unexpected performance change, preserving the expected baseline and false-positive risks.
-```
-
-```text
-Use $governed-analytics-workflow to compare observed journeys with an outcome and produce a reviewed stakeholder deck without causal overstatement.
-```
+Alternatively, extract the `governed-analytics-workflow` folder from the latest runtime zip into the agent's skills directory, then restart or reload the agent.
 
 ## Agent Compatibility
 
-The skill describes operations rather than vendor-specific commands. Codex, Claude Code, Gemini, and other agents can use local equivalents for files, queries, notebooks, APIs, browsers, visualisation, and presentations.
+The skill describes analytical operations rather than vendor-specific commands. Codex, Claude Code, Gemini, and other agents can use local equivalents for files, queries, notebooks, APIs, browsers, statistics, charts, and presentations.
 
-Unavailable tools must be recorded as limitations. The skill contains no client data, credentials, source integration, or machine-specific path.
+The reusable package contains no client data, credentials, source integrations, prior analysis results, or machine-specific paths.
 
 ## Release Checks
 
-Run before contributing or publishing:
-
 ```powershell
-python tools/check_release.py --tag v1.0.0 --release-notes CHANGELOG.md
+python tools/check_release.py --tag v2.0.0 --release-notes CHANGELOG.md
 python -m unittest discover -s tests -v
-python tools/build_skill_package.py --output dist/governed-analytics-workflow-v1.0.0.zip
+python tools/build_skill_package.py --output dist/governed-analytics-workflow-v2.0.0.zip
 ```
 
-CI validates structure, reference routing, portability, the manifest contract, six problem types, claim promotion, stale dependencies, and chart regressions. Tagged releases build a deterministic runtime archive.
+Tagged releases build the same deterministic runtime package tested locally.
 
 ## Privacy And Security
 
-Keep data and generated analysis artifacts outside the repository. Do not commit credentials, client information, private dashboard links, raw exports, personal data, or machine-specific paths. Use the runtime scan before sharing or publishing work.
-
-See [SECURITY.md](SECURITY.md) for reporting guidance.
+Keep generated analysis and private data outside this repository. Do not commit credentials, client information, private links, raw exports, personal data, or machine-specific paths. See [SECURITY.md](SECURITY.md).
 
 ## License
 

@@ -1,5 +1,49 @@
 # Changelog
 
+## 2.0.0 - 2026-07-15
+
+### Why This Release Matters
+
+Version 2.0 makes analytical judgment the workflow's primary behaviour. The agent now treats a request as stakeholder input, independently infers the real decision need, designs the complete analysis, and limits conclusions to evidence that has passed explicit quality gates.
+
+### What Changed
+
+- Added a small always-on reasoning kernel for request decomposition, need inference, construct validation, context necessity, evidence ceilings, population logic, and complete data planning.
+- Added trigger-based routes for ambiguity, multiple stakeholders, multiple sources, outcome comparisons, sampled or browser evidence, prediction, categorisation, anomalies, themes, and consequential work.
+- Added an operational analysis blueprint around the question tree, with active and excluded question roles, bidirectional data-plan lineage, adaptive context, and stop rules.
+- Added manifest schema `2.0` with concise needs discovery, analysis blueprint, quality checks, richer claim context, measurement cards, wording review, and rendered-output QA.
+- Added stage-specific `validate --stage contract|evidence|claims|delivery`, standalone `quality`, and safe `migrate` commands; legacy claim posture remains explicitly unresolved instead of being inferred.
+- Added always-on and route-specific quality checks covering source authority, freshness, scope, grain, identifiers, deduplication, denominators, missing versus zero, domains, semantics, coverage, joins, temporal order, representativeness, uncertainty, confounding, selection, and sensitivity.
+- Added explicit method contracts, structured evidence ceilings, warning propagation, causal-design requirements, and critical quality blockers for claim promotion.
+- Added function-first chart selection, variety as a tie-breaker, mandatory measurement context, natural-language review, and rendered-slide QA.
+- Added a blind twelve-case forward benchmark with two confusing requests for each analytical problem type and a 20-point acceptance rubric.
+- Retained the four-phase, twelve-checkpoint workflow, cross-agent portability, stale-dependency controls, and deterministic runtime packaging.
+
+### What Users Should Do
+
+- Start new work from the schema `2.0` manifest or `analysis_guard.py init`.
+- Let the agent recommend the framing and data plan; supply business clarification only when a material decision fork remains.
+- Run validation at the contract, evidence, claims, and delivery stages rather than relying only on final strict validation.
+- Run `quality` before claim promotion and carry warnings into affected claims and visuals.
+- Migrate reopened v1 analyses with `migrate`; review every unresolved v2 requirement before restoring approvals.
+- Use measurement cards and rendered QA for every stakeholder analytical visual.
+
+### Validation
+
+- Python compilation for the runtime guard and repository utilities.
+- 53 passing unit and regression tests for schema migration, staged validation, conditional routes, quality gates, evidence ceilings, warning propagation, metric fingerprints, stale dependencies, chart rules, wording review, and measurement cards.
+- Blind forward-test coverage across prediction, categorisation, anomaly detection, theme identification, connection discovery, and pattern finding; all six release cases passed at 19-20 out of 20 with no critical failure.
+- Portability and secret scanning across the runtime package.
+- Deterministic package and clean-install activation checks.
+- Repository release checks for version, documentation, reference routing, runtime scope, and release-note completeness.
+
+### Known Limits
+
+- The guard can enforce declared definitions and selected semantic invariants, but it cannot prove that an external query, model, statistical design, or business interpretation is correct.
+- Blind benchmark scoring still requires reviewer judgment; structural tests only validate the benchmark contract.
+- Live chart-catalogue consultation, source access, browser inspection, and rendered PowerPoint QA depend on the tools available to the executing agent.
+- Migration deliberately leaves v2 definitions and approvals unresolved rather than guessing them.
+
 ## 1.0.0 - 2026-07-15
 
 ### Why This Release Matters
