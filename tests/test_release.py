@@ -1,15 +1,20 @@
 from __future__ import annotations
 
+import importlib.util
 import subprocess
 import sys
 import tempfile
 import unittest
 import shutil
 from pathlib import Path
-from zipfile import ZipFile
+from zipfile import ZIP_STORED, ZipFile
 
 
 ROOT = Path(__file__).resolve().parents[1]
+SPEC = importlib.util.spec_from_file_location("build_skill_package", ROOT / "tools" / "build_skill_package.py")
+assert SPEC and SPEC.loader
+build_skill_package = importlib.util.module_from_spec(SPEC)
+SPEC.loader.exec_module(build_skill_package)
 
 
 class ReleaseTest(unittest.TestCase):
@@ -17,7 +22,7 @@ class ReleaseTest(unittest.TestCase):
         for cache in ROOT.rglob("__pycache__"):
             shutil.rmtree(cache)
         result = subprocess.run(
-            [sys.executable, "-B", str(ROOT / "tools" / "check_release.py"), "--tag", "v2.0.0", "--release-notes", str(ROOT / "CHANGELOG.md")],
+            [sys.executable, "-B", str(ROOT / "tools" / "check_release.py"), "--tag", "v2.0.1", "--release-notes", str(ROOT / "CHANGELOG.md")],
             cwd=ROOT,
             capture_output=True,
             text=True,
@@ -60,11 +65,22 @@ class ReleaseTest(unittest.TestCase):
             self.assertEqual(first.read_bytes(), second.read_bytes())
             with ZipFile(first) as archive:
                 names = set(archive.namelist())
+                compression_types = {entry.compress_type for entry in archive.infolist()}
             self.assertIn("governed-analytics-workflow/SKILL.md", names)
             self.assertIn("governed-analytics-workflow/scripts/analysis_guard.py", names)
             self.assertIn("governed-analytics-workflow/assets/analysis-manifest.template.json", names)
             self.assertNotIn("governed-analytics-workflow/README.md", names)
             self.assertFalse(any(name.startswith("governed-analytics-workflow/tests/") for name in names))
+            self.assertEqual({ZIP_STORED}, compression_types)
+
+    def test_runtime_text_is_normalized_for_cross_platform_determinism(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            sample = Path(temp) / "sample.yaml"
+            sample.write_bytes(b"first: value\r\nsecond: value\rthird: value\n")
+            self.assertEqual(
+                b"first: value\nsecond: value\nthird: value\n",
+                build_skill_package.canonical_runtime_bytes(sample),
+            )
 
     def test_packaged_guard_validates_packaged_template(self) -> None:
         with tempfile.TemporaryDirectory() as temp:

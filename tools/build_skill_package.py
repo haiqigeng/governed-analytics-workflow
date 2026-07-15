@@ -5,12 +5,13 @@ from __future__ import annotations
 
 import argparse
 from pathlib import Path
-from zipfile import ZIP_DEFLATED, ZipFile, ZipInfo
+from zipfile import ZIP_STORED, ZipFile, ZipInfo
 
 
 ROOT = Path(__file__).resolve().parents[1]
 RUNTIME_FILES = ("SKILL.md", "agents", "references", "assets", "scripts/analysis_guard.py")
 ARCHIVE_ROOT = Path("governed-analytics-workflow")
+TEXT_SUFFIXES = {".md", ".yaml", ".yml", ".json", ".py"}
 
 
 def package_files() -> list[Path]:
@@ -24,15 +25,22 @@ def package_files() -> list[Path]:
     return sorted(files, key=lambda path: path.relative_to(ROOT).as_posix())
 
 
+def canonical_runtime_bytes(path: Path) -> bytes:
+    data = path.read_bytes()
+    if path.suffix.lower() in TEXT_SUFFIXES:
+        return data.replace(b"\r\n", b"\n").replace(b"\r", b"\n")
+    return data
+
+
 def build(output: Path) -> None:
     output.parent.mkdir(parents=True, exist_ok=True)
-    with ZipFile(output, "w", compression=ZIP_DEFLATED, compresslevel=9) as archive:
+    with ZipFile(output, "w", compression=ZIP_STORED) as archive:
         for path in package_files():
             relative = ARCHIVE_ROOT / path.relative_to(ROOT)
             info = ZipInfo(relative.as_posix(), date_time=(2026, 1, 1, 0, 0, 0))
-            info.compress_type = ZIP_DEFLATED
+            info.compress_type = ZIP_STORED
             info.external_attr = 0o644 << 16
-            archive.writestr(info, path.read_bytes())
+            archive.writestr(info, canonical_runtime_bytes(path))
 
 
 def main() -> int:

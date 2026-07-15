@@ -1,5 +1,32 @@
 # Changelog
 
+## 2.0.1 - 2026-07-15
+
+### Why This Release Matters
+
+Version 2.0.1 makes the v2 runtime archive reproducible across Windows and Linux checkouts, even when Git materializes text files with different local line endings.
+
+### What Changed
+
+- Canonicalized runtime text files to LF while building the ZIP.
+- Switched the small runtime archive to ZIP stored mode so output does not depend on the platform's deflate implementation.
+- Added a regression test that supplies mixed CRLF, CR, and LF input to the package builder.
+- Kept the v2.0 analytical runtime and behavioural benchmark unchanged.
+
+### What Users Should Do
+
+- Use the `v2.0.1` archive for clean installations and automated distribution.
+- Existing installed v2.0 runtime files do not require a behavioural migration.
+
+### Validation
+
+- Full unit, regression, migration, benchmark, portability, and release suite.
+- Local and GitHub-built archive digest comparison after publication.
+
+### Known Limits
+
+- The archive is intentionally larger than a deflated ZIP in exchange for cross-platform byte reproducibility; runtime behaviour and installation contents are unchanged.
+
 ## 2.0.0 - 2026-07-15
 
 ### Why This Release Matters
